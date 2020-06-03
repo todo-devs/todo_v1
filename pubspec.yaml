@@ -1,5 +1,5 @@
 name: todo
-description: Toolkit para gestionar servicios de ETECSA y Cubacel.
+description: Helper app to aid user with ETECSA services.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
