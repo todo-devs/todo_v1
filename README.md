@@ -1,6 +1,6 @@
 # TODO
 
-Toolkit para gestionas servicios de ETECSA y Cubacel
+Helper app to aid user with ETECSA services
 
 ## Instalación del entono de desarrollo
 
@@ -9,15 +9,24 @@ Toolkit para gestionas servicios de ETECSA y Cubacel
 2. Instalar Flutter SDK https://flutter.dev/docs/get-started/install
 
 3. Instalar dependencias
+
+Dentro de la carpeta del proyecto
+
 ```bash
 flutter pub get
 ```
 4. Compilar y correr versión debug en dispositivo virtual o físico
+
+Dentro de la carpeta del proyecto
+
 ```bash
 flutter run
 ```
 
 5. Compilar version release para android
+
+Dentro de la carpeta del proyecto
+
 ```
 flutter build apk --target-platform android-arm,android-arm64
 ```
