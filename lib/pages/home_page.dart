@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:fetk/pages/login_page.dart';
+import 'package:todo/pages/login_page.dart';
 
-import 'package:fetk/components/ussd_widget.dart';
+import 'package:todo/components/ussd_widget.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);

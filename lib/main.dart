@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fetk/pages/home_page.dart';
+import 'package:todo/pages/home_page.dart';
 
 void main() {
   runApp(App());
@@ -11,12 +11,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'fETK',
+      title: 'TODO',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(title: 'fETK'),
+      home: HomePage(title: 'TODO'),
     );
   }
 }

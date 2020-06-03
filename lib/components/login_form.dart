@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:fetk/models/user.dart';
+import 'package:todo/models/user.dart';
 
 class LoginForm extends StatefulWidget {
   @override

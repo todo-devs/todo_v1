@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fetk/services/ussd.dart';
+import 'package:todo/services/ussd.dart';
 
-import 'package:fetk/config/ussd_codes.dart';
+import 'package:todo/config/ussd_codes.dart';
 
 class UssdWidget extends StatelessWidget {
   final String name;
