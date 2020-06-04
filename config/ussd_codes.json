@@ -1,6 +1,34 @@
 {
     "categories": [
       {
+        "name": "Llamadas",
+        "icon": "call",
+        "codes": [
+          {
+            "name":"Asterisco 99",
+            "icon": "call",
+            "fields":[
+              {
+                "name":"telefono",
+                "type":"phone_number"
+              }
+            ],
+            "code":"*99{telefono}"
+          },
+          {
+            "name":"Mi numero oculto",
+            "icon": "call",
+            "fields":[
+              {
+                "name":"telefono",
+                "type":"phone_number"
+              }
+            ],
+            "code":"#31#{telefono}"
+          }
+        ]
+      },
+      {
         "name": "Saldo",
         "icon": "attach_money",
         "codes": [
@@ -10,6 +38,82 @@
             "fields":[
             ],
             "code":"*222#"
+          },
+          {
+            "name":"Recargar",
+            "icon": "attach_money",
+            "fields":[
+              {
+                "name": "numero tarjeta",
+                "type": "card_number"
+              }
+            ],
+            "code":"*662*{numero_tarjeta}#"
+          },
+          {
+            "name":"Enviar Saldo",
+            "icon": "mobile_screen_share",
+            "fields":[
+              {
+                "name":"telefono",
+                "type":"phone_number"
+              },
+              {
+                "name":"cantidad",
+                "type":"money"
+              },
+              {
+                "name":"clave",
+                "type":"key_number"
+              }
+            ],
+            "code":"*234*1*{telefono}*{clave}*{cantidad}#"
+          },
+          {
+            "name": "Bonos",
+            "icon": "star_border",
+            "fields":[
+            ],
+            "code": "*222*266#"
+          }
+        ]
+      },
+      {
+        "name": "Planes de datos",
+        "icon": "network_cell",
+        "codes": [
+          {
+            "name": "Saldo",
+            "icon": "data_usage",
+            "fields":[
+            ],
+            "code": "*222*328#"
+          }
+        ]
+      },
+      {
+        "name": "Planes de voz",
+        "icon": "phone_in_talk",
+        "codes": [
+          {
+            "name": "Saldo",
+            "icon": "phone_in_talk",
+            "fields":[
+            ],
+            "code": "*222*869#"
+          }
+        ]
+      },
+      {
+        "name": "Planes de sms",
+        "icon": "sms",
+        "codes": [
+          {
+            "name": "Saldo",
+            "icon": "sms",
+            "fields":[
+            ],
+            "code": "*222*767##"
           }
         ]
       },
@@ -26,7 +130,7 @@
           },
           {
               "name": "Estado del bono",
-              "icon": "monetization_on",
+              "icon": "star_border",
               "fields":[
               ],
               "code": "*222*266#"

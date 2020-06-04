@@ -9,5 +9,8 @@ const strIcons = <String, IconData> {
   'call': Icons.call,
   'sms': Icons.sms,
   'phone_in_talk': Icons.phone_in_talk,
-  'mobile_screen_share': Icons.mobile_screen_share
+  'mobile_screen_share': Icons.mobile_screen_share,
+  'star_border': Icons.star_border,
+  'shopping_cart': Icons.shopping_cart,
+  'network_cell': Icons.network_cell
 };

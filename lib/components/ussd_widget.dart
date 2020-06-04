@@ -60,7 +60,7 @@ class UssdCategoryWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => UssdWidgets(
-                title: category.name,
+                title: category.name.toUpperCase(),
                 ussdCodes: category.codes,
                 icon: category.icon),
           ),
@@ -69,7 +69,7 @@ class UssdCategoryWidget extends StatelessWidget {
       child: Column(children: <Widget>[
         ListTile(
           leading: Icon(category.icon, color: Colors.blue),
-          title: Text(category.name),
+          title: Text(category.name.toUpperCase()),
         ),
         Divider(
           color: Colors.blue,
@@ -92,7 +92,6 @@ class UssdWidgets extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         title: Text(title),
-        centerTitle: true,
       ),
       body: ListView(
         children: <Widget>[
@@ -152,7 +151,7 @@ class SimpleCode extends StatelessWidget {
       child: Column(children: <Widget>[
         ListTile(
           leading: Icon(icon, color: Colors.blue),
-          title: Text(name),
+          title: Text(name.toUpperCase()),
         ),
         Divider(
           color: Colors.blue,
@@ -183,7 +182,7 @@ class CodeWithForm extends StatelessWidget {
       child: Column(children: <Widget>[
         ListTile(
           leading: Icon(code.icon, color: Colors.blue),
-          title: Text(code.name),
+          title: Text(code.name.toUpperCase()),
         ),
         Divider(
           color: Colors.blue,
@@ -202,7 +201,8 @@ class CodeFormPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(code.name),
+        elevation: 0,
+        title: Text(code.name.toUpperCase()),
       ),
       body: Container(
         alignment: Alignment.center,
@@ -361,6 +361,37 @@ class _CodeFormState extends State<CodeForm> {
 
                   if (value.length != 4) {
                     return 'La clave debe contener 4 dígitos';
+                  }
+                },
+                keyboardType: TextInputType.number,
+                onSaved: (val) {
+                  String rem = '{${field.name}}';
+
+                  String newCode = code.replaceAll(rem, val);
+
+                  setState(() {
+                    code = newCode;
+                  });
+                },
+              );
+
+            // INPUT CARD NUMBER
+            case 'card_number':
+              return TextFormField(
+                maxLength: 16,
+                autovalidate: true,
+                decoration: InputDecoration(
+                    labelText: field.name.toUpperCase(),
+                    prefixIcon: Icon(
+                      Icons.credit_card,
+                    )),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Este campo no debe estar vacío';
+                  }
+
+                  if (value.length != 16) {
+                    return 'El número de la tarjeta debe contener 16 dígitos';
                   }
                 },
                 keyboardType: TextInputType.number,

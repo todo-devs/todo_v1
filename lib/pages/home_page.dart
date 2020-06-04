@@ -36,12 +36,12 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => LoginPage(
-                            title: 'Wifi Login',
+                            title: 'NAUTA',
                           )));
             },
             child: Container(
                 child: ListTile(
-              title: Text('Wifi Login'),
+              title: Text('NAUTA'),
               leading: Icon(
                 Icons.wifi,
                 color: Colors.blue,
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
         ),
         Divider(color: Colors.blue),
         Container(
-          height: MediaQuery.of(context).size.height - 170,
+          height: MediaQuery.of(context).size.height - 270,
           child: UssdCategoriesWidget(),
         ),
       ]),
