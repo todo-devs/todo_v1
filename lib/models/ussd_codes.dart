@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:todo/utils/icons.dart';
+
 class UssdCodes {
   List<UssdCode> codes;
 
@@ -15,18 +18,30 @@ class UssdCodes {
 class UssdCode {
   String name;
   String code;
+  IconData icon;
 
   List<UssdCodeField> fields;
 
-  UssdCode({this.name, this.code, this.fields});
+  UssdCode({this.name, this.code, this.fields, this.icon});
 
   factory UssdCode.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['fields'] as List;
     List<UssdCodeField> fieldsList =
         list.map((i) => UssdCodeField.fromJson(i)).toList();
 
+    var icon;
+
+    try {
+      icon = strIcons[parsedJson['icon']];
+    } catch (e) {
+      icon = Icons.code;
+    }
+
     return UssdCode(
-        name: parsedJson['name'], code: parsedJson['code'], fields: fieldsList);
+        name: parsedJson['name'],
+        code: parsedJson['code'],
+        fields: fieldsList,
+        icon: strIcons[parsedJson['icon']]);
   }
 }
 

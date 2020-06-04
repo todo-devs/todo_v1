@@ -59,6 +59,7 @@ class UssdWidget extends StatelessWidget {
       return SimpleCode(
         code: ussdCode.code,
         name: ussdCode.name,
+        icon: ussdCode.icon,
       );
     }
 
@@ -69,8 +70,9 @@ class UssdWidget extends StatelessWidget {
 class SimpleCode extends StatelessWidget {
   final String code;
   final String name;
+  final IconData icon;
 
-  SimpleCode({this.code, this.name});
+  SimpleCode({this.code, this.name, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +81,11 @@ class SimpleCode extends StatelessWidget {
         launchUssd(code);
       },
       child: Card(
-          child: ListTile(
-        title: Text(name),
-      )),
+        child: ListTile(
+          leading: Icon(icon),
+          title: Text(name),
+        ),
+      ),
     );
   }
 }
@@ -103,9 +107,11 @@ class CodeWithForm extends StatelessWidget {
                     )));
       },
       child: Card(
-          child: ListTile(
-        title: Text(code.name),
-      )),
+        child: ListTile(
+          leading: Icon(code.icon),
+          title: Text(code.name),
+        ),
+      ),
     );
   }
 }
@@ -260,8 +266,10 @@ class _CodeFormState extends State<CodeForm> {
                     });
                   });
 
+            // INPUT KEY
             case 'key_number':
               return TextFormField(
+                obscureText: true,
                 maxLength: 4,
                 autovalidate: true,
                 decoration: InputDecoration(

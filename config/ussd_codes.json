@@ -2,12 +2,14 @@
     "codes": [
         {
             "name":"Consultar saldo",
+            "icon": "attach_money",
             "fields":[
             ],
             "code":"*222#"
         },
         {
             "name":"Nombre de acción",
+            "icon": "code",
             "fields":[
               {
                 "name":"telefono",
