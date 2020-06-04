@@ -1,6 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:todo/utils/icons.dart';
 
+class UssdCategories {
+  List<UssdCategory> categories;
+
+  UssdCategories({this.categories});
+
+  factory UssdCategories.fromJson(Map<String, dynamic> parsedJson) {
+    var list = parsedJson['categories'] as List;
+    List<UssdCategory> categoryList =
+        list.map((i) => UssdCategory.parseJson(i)).toList();
+
+    return UssdCategories(categories: categoryList);
+  }
+}
+
+class UssdCategory {
+  List<UssdCode> codes;
+  String name;
+  IconData icon;
+
+  UssdCategory({this.name, this.icon, this.codes});
+
+  factory UssdCategory.parseJson(Map<String, dynamic> parsedJson) {
+    var list = parsedJson['codes'] as List;
+
+    List<UssdCode> codesList = list.map((i) => UssdCode.fromJson(i)).toList();
+
+    var icon;
+
+    try {
+      icon = strIcons[parsedJson['icon']];
+    } catch (e) {
+      icon = Icons.code;
+    }
+
+    return UssdCategory(name: parsedJson['name'], icon: icon, codes: codesList);
+  }
+}
+
+/*
 class UssdCodes {
   List<UssdCode> codes;
 
@@ -14,6 +53,7 @@ class UssdCodes {
     return UssdCodes(codes: codesList);
   }
 }
+*/
 
 class UssdCode {
   String name;

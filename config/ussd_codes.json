@@ -1,65 +1,84 @@
 {
-    "codes": [
-        {
+    "categories": [
+      {
+        "name": "Saldo",
+        "icon": "attach_money",
+        "codes": [
+          {
             "name":"Saldo",
             "icon": "attach_money",
             "fields":[
             ],
             "code":"*222#"
-        },
-        {
-            "name": "Estado del bono",
-            "icon": "monetization_on",
-            "fields":[
-            ],
-            "code": "*222*266#"
-        },
-        {
-            "name": "Paquetes de datos",
-            "icon": "data_usage",
-            "fields":[
-            ],
-            "code": "*222*328#"
-        },
-        {
-            "name": "Plan de voz",
-            "icon": "phone_in_talk",
-            "fields":[
-            ],
-            "code": "*222*869#"
-        },
-        {
-            "name": "Plan de sms",
-            "icon": "sms",
-            "fields":[
-            ],
-            "code": "*222*767#"
-        },
-        {
-            "name": "Plan amigos",
-            "icon": "people",
-            "fields":[
-            ],
-            "code": "*222*264#"
-        },
-        {
-            "name":"Transferir saldo",
-            "icon": "mobile_screen_share",
-            "fields":[
-              {
-                "name":"telefono",
-                "type":"phone_number"
-              },
-              {
-                "name":"cantidad",
-                "type":"money"
-              },
-              {
-                "name":"clave",
-                "type":"key_number"
-              }
-            ],
-            "code":"*234*1*{telefono}*{clave}*{cantidad}#"
           }
-    ]
+        ]
+      },
+      {
+        "name": "ALL IN ONE",
+        "icon": "data_usage",
+        "codes": [
+          {
+              "name":"Saldo",
+              "icon": "attach_money",
+              "fields":[
+              ],
+              "code":"*222#"
+          },
+          {
+              "name": "Estado del bono",
+              "icon": "monetization_on",
+              "fields":[
+              ],
+              "code": "*222*266#"
+          },
+          {
+              "name": "Paquetes de datos",
+              "icon": "data_usage",
+              "fields":[
+              ],
+              "code": "*222*328#"
+          },
+          {
+              "name": "Plan de voz",
+              "icon": "phone_in_talk",
+              "fields":[
+              ],
+              "code": "*222*869#"
+          },
+          {
+              "name": "Plan de sms",
+              "icon": "sms",
+              "fields":[
+              ],
+              "code": "*222*767#"
+          },
+          {
+              "name": "Plan amigos",
+              "icon": "people",
+              "fields":[
+              ],
+              "code": "*222*264#"
+          },
+          {
+              "name":"Transferir saldo",
+              "icon": "mobile_screen_share",
+              "fields":[
+                {
+                  "name":"telefono",
+                  "type":"phone_number"
+                },
+                {
+                  "name":"cantidad",
+                  "type":"money"
+                },
+                {
+                  "name":"clave",
+                  "type":"key_number"
+                }
+              ],
+              "code":"*234*1*{telefono}*{clave}*{cantidad}#"
+          }
+        ]
+      }
+    ]  
 }

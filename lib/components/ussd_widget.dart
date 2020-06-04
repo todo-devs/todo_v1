@@ -6,44 +6,95 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:todo/services/ussd.dart';
 import 'package:todo/models/ussd_codes.dart';
 
-class UssdWidgets extends StatefulWidget {
-  _UssdWidgetsState createState() => _UssdWidgetsState();
+class UssdCategoriesWidget extends StatefulWidget {
+  _UssdCategoriesState createState() => _UssdCategoriesState();
 }
 
-class _UssdWidgetsState extends State<UssdWidgets> {
-  List<UssdCode> ussdCodes;
+class _UssdCategoriesState extends State<UssdCategoriesWidget> {
+  List<UssdCategory> categories;
 
   @override
   void initState() {
     super.initState();
 
-    _loadCodes();
+    _loadData();
   }
 
-  Future<void> _loadCodes() async {
+  Future<void> _loadData() async {
     final data = await rootBundle.loadString('config/ussd_codes.json');
 
     final parsedJson = jsonDecode(data);
 
     setState(() {
-      ussdCodes = UssdCodes.fromJson(parsedJson).codes;
+      categories = UssdCategories.fromJson(parsedJson).categories;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (ussdCodes != null) {
+    if (categories != null)
       return ListView.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            return UssdCategoryWidget(
+              category: categories[index],
+            );
+          });
+
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+}
+
+class UssdCategoryWidget extends StatelessWidget {
+  final UssdCategory category;
+
+  UssdCategoryWidget({this.category});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UssdWidgets(
+              title: category.name,
+              ussdCodes: category.codes,
+            ),
+          ),
+        );
+      },
+      child: Card(
+        child: ListTile(
+          leading: Icon(category.icon, color: Colors.blue),
+          title: Text(category.name),
+        ),
+      ),
+    );
+  }
+}
+
+class UssdWidgets extends StatelessWidget {
+  final List<UssdCode> ussdCodes;
+  final String title;
+
+  UssdWidgets({this.ussdCodes, this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: ListView.builder(
           itemCount: ussdCodes.length,
           itemBuilder: (context, index) {
             return UssdWidget(
               ussdCode: ussdCodes[index],
             );
-          });
-    }
-
-    return Center(
-      child: CircularProgressIndicator(),
+          }),
     );
   }
 }
