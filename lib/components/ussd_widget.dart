@@ -270,9 +270,7 @@ class _CodeFormState extends State<CodeForm> {
                 onPressed: () {
                   final form = _formKey.currentState;
 
-                  print(widget.type);
-
-                  if (widget.type == 'debug') {
+                  if (widget.type == "debug") {
                     if (form.validate()) {
                       form.save();
 
@@ -280,8 +278,7 @@ class _CodeFormState extends State<CodeForm> {
                         content: Text('Run USSD Code\n$code'),
                       ));
                     }
-                  }
-                  else {
+                  } else {
                     if (form.validate()) {
                       form.save();
                       callTo(code);
