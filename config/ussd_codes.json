@@ -41,7 +41,7 @@
           },
           {
             "name":"Recargar",
-            "icon": "attach_money",
+            "icon": "monetization_on",
             "fields":[
               {
                 "name": "numero tarjeta",
