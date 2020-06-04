@@ -9,5 +9,6 @@ Future<String> getContactPhoneNumber() async {
       .toString()
       .replaceAll('+53', '')
       .replaceAll(' ', '')
-      .replaceAll('(Work)', '');
+      .replaceAll(RegExp(r'([a-zA-Z])'), '')
+      .replaceAll('()', '');
 }
