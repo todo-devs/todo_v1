@@ -184,13 +184,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
-  ussd:
-    dependency: "direct main"
-    description:
-      name: ussd
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2+1"
   vector_math:
     dependency: transitive
     description:

@@ -25,7 +25,6 @@ dependencies:
     sdk: flutter
 
   # External depencies
-  ussd: 0.0.2+1 # Run ussd codes
   contact_picker: ^0.0.2 # Select phone number from contacts
   intent: ^1.3.4
 

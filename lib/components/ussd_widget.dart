@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-import 'package:todo/services/ussd.dart';
 import 'package:todo/services/contacts.dart';
 import 'package:todo/services/phone.dart';
 import 'package:todo/models/ussd_codes.dart';
@@ -148,7 +147,7 @@ class SimpleCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        launchUssd(code);
+        callTo(code);
       },
       child: Column(children: <Widget>[
         ListTile(
