@@ -62,10 +62,10 @@ Servicios utilizados por la aplicación
 
 Servicio encargado de lanzar codigos ussd
 
-* `/lib/config`
+* `/config`
 
 Archivos de configuración de la app
 
-* `/lib/config/ussd_codes.dart`
+* `/config/ussd_codes.dart`
 
 Listado de codigos ussd, se utiliza para mostrar el listado de widgets que permiten ejecutar los distintos codigos ussd.
