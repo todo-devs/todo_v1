@@ -12,5 +12,10 @@ const strIcons = <String, IconData> {
   'mobile_screen_share': Icons.mobile_screen_share,
   'star_border': Icons.star_border,
   'shopping_cart': Icons.shopping_cart,
-  'network_cell': Icons.network_cell
+  'network_cell': Icons.network_cell,
+  'cancel': Icons.cancel,
+  'offline_pin': Icons.offline_pin,
+  'add_circle_outline': Icons.add_circle_outline,
+  'remove_circle_outline': Icons.remove_circle_outline,
+  'list': Icons.list
 };
