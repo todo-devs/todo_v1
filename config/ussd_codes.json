@@ -101,6 +101,41 @@
             "fields":[
             ],
             "code": "*222*869#"
+          },
+          {
+            "name": "5 min",
+            "icon": "phone_in_talk",
+            "fields":[
+            ],
+            "code": "*133*3*1#"
+          },
+          {
+            "name": "10 min",
+            "icon": "phone_in_talk",
+            "fields":[
+            ],
+            "code": "*133*3*2#"
+          },
+          {
+            "name": "15 min",
+            "icon": "phone_in_talk",
+            "fields":[
+            ],
+            "code": "*133*3*3#"
+          },
+          {
+            "name": "25 min",
+            "icon": "phone_in_talk",
+            "fields":[
+            ],
+            "code": "*133*3*4#"
+          },
+          {
+            "name": "40 min",
+            "icon": "phone_in_talk",
+            "fields":[
+            ],
+            "code": "*133*3*5#"
           }
         ]
       },
@@ -113,7 +148,7 @@
             "icon": "sms",
             "fields":[
             ],
-            "code": "*222*767##"
+            "code": "*222*767#"
           }
         ]
       },
