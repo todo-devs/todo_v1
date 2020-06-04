@@ -181,69 +181,58 @@
         ]
       },
       {
-        "name": "ALL IN ONE",
-        "icon": "data_usage",
+        "name": "Plan amigos",
+        "icon": "people",
         "codes": [
           {
-              "name":"Saldo",
-              "icon": "attach_money",
-              "fields":[
-              ],
-              "code":"*222#"
+            "name": "Estado",
+            "icon": "people",
+            "fields":[
+            ],
+            "code": "*222*264#"
           },
           {
-              "name": "Estado del bono",
-              "icon": "star_border",
-              "fields":[
-              ],
-              "code": "*222*266#"
+            "name": "Activar",
+            "icon": "offline_pin",
+            "fields":[
+            ],
+            "code": "*133*4*1*1#"
           },
           {
-              "name": "Paquetes de datos",
-              "icon": "data_usage",
-              "fields":[
-              ],
-              "code": "*222*328#"
+            "name": "Desactivar",
+            "icon": "cancel",
+            "fields":[
+            ],
+            "code": "*133*4*1*2#"
           },
           {
-              "name": "Plan de voz",
-              "icon": "phone_in_talk",
-              "fields":[
-              ],
-              "code": "*222*869#"
+            "name": "Agregar amigo",
+            "icon": "add_circle_outline",
+            "fields":[
+              {
+                "name":"telefono",
+                "type":"phone_number"
+              }
+            ],
+            "code": "*133*4*2*1*{telefono}#"
           },
           {
-              "name": "Plan de sms",
-              "icon": "sms",
-              "fields":[
-              ],
-              "code": "*222*767#"
+            "name": "Eliminar amigo",
+            "icon": "remove_circle_outline",
+            "fields":[
+              {
+                "name":"telefono",
+                "type":"phone_number"
+              }
+            ],
+            "code": "*133*4*2*2*{telefono}#"
           },
           {
-              "name": "Plan amigos",
-              "icon": "people",
-              "fields":[
-              ],
-              "code": "*222*264#"
-          },
-          {
-              "name":"Transferir saldo",
-              "icon": "mobile_screen_share",
-              "fields":[
-                {
-                  "name":"telefono",
-                  "type":"phone_number"
-                },
-                {
-                  "name":"cantidad",
-                  "type":"money"
-                },
-                {
-                  "name":"clave",
-                  "type":"key_number"
-                }
-              ],
-              "code":"*234*1*{telefono}*{clave}*{cantidad}#"
+            "name": "Lista de amigos",
+            "icon": "list",
+            "fields":[
+            ],
+            "code": "*133*4*3#"
           }
         ]
       }
