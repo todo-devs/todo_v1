@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:todo/services/ussd.dart';
+import 'package:todo/services/contacts.dart';
+import 'package:todo/services/phone.dart';
 import 'package:todo/models/ussd_codes.dart';
 
 class UssdCategoriesWidget extends StatefulWidget {
@@ -215,6 +217,7 @@ class CodeFormPage extends StatelessWidget {
                       child: CodeForm(
                         code: code.code,
                         fields: code.fields,
+                        type: code.type,
                       )),
                 ))),
       ),
@@ -225,14 +228,17 @@ class CodeFormPage extends StatelessWidget {
 class CodeForm extends StatefulWidget {
   final List<UssdCodeField> fields;
   final String code;
+  final String type;
 
-  CodeForm({this.code, this.fields});
+  CodeForm({this.code, this.fields, this.type});
 
   _CodeFormState createState() => _CodeFormState();
 }
 
 class _CodeFormState extends State<CodeForm> {
   final _formKey = GlobalKey<FormState>();
+
+  TextEditingController phoneNumberController = TextEditingController();
 
   String code;
 
@@ -264,12 +270,23 @@ class _CodeFormState extends State<CodeForm> {
                 ),
                 onPressed: () {
                   final form = _formKey.currentState;
-                  if (form.validate()) {
-                    form.save();
 
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text('Run USSD Code\n$code'),
-                    ));
+                  print(widget.type);
+
+                  if (widget.type == 'ussd' || widget.type == null) {
+                    if (form.validate()) {
+                      form.save();
+
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text('Run USSD Code\n$code'),
+                      ));
+                    }
+                  }
+                  else {
+                    if (form.validate()) {
+                      form.save();
+                      callTo(code);
+                    }
                   }
                 },
               ),
@@ -282,10 +299,25 @@ class _CodeFormState extends State<CodeForm> {
             // INPUT PHONE_NUMBER
             case 'phone_number':
               return TextFormField(
+                controller: phoneNumberController,
                 maxLength: 8,
                 autovalidate: true,
                 decoration: InputDecoration(
                     labelText: field.name.toUpperCase(),
+                    suffixIcon: FlatButton(
+                        onPressed: () async {
+                          String number = await getContactPhoneNumber();
+
+                          phoneNumberController.text = number;
+                          phoneNumberController.addListener(() {
+                            phoneNumberController.selection =
+                                TextSelection(baseOffset: 8, extentOffset: 8);
+                          });
+                        },
+                        child: Icon(
+                          Icons.contacts,
+                          color: Colors.blue,
+                        )),
                     prefixIcon: Icon(
                       Icons.phone,
                     )),
@@ -296,6 +328,10 @@ class _CodeFormState extends State<CodeForm> {
 
                   if (value.length < 8) {
                     return 'Este campo debe contener 8 digitos';
+                  }
+
+                  if (value[0] != '5') {
+                    return 'Este campo debe comenzar con el dígito 5';
                   }
                 },
                 keyboardType: TextInputType.phone,

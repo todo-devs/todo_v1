@@ -59,10 +59,11 @@ class UssdCode {
   String name;
   String code;
   IconData icon;
+  String type;
 
   List<UssdCodeField> fields;
 
-  UssdCode({this.name, this.code, this.fields, this.icon});
+  UssdCode({this.name, this.code, this.fields, this.icon, this.type});
 
   factory UssdCode.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['fields'] as List;
@@ -77,11 +78,20 @@ class UssdCode {
       icon = Icons.code;
     }
 
+    var type;
+
+    try {
+      type = parsedJson['type'];
+    } catch (e) {
+      type = 'ussd';
+    }
+
     return UssdCode(
         name: parsedJson['name'],
         code: parsedJson['code'],
         fields: fieldsList,
-        icon: icon);
+        icon: icon,
+        type: type);
   }
 }
 
