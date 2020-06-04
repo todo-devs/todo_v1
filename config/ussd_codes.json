@@ -1,15 +1,50 @@
 {
     "codes": [
         {
-            "name":"Consultar saldo",
+            "name":"Saldo",
             "icon": "attach_money",
             "fields":[
             ],
             "code":"*222#"
         },
         {
-            "name":"Nombre de acción",
-            "icon": "code",
+            "name": "Estado del bono",
+            "icon": "monetization_on",
+            "fields":[
+            ],
+            "code": "*222*266#"
+        },
+        {
+            "name": "Paquetes de datos",
+            "icon": "data_usage",
+            "fields":[
+            ],
+            "code": "*222*328#"
+        },
+        {
+            "name": "Plan de voz",
+            "icon": "phone_in_talk",
+            "fields":[
+            ],
+            "code": "*222*869#"
+        },
+        {
+            "name": "Plan de sms",
+            "icon": "sms",
+            "fields":[
+            ],
+            "code": "*222*767#"
+        },
+        {
+            "name": "Plan amigos",
+            "icon": "people",
+            "fields":[
+            ],
+            "code": "*222*264#"
+        },
+        {
+            "name":"Transferir saldo",
+            "icon": "mobile_screen_share",
             "fields":[
               {
                 "name":"telefono",

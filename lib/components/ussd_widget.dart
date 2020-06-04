@@ -82,7 +82,7 @@ class SimpleCode extends StatelessWidget {
       },
       child: Card(
         child: ListTile(
-          leading: Icon(icon),
+          leading: Icon(icon, color: Colors.blue),
           title: Text(name),
         ),
       ),
@@ -100,15 +100,17 @@ class CodeWithForm extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CodeFormPage(
-                      code: code,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => CodeFormPage(
+              code: code,
+            ),
+          ),
+        );
       },
       child: Card(
         child: ListTile(
-          leading: Icon(code.icon),
+          leading: Icon(code.icon, color: Colors.blue),
           title: Text(code.name),
         ),
       ),

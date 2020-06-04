@@ -41,7 +41,7 @@ class UssdCode {
         name: parsedJson['name'],
         code: parsedJson['code'],
         fields: fieldsList,
-        icon: strIcons[parsedJson['icon']]);
+        icon: icon);
   }
 }
 
