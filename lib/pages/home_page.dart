@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               height: MediaQuery.of(context).size.height,
               child: UssdWidgets(),
-            )
+            ),
           ]),
         ));
   }
