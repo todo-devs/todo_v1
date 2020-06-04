@@ -97,12 +97,12 @@ class UssdWidgets extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           Container(
-            height: 100,
+            height: 80,
             color: Colors.blue,
             child: Icon(icon, size: 64, color: Colors.white),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 200,
+            height: MediaQuery.of(context).size.height - 100,
             child: ListView.builder(
                 itemCount: ussdCodes.length,
                 itemBuilder: (context, index) {

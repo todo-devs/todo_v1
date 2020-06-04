@@ -21,14 +21,14 @@ class _LoginPageState extends State<LoginPage> {
         body: ListView(
           children: <Widget>[
             Container(
-              height: 100,
+              height: 80,
               color: Colors.blue,
               child: Center(
                 child: Icon(Icons.wifi, size: 64, color: Colors.white,),
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 200,
+              height: MediaQuery.of(context).size.height - 100,
               alignment: Alignment.center,
               child: Center(
                   child: Padding(

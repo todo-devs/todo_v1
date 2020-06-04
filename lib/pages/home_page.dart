@@ -17,41 +17,31 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => LoginPage(
+                        title: 'NAUTA',
+                      )));
+        },
+        child: Icon(Icons.wifi),
+      ),
       appBar: AppBar(
         elevation: 0,
         title: Text(widget.title),
       ),
       body: ListView(children: <Widget>[
         Container(
-          height: 100,
+          height: 80,
           color: Colors.blue,
           child: Center(
             child: Icon(Icons.developer_mode, size: 64, color: Colors.white),
           ),
         ),
         Container(
-          child: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => LoginPage(
-                            title: 'NAUTA',
-                          )));
-            },
-            child: Container(
-                child: ListTile(
-              title: Text('NAUTA'),
-              leading: Icon(
-                Icons.wifi,
-                color: Colors.blue,
-              ),
-            )),
-          ),
-        ),
-        Divider(color: Colors.blue),
-        Container(
-          height: MediaQuery.of(context).size.height - 270,
+          height: MediaQuery.of(context).size.height - 100,
           child: UssdCategoriesWidget(),
         ),
       ]),
