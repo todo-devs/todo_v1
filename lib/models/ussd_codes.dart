@@ -83,7 +83,7 @@ class UssdCode {
     try {
       type = parsedJson['type'];
     } catch (e) {
-      type = 'ussd';
+      type = null;
     }
 
     return UssdCode(

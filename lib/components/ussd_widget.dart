@@ -272,7 +272,7 @@ class _CodeFormState extends State<CodeForm> {
 
                   print(widget.type);
 
-                  if (widget.type == 'ussd' || widget.type == null) {
+                  if (widget.type == 'debug') {
                     if (form.validate()) {
                       form.save();
 
