@@ -14,19 +14,31 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Center(
-            child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Card(
+        appBar: AppBar(
+          title: Text(widget.title),
+          elevation: 0,
+        ),
+        body: ListView(
+          children: <Widget>[
+            Container(
+              height: 100,
+              color: Colors.blue,
+              child: Center(
+                child: Icon(Icons.wifi, size: 64, color: Colors.white,),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height - 200,
+              alignment: Alignment.center,
+              child: Center(
                   child: Padding(
-                      padding: EdgeInsets.all(20.0), child: LoginForm()),
-                ))),
-      ),
-    );
+                      padding: EdgeInsets.all(10.0),
+                      child: Card(
+                        child: Padding(
+                            padding: EdgeInsets.all(20.0), child: LoginForm()),
+                      ))),
+            ),
+          ],
+        ));
   }
 }

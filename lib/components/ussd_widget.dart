@@ -60,18 +60,21 @@ class UssdCategoryWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => UssdWidgets(
-              title: category.name,
-              ussdCodes: category.codes,
-            ),
+                title: category.name,
+                ussdCodes: category.codes,
+                icon: category.icon),
           ),
         );
       },
-      child: Card(
-        child: ListTile(
+      child: Column(children: <Widget>[
+        ListTile(
           leading: Icon(category.icon, color: Colors.blue),
           title: Text(category.name),
         ),
-      ),
+        Divider(
+          color: Colors.blue,
+        )
+      ]),
     );
   }
 }
@@ -79,22 +82,37 @@ class UssdCategoryWidget extends StatelessWidget {
 class UssdWidgets extends StatelessWidget {
   final List<UssdCode> ussdCodes;
   final String title;
+  final IconData icon;
 
-  UssdWidgets({this.ussdCodes, this.title});
+  UssdWidgets({this.ussdCodes, this.title, this.icon});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(title),
+        centerTitle: true,
       ),
-      body: ListView.builder(
-          itemCount: ussdCodes.length,
-          itemBuilder: (context, index) {
-            return UssdWidget(
-              ussdCode: ussdCodes[index],
-            );
-          }),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 100,
+            color: Colors.blue,
+            child: Icon(icon, size: 64, color: Colors.white),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height - 200,
+            child: ListView.builder(
+                itemCount: ussdCodes.length,
+                itemBuilder: (context, index) {
+                  return UssdWidget(
+                    ussdCode: ussdCodes[index],
+                  );
+                }),
+          )
+        ],
+      ),
     );
   }
 }
@@ -131,12 +149,15 @@ class SimpleCode extends StatelessWidget {
       onTap: () {
         launchUssd(code);
       },
-      child: Card(
-        child: ListTile(
+      child: Column(children: <Widget>[
+        ListTile(
           leading: Icon(icon, color: Colors.blue),
           title: Text(name),
         ),
-      ),
+        Divider(
+          color: Colors.blue,
+        )
+      ]),
     );
   }
 }
@@ -159,12 +180,15 @@ class CodeWithForm extends StatelessWidget {
           ),
         );
       },
-      child: Card(
-        child: ListTile(
+      child: Column(children: <Widget>[
+        ListTile(
           leading: Icon(code.icon, color: Colors.blue),
           title: Text(code.name),
         ),
-      ),
+        Divider(
+          color: Colors.blue,
+        )
+      ]),
     );
   }
 }

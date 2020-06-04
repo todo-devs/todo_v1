@@ -17,38 +17,44 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(widget.title),
+      ),
+      body: ListView(children: <Widget>[
+        Container(
+          height: 100,
+          color: Colors.blue,
+          child: Center(
+            child: Icon(Icons.developer_mode, size: 64, color: Colors.white),
+          ),
         ),
-        body: Container(
-          alignment: Alignment.center,
-          child: ListView(children: <Widget>[
-            Container(
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LoginPage(
-                                title: 'Wifi Login',
-                              )));
-                },
-                child: Card(
-                    child: ListTile(
-                  title: Text('Wifi Login'),
-                  leading: Icon(
-                    Icons.wifi,
-                    color: Colors.blue,
-                  ),
-                )),
+        Container(
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LoginPage(
+                            title: 'Wifi Login',
+                          )));
+            },
+            child: Container(
+                child: ListTile(
+              title: Text('Wifi Login'),
+              leading: Icon(
+                Icons.wifi,
+                color: Colors.blue,
               ),
-            ),
-            Divider(),
-            Container(
-              height: MediaQuery.of(context).size.height - 170,
-              child: UssdCategoriesWidget(),
-            ),
-          ]),
-        ));
+            )),
+          ),
+        ),
+        Divider(color: Colors.blue),
+        Container(
+          height: MediaQuery.of(context).size.height - 170,
+          child: UssdCategoriesWidget(),
+        ),
+      ]),
+    );
   }
 }
