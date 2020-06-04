@@ -14,7 +14,6 @@ class App extends StatelessWidget {
       title: 'TODO',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(title: 'TODO'),
     );
