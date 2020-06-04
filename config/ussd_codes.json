@@ -1,0 +1,28 @@
+{
+    "codes": [
+        {
+            "name":"Consultar saldo",
+            "fields":[
+            ],
+            "code":"*222#"
+        },
+        {
+            "name":"Nombre de acción",
+            "fields":[
+              {
+                "name":"telefono",
+                "type":"phone_number"
+              },
+              {
+                "name":"cantidad",
+                "type":"money"
+              },
+              {
+                "name":"clave",
+                "type":"key_number"
+              }
+            ],
+            "code":"*234*1*{telefono}*{clave}*{cantidad}#"
+          }
+    ]
+}
