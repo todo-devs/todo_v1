@@ -149,6 +149,34 @@
             "fields":[
             ],
             "code": "*222*767#"
+          },
+          {
+            "name": "10 sms",
+            "icon": "sms",
+            "fields":[
+            ],
+            "code": "*133*2*1#"
+          },
+          {
+            "name": "20 sms",
+            "icon": "sms",
+            "fields":[
+            ],
+            "code": "*133*2*2#"
+          },
+          {
+            "name": "35 sms",
+            "icon": "sms",
+            "fields":[
+            ],
+            "code": "*133*2*3#"
+          },
+          {
+            "name": "45 sms",
+            "icon": "sms",
+            "fields":[
+            ],
+            "code": "*133*2*4#"
           }
         ]
       },
