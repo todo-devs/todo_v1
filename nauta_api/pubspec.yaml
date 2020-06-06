@@ -8,5 +8,6 @@ environment:
 dependencies:
   requests: ^3.3.0
   beautifulsoup: ^0.0.1
+  shared_preferences: ^0.5.7
   flutter:
     sdk: flutter
