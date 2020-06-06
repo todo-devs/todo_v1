@@ -9,3 +9,9 @@ class NautaLoginException implements Exception {
 
   NautaLoginException(this.message);
 }
+
+class NautaLogoutException implements Exception {
+  final String message;
+
+  NautaLogoutException(this.message);
+}

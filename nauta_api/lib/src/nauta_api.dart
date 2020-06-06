@@ -1,5 +1,6 @@
 import 'package:beautifulsoup/beautifulsoup.dart';
 import 'package:requests/requests.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:nauta_api/src/utils/exceptions.dart';
 
@@ -8,9 +9,42 @@ class SessionObject {
   String csrfhw;
   String wlanuserip;
   String attributeUuid;
+  static Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  SessionObject(
+      {this.loginAction, this.csrfhw, this.wlanuserip, this.attributeUuid});
 
   bool isLoggedIn() {
     return (attributeUuid != null);
+  }
+
+  Future<void> save() async {
+    final SharedPreferences prefs = await _prefs;
+
+    prefs.setString('nauta_login_action', loginAction);
+    prefs.setString('nauta_csrfhw', csrfhw);
+    prefs.setString('nauta_wlanuserip', wlanuserip);
+    prefs.setString('nauta_attribute_uuid', attributeUuid);
+  }
+
+  static Future<SessionObject> load() async {
+    final SharedPreferences prefs = await _prefs;
+
+    return SessionObject(
+      loginAction: prefs.getString('nauta_login_action'),
+      csrfhw: prefs.getString('nauta_csrfhw'),
+      wlanuserip: prefs.getString('nauta_wlanuserip'),
+      attributeUuid: prefs.getString('nauta_attribute_uuid')
+    );
+  }
+
+  Future<void> dispose() async {
+    final SharedPreferences prefs = await _prefs;
+
+    prefs.remove('nauta_login_action');
+    prefs.remove('nauta_csrfhw');
+    prefs.remove('nauta_wlanuserip');
+    prefs.remove('nauta_attribute_uuid');
   }
 }
 
@@ -129,6 +163,7 @@ class NautaClient {
 
   Future<void> initSession() async {
     session = await NautaProtocol.createSession();
+    await session.save();
   }
 
   bool isLoggedIn() {
@@ -141,9 +176,17 @@ class NautaClient {
     }
 
     session.attributeUuid = await NautaProtocol.login(session, user, password);
+    await session.save();
   }
 
   Future<void> logout() async {
-    await NautaProtocol.logout(session, user);
+    try {
+      await NautaProtocol.logout(session, user);
+      await session.dispose();
+      session = null;
+    }
+    catch (e) {
+      throw NautaLogoutException('No se puede cerrar la seccion');
+    }
   }
 }
