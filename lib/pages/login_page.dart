@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo/components/login_form.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
+  LoginPage({Key key, this.title = 'NAUTA'}) : super(key: key);
 
   final String title;
 
@@ -24,11 +24,14 @@ class _LoginPageState extends State<LoginPage> {
               height: 80,
               color: Colors.blue,
               child: Center(
-                child: Icon(Icons.wifi, size: 64, color: Colors.white,),
+                child: Icon(
+                  Icons.wifi_lock,
+                  size: 64,
+                  color: Colors.white,
+                ),
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 100,
               alignment: Alignment.center,
               child: Center(
                   child: Padding(
