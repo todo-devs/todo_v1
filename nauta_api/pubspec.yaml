@@ -1,0 +1,12 @@
+name: nauta_api
+description: nauta api
+version: 0.0.1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  requests: ^3.3.0
+  beautifulsoup: ^0.0.1
+  flutter:
+    sdk: flutter
