@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:todo/models/user.dart';
 
+import 'package:nauta_api/nauta_api.dart';
+
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -9,6 +11,7 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+  NautaClient nautaClient;
 
   User _user = User();
 
@@ -61,24 +64,44 @@ class _LoginFormState extends State<LoginForm> {
               onSaved: (val) => setState(() => _user.password = val),
             ),
           ),
+          Text(
+            'FUNCION EN DESARROLLO',
+            style: TextStyle(color: Colors.red),
+          ),
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: MaterialButton(
-              color: Colors.blue,
-              minWidth: MediaQuery.of(context).size.width,
-              child: Text(
-                'Login',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                final form = _formKey.currentState;
-                if (form.validate()) {
-                  form.save();
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text('${_user.username}\n${_user.password}'),
-                  ));
-                }
-              },
+            child: Row(
+              children: <Widget>[
+                MaterialButton(
+                  color: Colors.blue,
+                  child: Text(
+                    'Login',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    final form = _formKey.currentState;
+                    if (form.validate()) {
+                      form.save();
+
+                      nautaClient = NautaClient(
+                          user: _user.username, password: _user.password);
+
+                      nautaClient.login();
+                    }
+                  },
+                ),
+                MaterialButton(
+                  color: Colors.blue,
+                  child: Text(
+                    'Logout',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    if(nautaClient != null)
+                      nautaClient.logout();
+                  },
+                )
+              ],
             ),
           )
         ],
