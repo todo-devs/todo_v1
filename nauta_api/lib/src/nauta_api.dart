@@ -189,4 +189,8 @@ class NautaClient {
       throw NautaLogoutException('No se puede cerrar la seccion');
     }
   }
+
+  void loadLastSession() async {
+      session = await SessionObject.load();
+  }
 }
