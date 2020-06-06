@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:todo/models/user.dart';
+import 'package:todo/pages/connected_page.dart';
 
 import 'package:nauta_api/nauta_api.dart';
 
@@ -11,7 +12,6 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  NautaClient nautaClient;
 
   User _user = User();
 
@@ -19,18 +19,19 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: ListView(
+      child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(5.0),
             child: Text(
               'Login Nauta',
               style: TextStyle(color: Colors.blue, fontSize: 20),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(5.0),
             child: TextFormField(
+              autovalidate: true,
               decoration: InputDecoration(
                   labelText: 'Username',
                   prefixIcon: Icon(
@@ -39,69 +40,61 @@ class _LoginFormState extends State<LoginForm> {
                   )),
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Username empty';
+                  return 'Este campo no debe estar vacío';
                 }
               },
+              enableSuggestions: true,
               keyboardType: TextInputType.emailAddress,
               onSaved: (val) => setState(() => _user.username = val),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(5.0),
             child: TextFormField(
+              autovalidate: true,
               decoration: InputDecoration(
-                  labelText: 'Password',
+                  labelText: 'Contraseña',
                   prefixIcon: Icon(
                     Icons.lock_outline,
                     size: 32,
                   )),
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Password is empty';
+                  return 'Este campo no debe estar vacío';
                 }
               },
               keyboardType: TextInputType.emailAddress,
               onSaved: (val) => setState(() => _user.password = val),
             ),
           ),
-          Text(
-            'FUNCION EN DESARROLLO',
-            style: TextStyle(color: Colors.red),
-          ),
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Row(
-              children: <Widget>[
-                MaterialButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    final form = _formKey.currentState;
-                    if (form.validate()) {
-                      form.save();
+            child: MaterialButton(
+              color: Colors.blue,
+              minWidth: MediaQuery.of(context).size.width,
+              child: Text(
+                'Login',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () async {
+                final form = _formKey.currentState;
+                if (form.validate()) {
+                  form.save();
 
-                      nautaClient = NautaClient(
-                          user: _user.username, password: _user.password);
+                  var nautaClient = NautaClient(
+                      user: _user.username, password: _user.password);
 
-                      nautaClient.login();
-                    }
-                  },
-                ),
-                MaterialButton(
-                  color: Colors.blue,
-                  child: Text(
-                    'Logout',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () {
-                    if(nautaClient != null)
-                      nautaClient.logout();
-                  },
-                )
-              ],
+                  await nautaClient.login();
+
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ConnectedPage(
+                                title: 'Conectado',
+                                username: _user.username,
+                              )));
+                }
+              },
             ),
           )
         ],
