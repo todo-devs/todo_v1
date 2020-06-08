@@ -162,6 +162,39 @@ class NautaProtocol {
 
     return r.statusCode == 200;
   }
+
+  static Future<String> getUserCredit(
+      SessionObject session, String username, String password) async {
+    try {
+      final r = await Requests.post(
+        "https://secure.etecsa.net:8443/EtecsaQueryServlet",
+        body: {
+          "CSRFHW": session.csrfhw,
+          "wlanuserip": session.wlanuserip,
+          "username": username,
+          "password": password
+        },
+        bodyEncoding: RequestBodyEncoding.FormURLEncoded,
+      );
+
+      r.raiseForStatus();
+
+      if (!r.url.toString().contains("secure.etecsa.net")) {
+        throw NautaException(
+            "No se puede obtener el credito del usuario mientras esta online");
+      }
+
+      final soup = Beautifulsoup(r.content());
+
+      final table = soup.call('#sessioninfo');
+
+      final dataList = table.querySelectorAll('td');
+
+      return dataList[3].text.trim();
+    } catch (e) {
+      throw NautaException('Fallo al obtener la informacion del usuario');
+    }
+  }
 }
 
 class NautaClient {
@@ -187,6 +220,25 @@ class NautaClient {
 
     session.attributeUuid = await NautaProtocol.login(session, user, password);
     await session.save();
+  }
+
+  Future<String> userCredit() async {
+    bool disposeSession = false;
+
+    try {
+      if (session == null) {
+        disposeSession = true;
+
+        await initSession();
+      }
+
+      return await NautaProtocol.getUserCredit(session, user, password);
+    } finally {
+      if (session != null && disposeSession) {
+        session.dispose();
+        session = null;
+      }
+    }
   }
 
   Future<void> logout() async {
