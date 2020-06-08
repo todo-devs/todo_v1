@@ -1,17 +1,17 @@
-class NautaPreLoginException implements Exception {
-  final String message;
+class NautaException implements Exception {
+  final message;
 
-  NautaPreLoginException(this.message);
+  NautaException(this.message);
 }
 
-class NautaLoginException implements Exception {
-  final String message;
-
-  NautaLoginException(this.message);
+class NautaPreLoginException extends NautaException {
+  NautaPreLoginException(message) : super(message);
 }
 
-class NautaLogoutException implements Exception {
-  final String message;
+class NautaLoginException extends NautaException {
+  NautaLoginException(message) : super(message);
+}
 
-  NautaLogoutException(this.message);
+class NautaLogoutException extends NautaException {
+  NautaLogoutException(message) : super(message);
 }
