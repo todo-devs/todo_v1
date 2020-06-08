@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 import 'package:nauta_api/nauta_api.dart';
 import 'package:todo/pages/login_page.dart';
@@ -14,6 +15,7 @@ class ConnectedForm extends StatefulWidget {
 
 class _ConnectedFormState extends State<ConnectedForm> {
   NautaClient nautaClient;
+  ProgressDialog pr;
 
   @override
   void initState() {
@@ -28,6 +30,20 @@ class _ConnectedFormState extends State<ConnectedForm> {
 
   @override
   Widget build(BuildContext context) {
+    pr = ProgressDialog(context, isDismissible: false);
+
+    pr.style(
+      borderRadius: 0.0,
+      progressWidget: Container(
+        padding: EdgeInsets.all(8.0),
+        child: CircularProgressIndicator(),
+      ),
+      messageTextStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 19.0,
+      ),
+    );
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -49,12 +65,6 @@ class _ConnectedFormState extends State<ConnectedForm> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
-            child: Center(
-              child: Text(widget.username),
-            ),
-          ),
-          Padding(
             padding: EdgeInsets.all(10.0),
             child: MaterialButton(
               color: Colors.blue,
@@ -64,10 +74,25 @@ class _ConnectedFormState extends State<ConnectedForm> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () async {
-                await nautaClient.logout();
+                pr.style(message: 'Desconectando');
+                await pr.show();
 
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                try {
+                  await nautaClient.logout();
+
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                } on NautaLogoutException catch (e) {
+                  await pr.hide();
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Colors.red,
+                    content: Text(
+                      e.message,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+                    ),
+                  ));
+                }
               },
             ),
           )
