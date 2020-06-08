@@ -95,63 +95,109 @@ class _LoginFormState extends State<LoginForm> {
                 'Conectar',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () async {
-                // Hide keyboard
-                FocusScope.of(context).unfocus();
-
-                final form = _formKey.currentState;
-                if (form.validate()) {
-                  form.save();
-
-                  if(!_user.username.contains('@')) {
-                    _user.username += '@nauta.com.cu';
-                  }
-
-                  var nautaClient = NautaClient(
-                      user: _user.username, password: _user.password);
-
-                  pr.style(message: 'Conectando');
-                  await pr.show();
-
-                  try {
-                    await nautaClient.login();
-
-                    await pr.hide();
-
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ConnectedPage(
-                                  title: 'Conectado',
-                                  username: _user.username,
-                                )));
-                  } on NautaPreLoginException catch (e) {
-                    await pr.hide();
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text(
-                        e.message,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 18),
-                      ),
-                    ));
-                  } on NautaLoginException catch (e) {
-                    await pr.hide();
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text(
-                        e.message,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 18),
-                      ),
-                    ));
-                  }
-                }
-              },
+              onPressed: login,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(5.0),
+            child: MaterialButton(
+              color: Colors.lightBlue,
+              child: Text(
+                'Consultar crédito',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: credit,
             ),
           )
         ],
       ),
     );
   }
+
+  void login() async {
+    // Hide keyboard
+    FocusScope.of(context).unfocus();
+
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+
+      if (!_user.username.contains('@')) {
+        _user.username += '@nauta.com.cu';
+      }
+
+      var nautaClient =
+          NautaClient(user: _user.username, password: _user.password);
+
+      pr.style(message: 'Conectando');
+      await pr.show();
+
+      try {
+        await nautaClient.login();
+
+        await pr.hide();
+
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ConnectedPage(
+                      title: 'Conectado',
+                      username: _user.username,
+                    )));
+      } on NautaException catch (e) {
+        await pr.hide();
+        Scaffold.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            e.message,
+            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+          ),
+        ));
+      }
+    } // end if (form.validate())
+  } // end login()
+
+  void credit() async {
+    // Hide keyboard
+    FocusScope.of(context).unfocus();
+
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+
+      if (!_user.username.contains('@')) {
+        _user.username += '@nauta.com.cu';
+      }
+
+      var nautaClient =
+          NautaClient(user: _user.username, password: _user.password);
+
+      pr.style(message: 'Solicitando');
+      await pr.show();
+
+      try {
+        final userCredit = await nautaClient.userCredit();
+
+        await pr.hide();
+
+        Scaffold.of(context).showSnackBar(SnackBar(
+          duration: Duration(seconds: 10),
+          backgroundColor: Colors.blueAccent,
+          content: Text(
+            'Crédito: $userCredit',
+            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+          ),
+        ));
+      } on NautaException catch (e) {
+        await pr.hide();
+        Scaffold.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            e.message,
+            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+          ),
+        ));
+      }
+    } // end if (form.validate())
+  } // end credit()
 }
