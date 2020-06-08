@@ -31,11 +31,10 @@ class SessionObject {
     final SharedPreferences prefs = await _prefs;
 
     return SessionObject(
-      loginAction: prefs.getString('nauta_login_action'),
-      csrfhw: prefs.getString('nauta_csrfhw'),
-      wlanuserip: prefs.getString('nauta_wlanuserip'),
-      attributeUuid: prefs.getString('nauta_attribute_uuid')
-    );
+        loginAction: prefs.getString('nauta_login_action'),
+        csrfhw: prefs.getString('nauta_csrfhw'),
+        wlanuserip: prefs.getString('nauta_wlanuserip'),
+        attributeUuid: prefs.getString('nauta_attribute_uuid'));
   }
 
   Future<void> dispose() async {
@@ -67,9 +66,12 @@ class NautaProtocol {
   }
 
   static Future<bool> isConnected() async {
-    final r = await Requests.get(CHECK_PAGE);
-
-    return !(r.content().contains('secure.etecsa.net'));
+    try {
+      final r = await Requests.get(CHECK_PAGE);
+      return !(r.content().contains('secure.etecsa.net'));
+    } catch (e) {
+      throw NautaPreLoginException('Error de conexión');
+    }
   }
 
   static bool isLoggedIn() {
@@ -125,19 +127,27 @@ class NautaProtocol {
 
     final redirectUrl = r.headers['location'];
 
+    if (redirectUrl == null) {
+      final soup = Beautifulsoup(r.content());
+
+      final scriptText = soup.find_all('script').last.text;
+
+      final matches = RegExp(r'alert\("([^"]*?)"\)').allMatches(scriptText);
+
+      throw NautaLoginException(matches.elementAt(0).group(1).split('.')[0]);
+    }
+
     final res = await Requests.get(redirectUrl);
 
     res.raiseForStatus();
     final data = res.content();
 
-    final regExp = RegExp(r'ATTRIBUTE_UUID=(\w+)&CSRFHW=');
-
-    final matches = regExp.allMatches(data);
+    final matches = RegExp(r'ATTRIBUTE_UUID=(\w+)&CSRFHW=').allMatches(data);
 
     if (matches.length > 0)
       return matches.elementAt(0).group(1);
     else
-      throw NautaLoginException('No se pudo obtener ATTRIBUTE_UUID');
+      throw NautaLoginException('Error al iniciar sesión');
   }
 
   static Future<bool> logout(SessionObject session, String username) async {
@@ -184,13 +194,12 @@ class NautaClient {
       await NautaProtocol.logout(session, user);
       await session.dispose();
       session = null;
-    }
-    catch (e) {
-      throw NautaLogoutException('No se puede cerrar la seccion');
+    } catch (e) {
+      throw NautaLogoutException('No se pudo cerrar la sesión');
     }
   }
 
   void loadLastSession() async {
-      session = await SessionObject.load();
+    session = await SessionObject.load();
   }
 }
