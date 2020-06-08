@@ -85,10 +85,52 @@
           {
             "name": "Saldo",
             "icon": "data_usage",
-            "fields":[
-            ],
+            "fields": [],
             "code": "*222*328#"
+          },
+          {
+            "name": "Paquete 400 MB - 5 CUC (+bono 4G)",
+            "icon": "data_ussage",
+            "fields": [],
+            "code": "*133*1*4*1#"
+          },
+          {
+            "name": "Paquete 600 MB - 7 CUC (+bono 4G)",
+            "icon": "data_ussage",
+            "fields": [],
+            "code": "*133*1*4*2#"
+          },
+          {
+            "name": "Paquete 1GB - 10 CUC (+bono 4G)",
+            "icon": "data_ussage",
+            "fields": [],
+            "code": "*133*1*4*3#"
+          },
+          {
+            "name": "Paquete 2.5GB - 20 CUC",
+            "icon": "data_ussage",
+            "fields": [],
+            "code": "*133*1*4*4#"
+          },
+          {
+            "name": "Paquete 4GB - 30 CUC",
+            "icon": "data_ussage",
+            "fields": [],
+            "code": "*133*1*4*5#"
+          },
+          {
+            "name": "Paquete LTE 6.5GB - 35 CUC",
+            "icon": "data_ussage",
+            "fields": [],
+            "code": "*133*1*5*1#"
+          },
+          {
+            "name": "Paquete LTE 10GB - 45 CUC",
+            "icon": "data_ussage",
+            "fields": [],
+            "code": "*133*1*5*2#"
           }
+
         ]
       },
       {
