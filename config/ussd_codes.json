@@ -277,6 +277,61 @@
             "code": "*133*4*3#"
           }
         ]
+      },
+      {
+        "name": "Números útiles",
+        "icon": "call",
+        "codes": [
+          {
+            "name":"2266 - Atención al cliente",
+            "icon": "call",
+            "fields":[
+            ],
+            "code":"2266"
+          },
+          {
+            "name":"103 - Línea Antidrogas",
+            "icon": "call",
+            "fields":[
+            ],
+            "code":"103"
+          },
+          {
+            "name":"104 - Ambulancias",
+            "icon": "call",
+            "fields":[
+            ],
+            "code":"104"
+          },
+          {
+            "name":"105 - Bomberos",
+            "icon": "call",
+            "fields":[
+            ],
+            "code":"105"
+          },
+          {
+            "name":"106 - Policía",
+            "icon": "call",
+            "fields":[
+            ],
+            "code":"106"
+          },
+          {
+            "name":"107 - Salvamento Marítimo",
+            "icon": "call",
+            "fields":[
+            ],
+            "code":"107"
+          },
+          {
+            "name":"118 - Cubacel Info",
+            "icon": "call",
+            "fields":[
+            ],
+            "code":"118"
+          }
+        ]
       }
-    ]  
+    ]
 }
