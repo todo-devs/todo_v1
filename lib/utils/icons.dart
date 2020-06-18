@@ -13,9 +13,13 @@ const strIcons = <String, IconData> {
   'star_border': Icons.star_border,
   'shopping_cart': Icons.shopping_cart,
   'network_cell': Icons.network_cell,
+  'network_locked': Icons.network_locked,
   'cancel': Icons.cancel,
   'offline_pin': Icons.offline_pin,
   'add_circle_outline': Icons.add_circle_outline,
   'remove_circle_outline': Icons.remove_circle_outline,
-  'list': Icons.list
+  'list': Icons.list,
+  'lock_open': Icons.lock_open,
+  'screen_lock_landscape': Icons.screen_lock_landscape,
+  'mail': Icons.mail,
 };
