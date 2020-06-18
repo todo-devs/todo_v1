@@ -194,6 +194,24 @@ class NautaProtocol {
     } catch (e) {
       throw NautaException('Fallo al obtener la informacion del usuario');
     }
+  } // end getUserCredit
+
+  static Future<String> getUserTime(SessionObject session, String username) async {
+     final r = await Requests.post(
+            "https://secure.etecsa.net:8443/EtecsaQueryServlet",
+            body: {
+                "op": "getLeftTime",
+                "ATTRIBUTE_UUID": session.attributeUuid,
+                "CSRFHW": session.csrfhw,
+                "wlanuserip": session.wlanuserip,
+                "username": username
+            },
+            bodyEncoding: RequestBodyEncoding.FormURLEncoded,
+        );
+
+        r.raiseForStatus();
+
+        return r.content();
   }
 }
 
@@ -241,6 +259,14 @@ class NautaClient {
     }
   }
 
+  Future<String> remainingTime() async {
+    if (session == null) {
+      throw NautaTimeException('Debe iniciar sesión para conocer el tiempo restante');
+    }
+    
+    return await NautaProtocol.getUserTime(session, user);
+  }
+
   Future<void> logout() async {
     try {
       await NautaProtocol.logout(session, user);
@@ -251,7 +277,7 @@ class NautaClient {
     }
   }
 
-  void loadLastSession() async {
+  Future<void> loadLastSession() async {
     session = await SessionObject.load();
   }
 }

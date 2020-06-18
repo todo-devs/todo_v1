@@ -15,3 +15,7 @@ class NautaLoginException extends NautaException {
 class NautaLogoutException extends NautaException {
   NautaLogoutException(message) : super(message);
 }
+
+class NautaTimeException extends NautaException {
+  NautaTimeException(message) : super(message);
+}
