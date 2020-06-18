@@ -6,6 +6,8 @@ import 'package:todo/pages/connected_page.dart';
 
 import 'package:nauta_api/nauta_api.dart';
 
+import 'package:webview_flutter/webview_flutter.dart';
+
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -53,7 +55,7 @@ class _LoginFormState extends State<LoginForm> {
                   labelText: 'Username',
                   prefixIcon: Icon(
                     Icons.alternate_email,
-                    size: 32,
+                    size: 28,
                   )),
               validator: (value) {
                 if (value.isEmpty) {
@@ -74,7 +76,7 @@ class _LoginFormState extends State<LoginForm> {
                 labelText: 'Contraseña',
                 prefixIcon: Icon(
                   Icons.lock_outline,
-                  size: 32,
+                  size: 28,
                 ),
               ),
               validator: (value) {
@@ -98,17 +100,33 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: login,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(5.0),
-            child: MaterialButton(
-              color: Colors.lightBlue,
-              child: Text(
-                'Consultar crédito',
-                style: TextStyle(color: Colors.white),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(2.0),
+                child: MaterialButton(
+                  color: Colors.lightBlue,
+                  child: Text(
+                    'Consultar crédito',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: credit,
+                ),
               ),
-              onPressed: credit,
-            ),
-          )
+              Padding(
+                padding: EdgeInsets.all(2.0),
+                child: MaterialButton(
+                  color: Colors.lightBlue,
+                  child: Text(
+                    'Portal Nauta',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: portalNauta,
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );
@@ -138,21 +156,25 @@ class _LoginFormState extends State<LoginForm> {
         await pr.hide();
 
         Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ConnectedPage(
-                      title: 'Conectado',
-                      username: _user.username,
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => ConnectedPage(
+              title: 'Conectado',
+              username: _user.username,
+            ),
+          ),
+        );
       } on NautaException catch (e) {
         await pr.hide();
-        Scaffold.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.red,
-          content: Text(
-            e.message,
-            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              e.message,
+              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+            ),
           ),
-        ));
+        );
       }
     } // end if (form.validate())
   } // end login()
@@ -200,4 +222,29 @@ class _LoginFormState extends State<LoginForm> {
       }
     } // end if (form.validate())
   } // end credit()
+
+  void portalNauta() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PortalNauta(),
+      ),
+    );
+  }
+}
+
+class PortalNauta extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Portal Nauta'),
+        elevation: 0,
+      ),
+      body: WebView(
+        initialUrl: "https://www.portal.nauta.cu",
+        javascriptMode: JavascriptMode.unrestricted,
+      ),
+    );
+  }
 }
