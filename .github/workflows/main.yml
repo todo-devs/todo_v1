@@ -17,11 +17,6 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter build apk --target-platform android-arm,android-arm64
-      - name: Create a Release APK
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/release/*.apk"
-          token: ${{ secrets.GITHUB_TOKEN }}
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/apk/release
@@ -29,3 +24,8 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
+      - name: Create a Release APK
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/release/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
