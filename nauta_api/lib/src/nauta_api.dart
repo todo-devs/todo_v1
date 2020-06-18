@@ -116,6 +116,10 @@ class NautaProtocol {
 
   static Future<String> login(
       SessionObject session, String username, String password) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('nauta_username', username);
+
     final r = await Requests.post(session.loginAction,
         body: {
           "CSRFHW": session.csrfhw,
@@ -151,6 +155,10 @@ class NautaProtocol {
   }
 
   static Future<bool> logout(SessionObject session, String username) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('nauta_username');
+
     final logoutUrl = "https://secure.etecsa.net:8443/LogoutServlet?" +
         "CSRFHW=${session.csrfhw}&" +
         "username=$username&" +
@@ -196,22 +204,23 @@ class NautaProtocol {
     }
   } // end getUserCredit
 
-  static Future<String> getUserTime(SessionObject session, String username) async {
-     final r = await Requests.post(
-            "https://secure.etecsa.net:8443/EtecsaQueryServlet",
-            body: {
-                "op": "getLeftTime",
-                "ATTRIBUTE_UUID": session.attributeUuid,
-                "CSRFHW": session.csrfhw,
-                "wlanuserip": session.wlanuserip,
-                "username": username
-            },
-            bodyEncoding: RequestBodyEncoding.FormURLEncoded,
-        );
+  static Future<String> getUserTime(
+      SessionObject session, String username) async {
+    final r = await Requests.post(
+      "https://secure.etecsa.net:8443/EtecsaQueryServlet",
+      body: {
+        "op": "getLeftTime",
+        "ATTRIBUTE_UUID": session.attributeUuid,
+        "CSRFHW": session.csrfhw,
+        "wlanuserip": session.wlanuserip,
+        "username": username
+      },
+      bodyEncoding: RequestBodyEncoding.FormURLEncoded,
+    );
 
-        r.raiseForStatus();
+    r.raiseForStatus();
 
-        return r.content();
+    return r.content();
   }
 }
 
@@ -261,9 +270,10 @@ class NautaClient {
 
   Future<String> remainingTime() async {
     if (session == null) {
-      throw NautaTimeException('Debe iniciar sesión para conocer el tiempo restante');
+      throw NautaTimeException(
+          'Debe iniciar sesión para conocer el tiempo restante');
     }
-    
+
     return await NautaProtocol.getUserTime(session, user);
   }
 
