@@ -28,5 +28,5 @@ jobs:
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
         with:
-          artifacts: steps.sign-android-app.outputs.signedReleaseFile
+          artifacts: ${{ steps.sign-android-app.outputs.signedReleaseFile }}
           token: ${{ secrets.GITHUB_TOKEN }}
