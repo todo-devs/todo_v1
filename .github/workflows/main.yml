@@ -17,6 +17,7 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter build apk --target-platform android-arm,android-arm64
+      - name: Sign apk
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/apk/release
