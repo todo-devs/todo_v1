@@ -20,11 +20,13 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => LoginPage(
-                        title: 'NAUTA',
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginPage(
+                title: 'NAUTA',
+              ),
+            ),
+          );
         },
         child: Icon(Icons.wifi),
       ),
