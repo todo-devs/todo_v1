@@ -35,10 +35,20 @@ class _UssdCategoriesState extends State<UssdCategoriesWidget> {
   Widget build(BuildContext context) {
     if (categories != null)
       return ListView.builder(
-          itemCount: categories.length,
+          itemCount: categories.length + 1,
           itemBuilder: (context, index) {
+            if (index == 0)
+              return Container(
+                height: 80,
+                color: Colors.blue,
+                child: Center(
+                  child:
+                      Icon(Icons.developer_mode, size: 64, color: Colors.white),
+                ),
+              );
+
             return UssdCategoryWidget(
-              category: categories[index],
+              category: categories[index - 1],
             );
           });
 
@@ -94,24 +104,22 @@ class UssdWidgets extends StatelessWidget {
         elevation: 0,
         title: Text(title),
       ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 80,
-            color: Colors.blue,
-            child: Icon(icon, size: 64, color: Colors.white),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height - 100,
-            child: ListView.builder(
-                itemCount: ussdCodes.length,
-                itemBuilder: (context, index) {
-                  return UssdWidget(
-                    ussdCode: ussdCodes[index],
-                  );
-                }),
-          )
-        ],
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        child: ListView.builder(
+            itemCount: ussdCodes.length + 1,
+            itemBuilder: (context, index) {
+              if (index == 0)
+                return Container(
+                  height: 80,
+                  color: Colors.blue,
+                  child: Icon(icon, size: 64, color: Colors.white),
+                );
+
+              return UssdWidget(
+                ussdCode: ussdCodes[index-1],
+              );
+            }),
       ),
     );
   }

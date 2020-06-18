@@ -32,19 +32,10 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         title: Text(widget.title),
       ),
-      body: ListView(children: <Widget>[
-        Container(
-          height: 80,
-          color: Colors.blue,
-          child: Center(
-            child: Icon(Icons.developer_mode, size: 64, color: Colors.white),
-          ),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height - 100,
-          child: UssdCategoriesWidget(),
-        ),
-      ]),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        child: UssdCategoriesWidget(),
+      ),
     );
   }
 }
