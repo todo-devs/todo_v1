@@ -7,12 +7,12 @@ import 'package:todo/services/contacts.dart';
 import 'package:todo/services/phone.dart';
 import 'package:todo/models/ussd_codes.dart';
 
-class UssdCategoriesWidget extends StatefulWidget {
-  _UssdCategoriesState createState() => _UssdCategoriesState();
+class UssdRootWidget extends StatefulWidget {
+  _UssdRootState createState() => _UssdRootState();
 }
 
-class _UssdCategoriesState extends State<UssdCategoriesWidget> {
-  List<UssdCategory> categories;
+class _UssdRootState extends State<UssdRootWidget> {
+  List<UssdItem> items;
 
   @override
   void initState() {
@@ -27,19 +27,19 @@ class _UssdCategoriesState extends State<UssdCategoriesWidget> {
     final parsedJson = jsonDecode(data);
 
     setState(() {
-      categories = UssdCategories.fromJson(parsedJson).categories;
+      items = UssdRoot.fromJson(parsedJson).items;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (categories != null)
+    if (items != null)
       return ListView.builder(
-          itemCount: categories.length + 1,
+          itemCount: items.length + 1,
           itemBuilder: (context, index) {
             if (index == 0)
               return Container(
-                height: 80,
+                height: 100,
                 color: Colors.blue,
                 child: Center(
                   child:
@@ -47,9 +47,16 @@ class _UssdCategoriesState extends State<UssdCategoriesWidget> {
                 ),
               );
 
-            return UssdCategoryWidget(
-              category: categories[index - 1],
-            );
+            var item = items[index - 1];
+
+            if (item.type == 'code')
+              return UssdWidget(
+                ussdCode: item,
+              );
+            else
+              return UssdCategoryWidget(
+                category: item,
+              );
           });
 
     return Center(
@@ -72,7 +79,7 @@ class UssdCategoryWidget extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => UssdWidgets(
                 title: category.name.toUpperCase(),
-                ussdCodes: category.codes,
+                ussdItems: category.items,
                 icon: category.icon),
           ),
         );
@@ -91,11 +98,11 @@ class UssdCategoryWidget extends StatelessWidget {
 }
 
 class UssdWidgets extends StatelessWidget {
-  final List<UssdCode> ussdCodes;
+  final List<UssdItem> ussdItems;
   final String title;
   final IconData icon;
 
-  UssdWidgets({this.ussdCodes, this.title, this.icon});
+  UssdWidgets({this.ussdItems, this.title, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -107,18 +114,25 @@ class UssdWidgets extends StatelessWidget {
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: ListView.builder(
-            itemCount: ussdCodes.length + 1,
+            itemCount: ussdItems.length + 1,
             itemBuilder: (context, index) {
               if (index == 0)
                 return Container(
-                  height: 80,
+                  height: 100,
                   color: Colors.blue,
                   child: Icon(icon, size: 64, color: Colors.white),
                 );
 
-              return UssdWidget(
-                ussdCode: ussdCodes[index-1],
-              );
+              var item = ussdItems[index - 1];
+
+              if (item.type == 'code')
+                return UssdWidget(
+                  ussdCode: item,
+                );
+              else
+                return UssdCategoryWidget(
+                  category: item,
+                );
             }),
       ),
     );

@@ -1,69 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:todo/utils/icons.dart';
 
-class UssdCategories {
-  List<UssdCategory> categories;
+class UssdRoot {
+  List<UssdItem> items;
 
-  UssdCategories({this.categories});
+  UssdRoot({this.items});
 
-  factory UssdCategories.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['categories'] as List;
-    List<UssdCategory> categoryList =
-        list.map((i) => UssdCategory.parseJson(i)).toList();
+  factory UssdRoot.fromJson(Map<String, dynamic> parsedJson) {
+    var list = parsedJson['items'] as List;
+    List<UssdItem> itemList = list.map((i) => UssdItem.fromJson(i)).toList();
 
-    return UssdCategories(categories: categoryList);
+    return UssdRoot(items: itemList);
   }
 }
 
-class UssdCategory {
-  List<UssdCode> codes;
+abstract class UssdItem {
   String name;
   IconData icon;
+  String type;
 
-  UssdCategory({this.name, this.icon, this.codes});
+  UssdItem({this.name, this.icon, this.type});
 
-  factory UssdCategory.parseJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['codes'] as List;
+  factory UssdItem.fromJson(Map<String, dynamic> parsedJson) {
+    final type = parsedJson['type'];
 
-    List<UssdCode> codesList = list.map((i) => UssdCode.fromJson(i)).toList();
+    if (type == 'code') {
+      return UssdCode.fromJson(parsedJson);
+    } else {
+      return UssdCategory.fromJson(parsedJson);
+    }
+  }
+}
+
+class UssdCategory extends UssdItem {
+  List<UssdItem> items;
+
+  UssdCategory({name, icon, this.items})
+      : super(name: name, icon: icon, type: 'category');
+
+  factory UssdCategory.fromJson(Map<String, dynamic> parsedJson) {
+    var list = parsedJson['items'] as List;
+    List<UssdItem> itemList = list.map((i) => UssdItem.fromJson(i)).toList();
 
     var icon;
-
     try {
       icon = strIcons[parsedJson['icon']];
     } catch (e) {
       icon = Icons.code;
     }
 
-    return UssdCategory(name: parsedJson['name'], icon: icon, codes: codesList);
+    return UssdCategory(name: parsedJson['name'], icon: icon, items: itemList);
   }
 }
 
-/*
-class UssdCodes {
-  List<UssdCode> codes;
-
-  UssdCodes({this.codes});
-
-  factory UssdCodes.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['codes'] as List;
-
-    List<UssdCode> codesList = list.map((i) => UssdCode.fromJson(i)).toList();
-
-    return UssdCodes(codes: codesList);
-  }
-}
-*/
-
-class UssdCode {
-  String name;
+class UssdCode extends UssdItem {
   String code;
-  IconData icon;
-  String type;
 
   List<UssdCodeField> fields;
 
-  UssdCode({this.name, this.code, this.fields, this.icon, this.type});
+  UssdCode({name, icon, this.code, this.fields})
+      : super(name: name, icon: icon, type: 'code');
 
   factory UssdCode.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['fields'] as List;
@@ -78,20 +74,12 @@ class UssdCode {
       icon = Icons.code;
     }
 
-    var type;
-
-    try {
-      type = parsedJson['type'];
-    } catch (e) {
-      type = null;
-    }
-
     return UssdCode(
-        name: parsedJson['name'],
-        code: parsedJson['code'],
-        fields: fieldsList,
-        icon: icon,
-        type: type);
+      name: parsedJson['name'],
+      icon: icon,
+      code: parsedJson['code'],
+      fields: fieldsList,
+    );
   }
 }
 

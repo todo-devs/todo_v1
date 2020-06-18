@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        child: UssdCategoriesWidget(),
+        child: UssdRootWidget(),
       ),
     );
   }
