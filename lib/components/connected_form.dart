@@ -6,6 +6,8 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:nauta_api/nauta_api.dart';
 import 'package:todo/pages/login_page.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class ConnectedForm extends StatefulWidget {
   final String username;
 
@@ -46,7 +48,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
           });
     });
 
-    startTime();
+    if (widget.username != null) startTime();
   }
 
   void startTime() {
@@ -63,7 +65,6 @@ class _ConnectedFormState extends State<ConnectedForm> {
             setState(() {
               remaining = Duration(seconds: newtime);
             });
-            print(remaining.toString());
           }
         },
       ),
@@ -115,52 +116,61 @@ class _ConnectedFormState extends State<ConnectedForm> {
           Padding(
             padding: EdgeInsets.all(5.0),
             child: Text(
-              remaining == null ? '00:00:00' : time,
+              remaining == null ? '' : time,
               style: TextStyle(color: Colors.red, fontSize: 20),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: MaterialButton(
-              color: Colors.blue,
-              minWidth: MediaQuery.of(context).size.width,
-              child: Text(
-                'Salir',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () async {
-                pr.style(message: 'Desconectando');
-                await pr.show();
-
-                try {
-                  await nautaClient.logout();
-
-                  this.dispose();
-
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginPage(
-                        title: 'NAUTA',
-                      ),
-                    ),
-                  );
-                } on NautaLogoutException catch (e) {
-                  await pr.hide();
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.red,
-                    content: Text(
-                      e.message,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
-                    ),
-                  ));
-                }
-              },
-            ),
-          )
+          exitButton()
         ],
       ),
     );
+  }
+
+  Widget exitButton() {
+    if (widget.username != null)
+      return Padding(
+        padding: EdgeInsets.all(10.0),
+        child: MaterialButton(
+          color: Colors.blue,
+          minWidth: MediaQuery.of(context).size.width,
+          child: Text(
+            'Salir',
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () async {
+            pr.style(message: 'Desconectando');
+            await pr.show();
+
+            try {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.remove('nauta_username');
+              await nautaClient.logout();
+
+              _timer.cancel();
+              await pr.hide();
+
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(
+                    title: 'NAUTA',
+                  ),
+                ),
+              );
+            } on NautaLogoutException catch (e) {
+              await pr.hide();
+              Scaffold.of(context).showSnackBar(SnackBar(
+                backgroundColor: Colors.red,
+                content: Text(
+                  e.message,
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+                ),
+              ));
+            }
+          },
+        ),
+      );
+
+    return Text('');
   }
 }
