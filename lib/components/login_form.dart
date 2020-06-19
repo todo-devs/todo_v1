@@ -8,6 +8,8 @@ import 'package:nauta_api/nauta_api.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -16,12 +18,15 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
 
+
+
   User _user = User();
 
   ProgressDialog pr;
 
   @override
   Widget build(BuildContext context) {
+
     pr = ProgressDialog(context, isDismissible: false);
 
     pr.style(
@@ -92,18 +97,23 @@ class _LoginFormState extends State<LoginForm> {
               onSaved: (val) => setState(() => _user.password = val),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: MaterialButton(
-              color: Colors.blue,
-              minWidth: MediaQuery.of(context).size.width,
-              child: Text(
-                'Conectar',
-                style: TextStyle(color: Colors.white),
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: MaterialButton(
+                  color: Colors.blue,
+                  minWidth: MediaQuery.of(context).size.width,
+                  child: Text(
+                    'Conectar',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: login,
+                ),
               ),
-              onPressed: login,
-            ),
+            ],
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -131,9 +141,71 @@ class _LoginFormState extends State<LoginForm> {
               )
             ],
           ),
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: MaterialButton(
+              color: Colors.lightBlueAccent,
+              minWidth: MediaQuery.of(context).size.width,
+              child: Text(
+                'Reconectar',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: reconnect,
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  void reconnect() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String username = prefs.getString('nauta_username');
+
+    if(username != null && await NautaProtocol.isConnected()){
+      pr.style(message: 'Reconectando');
+      await pr.show();
+
+      try {
+        await pr.hide();
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ConnectedPage(
+              title: 'Conectado',
+              username: username,
+            ),
+          ),
+        );
+      } on NautaException catch (e) {
+        await prefs.remove('nauta_username');
+        await pr.hide();
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              e.message,
+              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+            ),
+          ),
+        );
+      }
+    }
+    else{
+      await prefs.remove('nauta_username');
+      Scaffold.of(context).hideCurrentSnackBar();
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text(
+            "No se ha podido recuperar la sesión",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
   }
 
   void login() async {
