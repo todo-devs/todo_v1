@@ -52,7 +52,7 @@ class _LoginFormState extends State<LoginForm> {
             child: TextFormField(
               autovalidate: true,
               decoration: InputDecoration(
-                  labelText: 'Username',
+                  labelText: 'Usuario',
                   prefixIcon: Icon(
                     Icons.alternate_email,
                     size: 28,
@@ -61,6 +61,8 @@ class _LoginFormState extends State<LoginForm> {
                 if (value.isEmpty) {
                   return 'Este campo no debe estar vacío';
                 }
+
+                return null;
               },
               enableSuggestions: true,
               keyboardType: TextInputType.emailAddress,
@@ -83,6 +85,8 @@ class _LoginFormState extends State<LoginForm> {
                 if (value.isEmpty) {
                   return 'Este campo no debe estar vacío';
                 }
+
+                return null;
               },
               keyboardType: TextInputType.emailAddress,
               onSaved: (val) => setState(() => _user.password = val),
