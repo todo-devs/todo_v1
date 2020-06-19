@@ -188,6 +188,20 @@ class _LoginFormState extends State<LoginForm> {
         );
       }
     }
+    else{
+      await prefs.remove('nauta_username');
+      Scaffold.of(context).hideCurrentSnackBar();
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text(
+            "No se ha podido recuperar la sesión",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
   }
 
   void login() async {
