@@ -138,7 +138,7 @@ class _LoginFormState extends State<LoginForm> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0, left: 12.0, right: 12.0, top: 10.0),
+            padding: EdgeInsets.all(10.0),
             child: MaterialButton(
               color: Colors.lightBlueAccent,
               minWidth: MediaQuery.of(context).size.width,
