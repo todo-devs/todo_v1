@@ -1,6 +1,6 @@
 # TODO
 
-Helper app to add user with ETECSA services
+Helper app to aid user with ETECSA services
 
 ## Instalación del entono de desarrollo
 
