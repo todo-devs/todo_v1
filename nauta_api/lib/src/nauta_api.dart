@@ -269,6 +269,25 @@ class NautaClient {
     await session.save();
   }
 
+  Future<String> getWlanUserIP() async {
+    bool disposeSession = false;
+
+    try {
+      if (session == null) {
+        disposeSession = true;
+
+        await initSession();
+      }
+
+      return session.wlanuserip;
+    } finally {
+      if (session != null && disposeSession) {
+        session.dispose();
+        session = null;
+      }
+    }
+  }
+
   Future<String> userCredit() async {
     bool disposeSession = false;
 

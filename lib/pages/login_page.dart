@@ -19,8 +19,23 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   ProgressDialog pr;
+  String ip;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    NautaClient().getWlanUserIP().then(
+          (value) => setState(
+            () {
+              ip = value;
+              print(ip);
+            },
+          ),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +74,17 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.only(top: 10),
+            // Comprobar si ya obtuvo la ip de WLAN
+            child: ip != null
+                // Si obtuvo la ip aquí se debe comprobar si ip WLAN es igual
+                // a ip del movil y mostrar un mensaje apropiado
+                // (en este caso solo se muestra la ip)
+                ? Center(child: checkIp())
+                // Si todavía no se ha obtenido la ip no muestra nada
+                : null,
+          ),
           Container(
             alignment: Alignment.center,
             child: Center(
@@ -74,6 +100,24 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget checkIp() {
+    // TODO: implementar a lógica para comprobar si la ip de WLAN es igual a la ip del movil
+
+    // Aqui debe ir la lógica para comprobar si
+    // la ip de WLAN es igual a la ip del movil
+    // en ambos casos enviar un Text
+    // para el caso de ip == ipMovil enviar Text de color
+    // verde como se muestra en el ejemplo
+    // para el caso contrario enviar Text de color rojo
+
+    return Text(
+      ip,
+      style: TextStyle(
+        color: Colors.green,
       ),
     );
   }
@@ -97,8 +141,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         );
-
-        
       } // end if isConnected
     } on NautaException catch (e) {
       await prefs.remove('nauta_username');
