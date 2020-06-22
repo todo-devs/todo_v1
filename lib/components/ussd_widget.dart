@@ -75,21 +75,22 @@ class UssdCategoryWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => UssdWidgets(
-                title: category.name.toUpperCase(),
-                ussdItems: category.items,
-                icon: category.icon),
+              title: category.name.toUpperCase(),
+              ussdItems: category.items,
+              icon: category.icon,
+            ),
           ),
         );
       },
       child: Column(children: <Widget>[
         ListTile(
-          leading: Icon(category.icon, color: Theme.of(context).primaryColor),
+          leading: Icon(category.icon, color: Theme.of(context).focusColor),
           title: Text(
             category.name.toUpperCase(),
           ),
         ),
         Divider(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).focusColor,
         )
       ]),
     );
@@ -125,12 +126,12 @@ class UssdWidgets extends StatelessWidget {
         children: <Widget>[
           Container(
             height: 100,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Icon(icon, size: 64, color: Colors.white),
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).dialogBackgroundColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(45.0),
                 bottomRight: Radius.circular(45.0),
@@ -199,13 +200,13 @@ class SimpleCode extends StatelessWidget {
       },
       child: Column(children: <Widget>[
         ListTile(
-          leading: Icon(icon, color: Theme.of(context).primaryColor),
+          leading: Icon(icon, color: Theme.of(context).focusColor),
           title: Text(
             name.toUpperCase(),
           ),
         ),
         Divider(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).focusColor,
         )
       ]),
     );
@@ -232,11 +233,11 @@ class CodeWithForm extends StatelessWidget {
       },
       child: Column(children: <Widget>[
         ListTile(
-          leading: Icon(code.icon, color: Theme.of(context).primaryColor),
+          leading: Icon(code.icon, color: Theme.of(context).focusColor),
           title: Text(code.name.toUpperCase()),
         ),
         Divider(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).focusColor,
         )
       ]),
     );
@@ -271,7 +272,7 @@ class CodeFormPage extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height - 80,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).dialogBackgroundColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(45.0),
                 bottomRight: Radius.circular(45.0),
@@ -335,7 +336,7 @@ class _CodeFormState extends State<CodeForm> {
               padding: EdgeInsets.all(10.0),
               child: MaterialButton(
                 elevation: 0.5,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).focusColor,
                 minWidth: MediaQuery.of(context).size.width,
                 child: Text(
                   'Aceptar',
@@ -386,7 +387,7 @@ class _CodeFormState extends State<CodeForm> {
                         },
                         child: Icon(
                           Icons.contacts,
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).focusColor,
                         )),
                     prefixIcon: Icon(
                       Icons.phone,

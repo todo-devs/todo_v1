@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Container(
             height: 100,
-            color: Colors.blue,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Center(
               child: Icon(
                 Icons.wifi_lock,
@@ -96,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).dialogBackgroundColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(45.0),
                 bottomRight: Radius.circular(45.0),

@@ -92,7 +92,7 @@ class _LoginFormState extends State<LoginForm> {
                 padding: EdgeInsets.all(10.0),
                 child: MaterialButton(
                   elevation: 0.5,
-                  color: Colors.blue,
+                  color: Theme.of(context).focusColor,
                   minWidth: MediaQuery.of(context).size.width,
                   child: Text(
                     'Conectar',
@@ -247,6 +247,12 @@ class PortalNauta extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text(
           'Portal Nauta',
           style: TextStyle(fontWeight: FontWeight.bold),

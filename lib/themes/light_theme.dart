@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/themes/colors.dart';
 
 final themeLight = ThemeData(
   fontFamily: 'Montserrat',
@@ -6,7 +7,7 @@ final themeLight = ThemeData(
     color: Colors.transparent,
     elevation: 0.0,
   ),
-  scaffoldBackgroundColor: Colors.blue,
-  dialogBackgroundColor: Colors.white,
-  primaryColor: Colors.blue,
+  scaffoldBackgroundColor: GFColors.PRIMARY,
+  dialogBackgroundColor: GFColors.WHITE,
+  focusColor: GFColors.PRIMARY,
 );

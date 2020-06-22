@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/themes/colors.dart';
 
 final themeDark = ThemeData(
   brightness: Brightness.dark,
@@ -7,7 +8,7 @@ final themeDark = ThemeData(
     color: Colors.transparent,
     elevation: 0.0,
   ),
-  scaffoldBackgroundColor: Colors.black,
-  dialogBackgroundColor: Color(0xff4f4f4f),
-  primaryColor: Colors.green,
+  scaffoldBackgroundColor: Color.fromRGBO(39, 50, 80, 1),
+  dialogBackgroundColor: Color.fromRGBO(55, 65, 104, 1),
+  focusColor: GFColors.SUCCESS
 );

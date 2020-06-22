@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/services/AppStateNotifier.dart';
+import 'package:todo/themes/colors.dart';
 
 class SettingsWidget extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
@@ -48,7 +49,7 @@ class _SettingsState extends State<SettingsWidget> {
                   ),
                 ),
                 Switch(
-                  activeColor: Colors.white,
+                  activeColor: GFColors.SUCCESS,
                   value: darkMode,
                   onChanged: (value) {
                     setState(() {
