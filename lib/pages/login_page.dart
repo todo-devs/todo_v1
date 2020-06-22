@@ -8,6 +8,8 @@ import 'package:nauta_api/nauta_api.dart';
 
 import 'package:todo/pages/connected_page.dart';
 
+import 'package:get_ip/get_ip.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title = 'NAUTA'}) : super(key: key);
 
@@ -19,6 +21,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   ProgressDialog pr;
+  String wlanIp;
   String ip;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -27,14 +30,14 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
 
-    NautaClient().getWlanUserIP().then(
-          (value) => setState(
-            () {
-              ip = value;
-              print(ip);
-            },
-          ),
-        );
+    NautaClient().getWlanUserIP().then((value) {
+      GetIp.ipAddress.then((value2) {
+        setState(() {
+          wlanIp = value;
+          ip = value2;
+        });
+      });
+    });
   }
 
   @override
@@ -76,13 +79,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Padding(
             padding: EdgeInsets.only(top: 10),
-            // Comprobar si ya obtuvo la ip de WLAN
-            child: ip != null
-                // Si obtuvo la ip aquí se debe comprobar si ip WLAN es igual
-                // a ip del movil y mostrar un mensaje apropiado
-                // (en este caso solo se muestra la ip)
+            child: wlanIp != null && ip != null
                 ? Center(child: checkIp())
-                // Si todavía no se ha obtenido la ip no muestra nada
                 : null,
           ),
           Container(
@@ -105,19 +103,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget checkIp() {
-    // TODO: implementar a lógica para comprobar si la ip de WLAN es igual a la ip del movil
-
-    // Aqui debe ir la lógica para comprobar si
-    // la ip de WLAN es igual a la ip del movil
-    // en ambos casos enviar un Text
-    // para el caso de ip == ipMovil enviar Text de color
-    // verde como se muestra en el ejemplo
-    // para el caso contrario enviar Text de color rojo
+    String ok = "Usted se encuentra conectado directamente a ETECSA.";
+    String bad = "No se encuentra conectado directamente a ETECSA.";
+    bool cmp = ip == wlanIp;
 
     return Text(
-      ip,
+      cmp ? ok : bad,
       style: TextStyle(
-        color: Colors.green,
+        color: cmp ? Colors.green : Colors.red,
       ),
     );
   }
