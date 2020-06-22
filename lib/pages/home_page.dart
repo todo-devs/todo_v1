@@ -14,6 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var showSettings = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,30 +40,59 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.expand_more),
+            onPressed: () {
+              setState(() {
+                showSettings = !showSettings;
+              });
+            },
+          )
+        ],
       ),
       body: ListView(
         children: <Widget>[
-          Container(
-            height: 100,
-            color: Colors.blue,
-            child: Center(
-              child: Icon(
-                Icons.developer_mode,
-                size: 64,
-                color: Colors.white,
+          Stack(
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.transparent,
               ),
-            ),
-          ),
-          Container(
-            height: MediaQuery.of(context).size.height - 180.0,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(45.0),
-                bottomRight: Radius.circular(45.0),
-              ),
-            ),
-            child: UssdRootWidget(),
+              AnimatedPositioned(
+                duration: Duration(milliseconds: 500),
+                top:
+                    showSettings ? MediaQuery.of(context).size.height - 180 : 0,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 100,
+                      color: Colors.blue,
+                      child: Center(
+                        child: Icon(
+                          Icons.developer_mode,
+                          size: 64,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height - 180.0,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(45.0),
+                          bottomRight: Radius.circular(45.0),
+                        ),
+                      ),
+                      child: UssdRootWidget(),
+                    )
+                  ],
+                ),
+              )
+            ],
           )
         ],
       ),
