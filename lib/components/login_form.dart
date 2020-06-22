@@ -42,13 +42,6 @@ class _LoginFormState extends State<LoginForm> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.all(5.0),
-            child: Text(
-              'Login Nauta',
-              style: TextStyle(color: Colors.blue, fontSize: 20),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(5.0),
             child: TextFormField(
               autovalidate: true,
               decoration: InputDecoration(

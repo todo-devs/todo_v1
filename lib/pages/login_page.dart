@@ -86,11 +86,13 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: wlanIp != null && ip != null
-                ? Center(child: checkIp())
-                : null,
+          Container(
+            child: Padding(
+              padding: EdgeInsets.only(left: 30, right: 30, bottom: 10),
+              child: wlanIp != null && ip != null
+                  ? Center(child: checkIp())
+                  : null,
+            ),
           ),
           Container(
             decoration: BoxDecoration(
@@ -103,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
             alignment: Alignment.center,
             child: Center(
               child: Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Padding(
                   padding: EdgeInsets.all(20.0),
                   child: LoginForm(),
@@ -117,14 +119,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget checkIp() {
-    String ok = "Usted se encuentra conectado directamente a ETECSA.";
-    String bad = "No se encuentra conectado directamente a ETECSA.";
+    String ok =
+        "Usted se encuentra conectado directamente a la red WIFI_ETECSA.";
+    String bad =
+        "Usted está pasando por un intermediario para llegar a la red WIFI_ETECSA.";
     bool cmp = ip == wlanIp;
 
     return Text(
       cmp ? ok : bad,
       style: TextStyle(
-        color: cmp ? Colors.green : Colors.red,
+        color: cmp ? Colors.lightGreenAccent : Colors.pinkAccent,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
