@@ -31,12 +31,39 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.wifi),
       ),
       appBar: AppBar(
-        elevation: 0,
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        child: UssdRootWidget(),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 100,
+            color: Colors.blue,
+            child: Center(
+              child: Icon(
+                Icons.developer_mode,
+                size: 64,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height - 180.0,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(45.0),
+                bottomRight: Radius.circular(45.0),
+              ),
+            ),
+            child: UssdRootWidget(),
+          )
+        ],
       ),
     );
   }

@@ -58,8 +58,17 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(widget.title),
-        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          widget.title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: ListView(
         children: <Widget>[
@@ -86,15 +95,20 @@ class _LoginPageState extends State<LoginPage> {
                 : null,
           ),
           Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(45.0),
+                bottomRight: Radius.circular(45.0),
+              ),
+            ),
             alignment: Alignment.center,
             child: Center(
               child: Padding(
                 padding: EdgeInsets.all(10.0),
-                child: Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: LoginForm(),
-                  ),
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: LoginForm(),
                 ),
               ),
             ),

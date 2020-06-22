@@ -52,11 +52,12 @@ class _LoginFormState extends State<LoginForm> {
             child: TextFormField(
               autovalidate: true,
               decoration: InputDecoration(
-                  labelText: 'Usuario',
-                  prefixIcon: Icon(
-                    Icons.alternate_email,
-                    size: 28,
-                  )),
+                labelText: 'Usuario',
+                prefixIcon: Icon(
+                  Icons.alternate_email,
+                  size: 28,
+                ),
+              ),
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Este campo no debe estar vacío';
@@ -97,6 +98,7 @@ class _LoginFormState extends State<LoginForm> {
               Padding(
                 padding: EdgeInsets.all(10.0),
                 child: MaterialButton(
+                  elevation: 0.5,
                   color: Colors.blue,
                   minWidth: MediaQuery.of(context).size.width,
                   child: Text(
@@ -114,6 +116,7 @@ class _LoginFormState extends State<LoginForm> {
               Padding(
                 padding: EdgeInsets.all(2.0),
                 child: MaterialButton(
+                  elevation: 0.5,
                   color: Colors.lightBlue,
                   child: Text(
                     'Consultar crédito',
@@ -125,6 +128,7 @@ class _LoginFormState extends State<LoginForm> {
               Padding(
                 padding: EdgeInsets.all(2.0),
                 child: MaterialButton(
+                  elevation: 0.5,
                   color: Colors.lightBlue,
                   child: Text(
                     'Portal Nauta',
@@ -246,7 +250,10 @@ class PortalNauta extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Portal Nauta'),
+        title: Text(
+          'Portal Nauta',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         elevation: 0,
       ),
       body: WebView(

@@ -133,6 +133,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
       return Padding(
         padding: EdgeInsets.all(10.0),
         child: MaterialButton(
+          elevation: 0.5,
           color: Colors.blue,
           minWidth: MediaQuery.of(context).size.width,
           child: Text(
@@ -181,6 +182,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
       return Padding(
         padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
         child: MaterialButton(
+            elevation: 0.5,
             color: Colors.blue,
             minWidth: MediaQuery.of(context).size.width,
             child: Text(
@@ -206,5 +208,4 @@ class _ConnectedFormState extends State<ConnectedForm> {
     }
     return Text("");
   }
-
 }

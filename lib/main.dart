@@ -13,8 +13,12 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TODO',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Montserrat',
+        appBarTheme: AppBarTheme(
+          color: Colors.transparent,
+          elevation: 0.0,
+        ),
+        scaffoldBackgroundColor: Colors.blue,
       ),
       home: HomePage(title: 'TODO'),
     );

@@ -35,29 +35,26 @@ class _UssdRootState extends State<UssdRootWidget> {
   Widget build(BuildContext context) {
     if (items != null)
       return ListView.builder(
-          itemCount: items.length + 1,
-          itemBuilder: (context, index) {
-            if (index == 0)
-              return Container(
-                height: 100,
-                color: Colors.blue,
-                child: Center(
-                  child:
-                      Icon(Icons.developer_mode, size: 64, color: Colors.white),
-                ),
-              );
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          var item = items[index];
 
-            var item = items[index - 1];
-
-            if (item.type == 'code')
-              return UssdWidget(
+          if (item.type == 'code')
+            return Padding(
+              padding: EdgeInsets.only(left: 14.0, right: 14.0),
+              child: UssdWidget(
                 ussdCode: item,
-              );
-            else
-              return UssdCategoryWidget(
+              ),
+            );
+          else
+            return Padding(
+              padding: EdgeInsets.only(left: 14.0, right: 14.0),
+              child: UssdCategoryWidget(
                 category: item,
-              );
-          });
+              ),
+            );
+        },
+      );
 
     return Center(
       child: CircularProgressIndicator(),
@@ -87,7 +84,9 @@ class UssdCategoryWidget extends StatelessWidget {
       child: Column(children: <Widget>[
         ListTile(
           leading: Icon(category.icon, color: Colors.blue),
-          title: Text(category.name.toUpperCase()),
+          title: Text(
+            category.name.toUpperCase(),
+          ),
         ),
         Divider(
           color: Colors.blue,
@@ -108,32 +107,59 @@ class UssdWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        title: Text(title),
+        centerTitle: true,
+        title: Text(
+          title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        child: ListView.builder(
-            itemCount: ussdItems.length + 1,
-            itemBuilder: (context, index) {
-              if (index == 0)
-                return Container(
-                  height: 100,
-                  color: Colors.blue,
-                  child: Icon(icon, size: 64, color: Colors.white),
-                );
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: 100,
+            color: Colors.blue,
+            child: Icon(icon, size: 64, color: Colors.white),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(45.0),
+                bottomRight: Radius.circular(45.0),
+              ),
+            ),
+            height: MediaQuery.of(context).size.height - 180,
+            child: ListView.builder(
+              itemCount: ussdItems.length,
+              itemBuilder: (context, index) {
+                var item = ussdItems[index];
 
-              var item = ussdItems[index - 1];
-
-              if (item.type == 'code')
-                return UssdWidget(
-                  ussdCode: item,
-                );
-              else
-                return UssdCategoryWidget(
-                  category: item,
-                );
-            }),
+                if (item.type == 'code')
+                  return Padding(
+                    padding: EdgeInsets.only(left: 14.0, right: 14.0),
+                    child: UssdWidget(
+                      ussdCode: item,
+                    ),
+                  );
+                else
+                  return Padding(
+                    padding: EdgeInsets.only(left: 14.0, right: 14.0),
+                    child: UssdCategoryWidget(
+                      category: item,
+                    ),
+                  );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -174,7 +200,9 @@ class SimpleCode extends StatelessWidget {
       child: Column(children: <Widget>[
         ListTile(
           leading: Icon(icon, color: Colors.blue),
-          title: Text(name.toUpperCase()),
+          title: Text(
+            name.toUpperCase(),
+          ),
         ),
         Divider(
           color: Colors.blue,
@@ -224,23 +252,46 @@ class CodeFormPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        title: Text(code.name.toUpperCase()),
+        centerTitle: true,
+        title: Text(
+          code.name.toUpperCase(),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
       ),
-      body: Container(
-        alignment: Alignment.center,
-        child: Center(
-            child: Padding(
+      body: ListView(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height - 80,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(45.0),
+                bottomRight: Radius.circular(45.0),
+              ),
+            ),
+            child: Center(
+              child: Padding(
                 padding: EdgeInsets.all(10.0),
-                child: Card(
-                  child: Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: CodeForm(
-                        code: code.code,
-                        fields: code.fields,
-                        type: code.type,
-                      )),
-                ))),
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: CodeForm(
+                    code: code.code,
+                    fields: code.fields,
+                    type: code.type,
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -283,6 +334,7 @@ class _CodeFormState extends State<CodeForm> {
             return Padding(
               padding: EdgeInsets.all(10.0),
               child: MaterialButton(
+                elevation: 0.5,
                 color: Colors.blue,
                 minWidth: MediaQuery.of(context).size.width,
                 child: Text(
