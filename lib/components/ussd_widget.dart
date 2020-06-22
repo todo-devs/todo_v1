@@ -83,13 +83,13 @@ class UssdCategoryWidget extends StatelessWidget {
       },
       child: Column(children: <Widget>[
         ListTile(
-          leading: Icon(category.icon, color: Colors.blue),
+          leading: Icon(category.icon, color: Theme.of(context).primaryColor),
           title: Text(
             category.name.toUpperCase(),
           ),
         ),
         Divider(
-          color: Colors.blue,
+          color: Theme.of(context).primaryColor,
         )
       ]),
     );
@@ -125,7 +125,7 @@ class UssdWidgets extends StatelessWidget {
         children: <Widget>[
           Container(
             height: 100,
-            color: Colors.blue,
+            color: Theme.of(context).primaryColor,
             child: Icon(icon, size: 64, color: Colors.white),
           ),
           Container(
@@ -199,13 +199,13 @@ class SimpleCode extends StatelessWidget {
       },
       child: Column(children: <Widget>[
         ListTile(
-          leading: Icon(icon, color: Colors.blue),
+          leading: Icon(icon, color: Theme.of(context).primaryColor),
           title: Text(
             name.toUpperCase(),
           ),
         ),
         Divider(
-          color: Colors.blue,
+          color: Theme.of(context).primaryColor,
         )
       ]),
     );
@@ -232,11 +232,11 @@ class CodeWithForm extends StatelessWidget {
       },
       child: Column(children: <Widget>[
         ListTile(
-          leading: Icon(code.icon, color: Colors.blue),
+          leading: Icon(code.icon, color: Theme.of(context).primaryColor),
           title: Text(code.name.toUpperCase()),
         ),
         Divider(
-          color: Colors.blue,
+          color: Theme.of(context).primaryColor,
         )
       ]),
     );
@@ -335,7 +335,7 @@ class _CodeFormState extends State<CodeForm> {
               padding: EdgeInsets.all(10.0),
               child: MaterialButton(
                 elevation: 0.5,
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
                 minWidth: MediaQuery.of(context).size.width,
                 child: Text(
                   'Aceptar',
@@ -386,7 +386,7 @@ class _CodeFormState extends State<CodeForm> {
                         },
                         child: Icon(
                           Icons.contacts,
-                          color: Colors.blue,
+                          color: Theme.of(context).primaryColor,
                         )),
                     prefixIcon: Icon(
                       Icons.phone,

@@ -35,7 +35,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-              child: Icon(Icons.wifi),
+              child: Icon(
+                Icons.wifi,
+                color: Colors.white,
+              ),
             ),
       appBar: AppBar(
         title: Text(
@@ -90,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                       height: MediaQuery.of(context).size.height - 180.0,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).dialogBackgroundColor,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(45.0),
                           bottomRight: Radius.circular(45.0),

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 final themeDark = ThemeData(
+  brightness: Brightness.dark,
   fontFamily: 'Montserrat',
   appBarTheme: AppBarTheme(
     color: Colors.transparent,
     elevation: 0.0,
   ),
   scaffoldBackgroundColor: Colors.black,
-  textTheme: TextTheme(
-    headline6: TextStyle(
-      color: Colors.blue,
-    ),
-  ),
+  dialogBackgroundColor: Color(0xff4f4f4f),
+  primaryColor: Colors.green,
 );

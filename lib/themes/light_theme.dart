@@ -7,4 +7,6 @@ final themeLight = ThemeData(
     elevation: 0.0,
   ),
   scaffoldBackgroundColor: Colors.blue,
+  dialogBackgroundColor: Colors.white,
+  primaryColor: Colors.blue,
 );
