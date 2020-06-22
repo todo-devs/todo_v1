@@ -9,10 +9,16 @@ class SessionObject {
   String csrfhw;
   String wlanuserip;
   String attributeUuid;
+  String ssid;
   static Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  SessionObject(
-      {this.loginAction, this.csrfhw, this.wlanuserip, this.attributeUuid});
+  SessionObject({
+    this.loginAction,
+    this.csrfhw,
+    this.wlanuserip,
+    this.attributeUuid,
+    this.ssid,
+  });
 
   bool isLoggedIn() {
     return (attributeUuid != null);
@@ -25,16 +31,19 @@ class SessionObject {
     prefs.setString('nauta_csrfhw', csrfhw);
     prefs.setString('nauta_wlanuserip', wlanuserip);
     prefs.setString('nauta_attribute_uuid', attributeUuid);
+    prefs.setString('nauta_ssid', ssid);
   }
 
   static Future<SessionObject> load() async {
     final SharedPreferences prefs = await _prefs;
 
     return SessionObject(
-        loginAction: prefs.getString('nauta_login_action'),
-        csrfhw: prefs.getString('nauta_csrfhw'),
-        wlanuserip: prefs.getString('nauta_wlanuserip'),
-        attributeUuid: prefs.getString('nauta_attribute_uuid'));
+      loginAction: prefs.getString('nauta_login_action'),
+      csrfhw: prefs.getString('nauta_csrfhw'),
+      wlanuserip: prefs.getString('nauta_wlanuserip'),
+      attributeUuid: prefs.getString('nauta_attribute_uuid'),
+      ssid: prefs.getString('nauta_ssid'),
+    );
   }
 
   Future<void> dispose() async {
@@ -44,6 +53,7 @@ class SessionObject {
     prefs.remove('nauta_csrfhw');
     prefs.remove('nauta_wlanuserip');
     prefs.remove('nauta_attribute_uuid');
+    prefs.remove('nauta_ssid');
   }
 }
 
@@ -100,8 +110,11 @@ class NautaProtocol {
     var data = _getInputs(soup);
 
     // Now go to the login page
-    resp = await Requests.post(action,
-        body: data, bodyEncoding: RequestBodyEncoding.FormURLEncoded);
+    resp = await Requests.post(
+      action,
+      body: data,
+      bodyEncoding: RequestBodyEncoding.FormURLEncoded,
+    );
 
     soup = Beautifulsoup(resp.content());
 
@@ -110,24 +123,30 @@ class NautaProtocol {
 
     session.csrfhw = data['CSRFHW'];
     session.wlanuserip = data['wlanuserip'];
+    session.ssid = data['ssid'];
 
     return session;
   }
 
   static Future<String> login(
-      SessionObject session, String username, String password) async {
-
+    SessionObject session,
+    String username,
+    String password,
+  ) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('nauta_username', username);
 
-    final r = await Requests.post(session.loginAction,
-        body: {
-          "CSRFHW": session.csrfhw,
-          "wlanuserip": session.wlanuserip,
-          "username": username,
-          "password": password
-        },
-        bodyEncoding: RequestBodyEncoding.FormURLEncoded);
+    final r = await Requests.post(
+      session.loginAction,
+      body: {
+        "CSRFHW": session.csrfhw,
+        "wlanuserip": session.wlanuserip,
+        "username": username,
+        "password": password,
+        "ssid": session.ssid,
+      },
+      bodyEncoding: RequestBodyEncoding.FormURLEncoded,
+    );
 
     final redirectUrl = r.headers['location'];
 
@@ -155,7 +174,6 @@ class NautaProtocol {
   }
 
   static Future<bool> logout(SessionObject session, String username) async {
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('nauta_username');
 
@@ -180,7 +198,8 @@ class NautaProtocol {
           "CSRFHW": session.csrfhw,
           "wlanuserip": session.wlanuserip,
           "username": username,
-          "password": password
+          "password": password,
+          "ssid": session.ssid,
         },
         bodyEncoding: RequestBodyEncoding.FormURLEncoded,
       );
@@ -213,7 +232,8 @@ class NautaProtocol {
         "ATTRIBUTE_UUID": session.attributeUuid,
         "CSRFHW": session.csrfhw,
         "wlanuserip": session.wlanuserip,
-        "username": username
+        "username": username,
+        "ssid": session.ssid,
       },
       bodyEncoding: RequestBodyEncoding.FormURLEncoded,
     );
