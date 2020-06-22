@@ -1,52 +1,32 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:todo/themes/apptheme.dart';
 import 'package:todo/pages/home_page.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/services/AppStateNotifier.dart';
 
 void main() {
-  runApp(App());
+  runApp(
+    ChangeNotifierProvider<AppStateNotifier>(
+      create: (_) => AppStateNotifier(),
+      child: App(),
+    ),
+  );
 }
 
-class App extends StatefulWidget {
-  _AppState createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  var darkMode = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    SharedPreferences.getInstance().then((prefs) {
-      final dm = prefs.getBool('darkmode');
-
-      if (dm != null)
-        setState(() {
-          darkMode = dm;
-        });
-    });
-  }
-
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final color = darkMode ? Colors.greenAccent : Colors.blue;
-
-    print(darkMode);
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'TODO',
-      theme: ThemeData(
-        fontFamily: 'Montserrat',
-        appBarTheme: AppBarTheme(
-          color: Colors.transparent,
-          elevation: 0.0,
-        ),
-        scaffoldBackgroundColor: color,
-      ),
-      home: HomePage(title: 'TODO'),
+    return Consumer<AppStateNotifier>(
+      builder: (context, appState, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'TODO',
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: appState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
+          home: HomePage(title: 'TODO'),
+        );
+      },
     );
   }
 }

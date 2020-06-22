@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/services/AppStateNotifier.dart';
 
 class SettingsWidget extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
@@ -12,14 +14,18 @@ class _SettingsState extends State<SettingsWidget> {
   void initState() {
     super.initState();
 
-    SharedPreferences.getInstance().then((prefs) {
-      final dm = prefs.getBool('darkmode');
+    SharedPreferences.getInstance().then(
+      (prefs) {
+        final dm = prefs.getBool('darkmode');
+        if (dm != null) {
+          setState(() {
+            darkMode = dm;
+          });
 
-      if (dm != null)
-        setState(() {
-          darkMode = dm;
-        });
-    });
+          Provider.of<AppStateNotifier>(context, listen: false).updateTheme(dm);
+        }
+      },
+    );
   }
 
   @override
@@ -47,6 +53,13 @@ class _SettingsState extends State<SettingsWidget> {
                   onChanged: (value) {
                     setState(() {
                       darkMode = value;
+                    });
+
+                    Provider.of<AppStateNotifier>(context, listen: false)
+                        .updateTheme(darkMode);
+
+                    SharedPreferences.getInstance().then((prefs) {
+                      prefs.setBool('darkmode', darkMode);
                     });
                   },
                 )

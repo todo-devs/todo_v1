@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: showSettings
           ? null
           : FloatingActionButton(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -76,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       height: 100,
                       width: MediaQuery.of(context).size.width,
-                      color: Colors.blue,
+                      color: Theme.of(context).scaffoldBackgroundColor,
                       child: Center(
                         child: Icon(
                           Icons.developer_mode,
