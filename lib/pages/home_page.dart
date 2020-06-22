@@ -4,6 +4,8 @@ import 'package:todo/pages/login_page.dart';
 
 import 'package:todo/components/ussd_widget.dart';
 
+import 'package:todo/components/settings.dart';
+
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
 
@@ -19,19 +21,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginPage(
-                title: 'NAUTA',
-              ),
+      floatingActionButton: showSettings
+          ? null
+          : FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(
+                      title: 'NAUTA',
+                    ),
+                  ),
+                );
+              },
+              child: Icon(Icons.wifi),
             ),
-          );
-        },
-        child: Icon(Icons.wifi),
-      ),
       appBar: AppBar(
         title: Text(
           widget.title,
@@ -42,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.expand_more),
+            icon: Icon(showSettings ? Icons.expand_less : Icons.expand_more),
             onPressed: () {
               setState(() {
                 showSettings = !showSettings;
@@ -60,14 +64,18 @@ class _HomePageState extends State<HomePage> {
                 width: MediaQuery.of(context).size.width,
                 color: Colors.transparent,
               ),
+              Container(
+                child: SettingsWidget(),
+              ),
               AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
+                duration: Duration(milliseconds: 300),
                 top:
                     showSettings ? MediaQuery.of(context).size.height - 180 : 0,
                 child: Column(
                   children: <Widget>[
                     Container(
                       height: 100,
+                      width: MediaQuery.of(context).size.width,
                       color: Colors.blue,
                       child: Center(
                         child: Icon(
