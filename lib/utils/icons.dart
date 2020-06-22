@@ -22,4 +22,5 @@ const strIcons = <String, IconData> {
   'lock_open': Icons.lock_open,
   'screen_lock_landscape': Icons.screen_lock_landscape,
   'mail': Icons.mail,
+  'phone_android': Icons.phone_android
 };

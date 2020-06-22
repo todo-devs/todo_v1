@@ -294,48 +294,42 @@
               "name": "Saldo",
               "icon": "phone_in_talk",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*222*869#"
             },
             {
               "name": "5 min",
               "icon": "phone_in_talk",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*3*1#"
             },
             {
               "name": "10 min",
               "icon": "phone_in_talk",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*3*2#"
             },
             {
               "name": "15 min",
               "icon": "phone_in_talk",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*3*3#"
             },
             {
               "name": "25 min",
               "icon": "phone_in_talk",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*3*4#"
             },
             {
               "name": "40 min",
               "icon": "phone_in_talk",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*3*5#"
             }
           ]
@@ -349,40 +343,35 @@
               "name": "Saldo",
               "icon": "sms",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*222*767#"
             },
             {
               "name": "10 sms",
               "icon": "sms",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*2*1#"
             },
             {
               "name": "20 sms",
               "icon": "sms",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*2*2#"
             },
             {
               "name": "35 sms",
               "icon": "sms",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*2*3#"
             },
             {
               "name": "45 sms",
               "icon": "sms",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*2*4#"
             }
           ]
@@ -396,34 +385,31 @@
               "name": "Estado",
               "icon": "people",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*222*264#"
             },
             {
               "name": "Activar",
               "icon": "offline_pin",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*4*1*1#"
             },
             {
               "name": "Desactivar",
               "icon": "cancel",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*4*1*2#"
             },
             {
               "name": "Agregar amigo",
               "icon": "add_circle_outline",
               "type": "code",
-              "fields":[
+              "fields": [
                 {
-                  "name":"telefono",
-                  "type":"phone_number"
+                  "name": "telefono",
+                  "type": "phone_number"
                 }
               ],
               "code": "*133*4*2*1*{telefono}#"
@@ -432,10 +418,10 @@
               "name": "Eliminar amigo",
               "icon": "remove_circle_outline",
               "type": "code",
-              "fields":[
+              "fields": [
                 {
-                  "name":"telefono",
-                  "type":"phone_number"
+                  "name": "telefono",
+                  "type": "phone_number"
                 }
               ],
               "code": "*133*4*2*2*{telefono}#"
@@ -444,8 +430,7 @@
               "name": "Lista de amigos",
               "icon": "list",
               "type": "code",
-              "fields":[
-              ],
+              "fields": [],
               "code": "*133*4*3#"
             }
           ]
