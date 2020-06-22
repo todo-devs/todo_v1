@@ -106,28 +106,32 @@ class _LoginFormState extends State<LoginForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(2.0),
-                child: MaterialButton(
-                  elevation: 0.5,
-                  color: Colors.lightBlue,
-                  child: Text(
-                    'Consultar crédito',
-                    style: TextStyle(color: Colors.white),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(2.0),
+                  child: MaterialButton(
+                    elevation: 0.5,
+                    color: Colors.lightBlue,
+                    child: Text(
+                      'Consultar crédito',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: credit,
                   ),
-                  onPressed: credit,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.all(2.0),
-                child: MaterialButton(
-                  elevation: 0.5,
-                  color: Colors.lightBlue,
-                  child: Text(
-                    'Portal Nauta',
-                    style: TextStyle(color: Colors.white),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(2.0),
+                  child: MaterialButton(
+                    elevation: 0.5,
+                    color: Colors.lightBlue,
+                    child: Text(
+                      'Portal Nauta',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: portalNauta,
                   ),
-                  onPressed: portalNauta,
                 ),
               )
             ],
