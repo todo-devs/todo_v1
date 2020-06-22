@@ -113,7 +113,7 @@ class _LoginFormState extends State<LoginForm> {
                     elevation: 0.5,
                     color: Colors.lightBlue,
                     child: Text(
-                      'Consultar crédito',
+                      'Crédito',
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: credit,
