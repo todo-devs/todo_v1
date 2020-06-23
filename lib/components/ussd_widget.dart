@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:todo/services/contacts.dart';
 import 'package:todo/services/phone.dart';
@@ -22,10 +25,52 @@ class _UssdRootState extends State<UssdRootWidget> {
   }
 
   Future<void> _loadData() async {
-    final data = await rootBundle.loadString('config/ussd_codes.json');
-
-    final parsedJson = jsonDecode(data);
-
+    String data;
+    Map<String, dynamic> parsedJson;
+    try {
+      var prefs = await SharedPreferences.getInstance();
+      var lastHash = prefs.getString('hash');
+      var lastDay = prefs.getInt('day');
+      var actualDay = DateTime.now().day;
+      if (lastDay == null || lastDay != actualDay) {
+        try {
+          var resp = await get(
+            'https://todo-devs.github.io/todo-json/hash.json',
+            headers: {
+              'Accept-Encoding': 'gzip, deflate, br',
+            },
+          );
+          if (resp.statusCode == 200) {
+            var json = jsonDecode(utf8.decode(resp.bodyBytes));
+            var actualHash = json['hash'];
+            if (actualHash != lastHash) {
+              var resp = await get(
+                'https://todo-devs.github.io/todo-json/config.json',
+                headers: {
+                  'Accept-Encoding': 'gzip, deflate, br',
+                },
+              );
+              if (resp.statusCode == 200) {
+                var body = utf8.decode(resp.bodyBytes);
+                data = body;
+                prefs.setString('hash', actualHash);
+                prefs.setString('config', body);
+              }
+            }
+            prefs.setInt('day', actualDay);
+          }
+        } catch (e) {
+          log(e.toString());
+        }
+      }
+      data ??= prefs.getString('config');
+      data ??= await rootBundle.loadString('config/ussd_codes.json');
+      parsedJson = jsonDecode(data);
+    } catch (e) {
+      log(e.toString());
+      data = await rootBundle.loadString('config/ussd_codes.json');
+      parsedJson = jsonDecode(data);
+    }
     setState(() {
       items = UssdRoot.fromJson(parsedJson).items;
     });
@@ -41,14 +86,22 @@ class _UssdRootState extends State<UssdRootWidget> {
 
           if (item.type == 'code')
             return Padding(
-              padding: EdgeInsets.only(left: 14.0, right: 14.0),
+              padding: EdgeInsets.only(
+                left: 14.0,
+                right: 14.0,
+                top: index == 0 ? 10 : 0,
+              ),
               child: UssdWidget(
                 ussdCode: item,
               ),
             );
           else
             return Padding(
-              padding: EdgeInsets.only(left: 14.0, right: 14.0),
+              padding: EdgeInsets.only(
+                left: 14.0,
+                right: 14.0,
+                top: index == 0 ? 10 : 0,
+              ),
               child: UssdCategoryWidget(
                 category: item,
               ),
@@ -145,14 +198,22 @@ class UssdWidgets extends StatelessWidget {
 
                 if (item.type == 'code')
                   return Padding(
-                    padding: EdgeInsets.only(left: 14.0, right: 14.0),
+                    padding: EdgeInsets.only(
+                      left: 14.0,
+                      right: 14.0,
+                      top: index == 0 ? 10 : 0,
+                    ),
                     child: UssdWidget(
                       ussdCode: item,
                     ),
                   );
                 else
                   return Padding(
-                    padding: EdgeInsets.only(left: 14.0, right: 14.0),
+                    padding: EdgeInsets.only(
+                      left: 14.0,
+                      right: 14.0,
+                      top: index == 0 ? 10 : 0,
+                    ),
                     child: UssdCategoryWidget(
                       category: item,
                     ),
@@ -330,7 +391,7 @@ class _CodeFormState extends State<CodeForm> {
       key: _formKey,
       child: ListView.builder(
         itemCount: widget.fields.length + 1,
-        itemBuilder: (contex, index) {
+        itemBuilder: (_, index) {
           if (index == widget.fields.length) {
             return Padding(
               padding: EdgeInsets.all(10.0),

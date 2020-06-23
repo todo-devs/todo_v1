@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/pages/download_ussd_page.dart';
 import 'package:todo/services/AppStateNotifier.dart';
 import 'package:todo/themes/colors.dart';
 import 'package:todo/components/disclaim.dart';
@@ -52,11 +53,13 @@ class _SettingsState extends State<SettingsWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Activar modo oscuro',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    'Activar modo oscuro',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 Switch(
@@ -74,8 +77,42 @@ class _SettingsState extends State<SettingsWidget> {
                       prefs.setBool('darkmode', darkMode);
                     });
                   },
-                )
+                ),
               ],
+            ),
+            SizedBox(
+              height: 48,
+            ),
+            GestureDetector(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      'Descargar códigos USSD',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    child: Icon(
+                      Icons.file_download,
+                      color: GFColors.SUCCESS,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DownloadUssdPage(),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 48,
