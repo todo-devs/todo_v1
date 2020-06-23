@@ -31,47 +31,44 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
     try {
       var prefs = await SharedPreferences.getInstance();
       var lastHash = prefs.getString('hash');
-      var lastDay = prefs.getInt('day');
       var actualDay = DateTime.now().day;
-      if (lastDay == null || lastDay != actualDay) {
-        var resp = await get(
-          'https://todo-devs.github.io/todo-json/hash.json',
-          headers: {
-            'Accept-Encoding': 'gzip, deflate, br',
-          },
-        );
-        if (resp.statusCode == 200) {
-          var json = jsonDecode(utf8.decode(resp.bodyBytes));
-          var actualHash = json['hash'];
-          if (actualHash != lastHash) {
-            var resp = await get(
-              'https://todo-devs.github.io/todo-json/config.json',
-              headers: {
-                'Accept-Encoding': 'gzip, deflate, br',
-              },
-            );
-            if (resp.statusCode == 200) {
-              var body = utf8.decode(resp.bodyBytes);
-              var parsedJson = jsonDecode(body);
-              UssdRoot.fromJson(parsedJson);
-              prefs.setString('hash', actualHash);
-              prefs.setString('config', body);
-            } else {
-              throw Exception(
-                'Request failed: ${resp.request.url}\n'
-                'StatusCode: ${resp.statusCode}\n'
-                'Body: ${resp.body}',
-              );
-            }
-          }
-          prefs.setInt('day', actualDay);
-        } else {
-          throw Exception(
-            'Request failed: ${resp.request.url}\n'
-            'StatusCode: ${resp.statusCode}\n'
-            'Body: ${resp.body}',
+      var resp = await get(
+        'https://todo-devs.github.io/todo-json/hash.json',
+        headers: {
+          'Accept-Encoding': 'gzip, deflate, br',
+        },
+      );
+      if (resp.statusCode == 200) {
+        var json = jsonDecode(utf8.decode(resp.bodyBytes));
+        var actualHash = json['hash'];
+        if (actualHash != lastHash) {
+          var resp = await get(
+            'https://todo-devs.github.io/todo-json/config.json',
+            headers: {
+              'Accept-Encoding': 'gzip, deflate, br',
+            },
           );
+          if (resp.statusCode == 200) {
+            var body = utf8.decode(resp.bodyBytes);
+            var parsedJson = jsonDecode(body);
+            UssdRoot.fromJson(parsedJson);
+            prefs.setString('hash', actualHash);
+            prefs.setString('config', body);
+          } else {
+            throw Exception(
+              'Request failed: ${resp.request.url}\n'
+                  'StatusCode: ${resp.statusCode}\n'
+                  'Body: ${resp.body}',
+            );
+          }
         }
+        prefs.setInt('day', actualDay);
+      } else {
+        throw Exception(
+          'Request failed: ${resp.request.url}\n'
+              'StatusCode: ${resp.statusCode}\n'
+              'Body: ${resp.body}',
+        );
       }
       Navigator.pushReplacement(
         context,
