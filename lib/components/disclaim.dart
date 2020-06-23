@@ -41,7 +41,7 @@ class DisclaimerWidget extends StatelessWidget {
             child: MaterialButton(
               onPressed: () {
                 SharedPreferences.getInstance().then((prefs) {
-                  prefs.setBool('dok', true);
+                  prefs.setBool('dok1', true);
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (context) => HomePage(
@@ -77,7 +77,7 @@ con el objetivo de facilitar el acceso a los servicios de ETECSA.
 
 Se recomienda al usuario descargar siempre la aplicación desde las fuentes oficiales, las cuáles se listan al final de este escrito y que esté al tanto de las actualizaciones para que la aplicación funcione correctamente. 
 
-No se almacena ni se exporta ningún tipo de información personal del el usuario ni del uso que hace de la aplicación.
+No se almacena ni se exporta ningún tipo de información personal del usuario ni del uso que hace de la aplicación.
 
 Los servicios solicitados mediante la aplicación responden a las prestaciones de ETECSA, la aplicación solo actúa como una herramienta para facilitar la ejecución de los códigos ussd y la gestión de conexión en el servicio de WIFI_ETECSA y Nauta Hogar. No nos hacemos responsables por demoras o mal funcionamiento de los servicios de la compañía. 
 

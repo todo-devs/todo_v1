@@ -39,6 +39,16 @@ class _SettingsState extends State<SettingsWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(
+              'Versión 1.0.0 | 22-06-2020',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 48,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -68,7 +78,7 @@ class _SettingsState extends State<SettingsWidget> {
               ],
             ),
             SizedBox(
-              height: 64,
+              height: 48,
             ),
             MaterialButton(
               onPressed: () {

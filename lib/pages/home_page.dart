@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     SharedPreferences.getInstance().then((prefs) {
-      final dok = prefs.getBool('dok');
+      final dok = prefs.getBool('dok1');
 
       if (dok == null || !dok)
         Navigator.of(context).push(
