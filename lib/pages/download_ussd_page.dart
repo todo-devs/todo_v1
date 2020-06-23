@@ -56,9 +56,21 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
               UssdRoot.fromJson(parsedJson);
               prefs.setString('hash', actualHash);
               prefs.setString('config', body);
+            } else {
+              throw Exception(
+                'Request failed: ${resp.request.url}\n'
+                'StatusCode: ${resp.statusCode}\n'
+                'Body: ${resp.body}',
+              );
             }
           }
           prefs.setInt('day', actualDay);
+        } else {
+          throw Exception(
+            'Request failed: ${resp.request.url}\n'
+            'StatusCode: ${resp.statusCode}\n'
+            'Body: ${resp.body}',
+          );
         }
       }
       Navigator.pushReplacement(
