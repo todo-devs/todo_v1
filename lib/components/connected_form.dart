@@ -83,13 +83,14 @@ class _ConnectedFormState extends State<ConnectedForm> {
     pr = ProgressDialog(context, isDismissible: false);
 
     pr.style(
+      backgroundColor: Theme.of(context).dialogBackgroundColor,
       borderRadius: 0.0,
       progressWidget: Container(
+        color: Theme.of(context).dialogBackgroundColor,
         padding: EdgeInsets.all(8.0),
         child: CircularProgressIndicator(),
       ),
       messageTextStyle: TextStyle(
-        color: Colors.black,
         fontSize: 19.0,
       ),
     );

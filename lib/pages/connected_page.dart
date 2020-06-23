@@ -34,7 +34,7 @@ class _ConnectedPageState extends State<ConnectedPage> {
         children: <Widget>[
           Container(
             height: 80,
-            color: Colors.blue,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Center(
               child: Icon(
                 Icons.wifi,
@@ -45,7 +45,7 @@ class _ConnectedPageState extends State<ConnectedPage> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).dialogBackgroundColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(45.0),
                 bottomRight: Radius.circular(45.0),

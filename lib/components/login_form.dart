@@ -25,13 +25,13 @@ class _LoginFormState extends State<LoginForm> {
     pr = ProgressDialog(context, isDismissible: false);
 
     pr.style(
+      backgroundColor: Theme.of(context).dialogBackgroundColor,
       borderRadius: 0.0,
       progressWidget: Container(
         padding: EdgeInsets.all(8.0),
         child: CircularProgressIndicator(),
       ),
       messageTextStyle: TextStyle(
-        color: Colors.black,
         fontSize: 19.0,
       ),
     );
@@ -92,7 +92,7 @@ class _LoginFormState extends State<LoginForm> {
                 padding: EdgeInsets.all(10.0),
                 child: MaterialButton(
                   elevation: 0.5,
-                  color: Theme.of(context).focusColor,
+                  color: Colors.blue,
                   minWidth: MediaQuery.of(context).size.width,
                   child: Text(
                     'Conectar',
