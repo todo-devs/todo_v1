@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:todo/pages/login_page.dart';
 
 import 'package:todo/components/ussd_widget.dart';
 
 import 'package:todo/components/settings.dart';
+import 'package:todo/components/disclaim.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -20,6 +22,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences.getInstance().then((prefs) {
+      final dok = prefs.getBool('dok');
+
+      if (dok == null || !dok)
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => DisclaimerWidget(),
+          ),
+        );
+    });
+
     return Scaffold(
       floatingActionButton: showSettings
           ? null

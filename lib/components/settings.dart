@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/services/AppStateNotifier.dart';
 import 'package:todo/themes/colors.dart';
+import 'package:todo/components/disclaim.dart';
 
 class SettingsWidget extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
@@ -65,6 +66,37 @@ class _SettingsState extends State<SettingsWidget> {
                   },
                 )
               ],
+            ),
+            SizedBox(
+              height: 64,
+            ),
+            MaterialButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => DisclaimerWidget(),
+                  ),
+                );
+              },
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.verified_user,
+                    color: Colors.white,
+                    size: 64,
+                  ),
+                  SizedBox(
+                    height: 11,
+                  ),
+                  Text(
+                    'Términos de uso',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
