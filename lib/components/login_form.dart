@@ -92,7 +92,7 @@ class _LoginFormState extends State<LoginForm> {
                 padding: EdgeInsets.all(10.0),
                 child: MaterialButton(
                   elevation: 0.5,
-                  color: Colors.blue,
+                  color: Theme.of(context).focusColor,
                   minWidth: MediaQuery.of(context).size.width,
                   child: Text(
                     'Conectar',
@@ -111,7 +111,7 @@ class _LoginFormState extends State<LoginForm> {
                   padding: EdgeInsets.all(2.0),
                   child: MaterialButton(
                     elevation: 0.5,
-                    color: Colors.lightBlue,
+                    color: Theme.of(context).focusColor,
                     child: Text(
                       'Crédito',
                       style: TextStyle(color: Colors.white),
@@ -125,7 +125,7 @@ class _LoginFormState extends State<LoginForm> {
                   padding: EdgeInsets.all(2.0),
                   child: MaterialButton(
                     elevation: 0.5,
-                    color: Colors.lightBlue,
+                    color: Theme.of(context).focusColor,
                     child: Text(
                       'Portal Nauta',
                       style: TextStyle(color: Colors.white),
@@ -180,7 +180,11 @@ class _LoginFormState extends State<LoginForm> {
             backgroundColor: Colors.red,
             content: Text(
               e.message,
-              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 18,
+                color: Colors.white,
+              ),
             ),
           ),
         );
@@ -213,7 +217,7 @@ class _LoginFormState extends State<LoginForm> {
 
         Scaffold.of(context).showSnackBar(SnackBar(
           duration: Duration(seconds: 10),
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Theme.of(context).focusColor,
           content: Text(
             'Crédito: $userCredit',
             style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),

@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/services/contacts.dart';
 import 'package:todo/services/phone.dart';
 import 'package:todo/models/ussd_codes.dart';
+import 'package:getflutter/getflutter.dart';
 
 class UssdRootWidget extends StatefulWidget {
   _UssdRootState createState() => _UssdRootState();
@@ -136,8 +137,15 @@ class UssdCategoryWidget extends StatelessWidget {
         );
       },
       child: Column(children: <Widget>[
-        ListTile(
-          leading: Icon(category.icon, color: Theme.of(context).focusColor),
+        GFListTile(
+          margin: EdgeInsets.all(3),
+          avatar: Icon(category.icon, color: Theme.of(context).focusColor),
+          description: Text(
+            category.description,
+            style: TextStyle(
+              color: Theme.of(context).focusColor,
+            ),
+          ),
           title: Text(
             category.name.toUpperCase(),
           ),
@@ -239,6 +247,7 @@ class UssdWidget extends StatelessWidget {
         code: ussdCode.code,
         name: ussdCode.name,
         icon: ussdCode.icon,
+        description: ussdCode.description,
       );
     }
 
@@ -249,9 +258,10 @@ class UssdWidget extends StatelessWidget {
 class SimpleCode extends StatelessWidget {
   final String code;
   final String name;
+  final String description;
   final IconData icon;
 
-  SimpleCode({this.code, this.name, this.icon});
+  SimpleCode({this.code, this.name, this.icon, this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -260,8 +270,15 @@ class SimpleCode extends StatelessWidget {
         callTo(code);
       },
       child: Column(children: <Widget>[
-        ListTile(
-          leading: Icon(icon, color: Theme.of(context).focusColor),
+        GFListTile(
+          margin: EdgeInsets.all(3),
+          avatar: Icon(icon, color: Theme.of(context).focusColor),
+          description: Text(
+            description,
+            style: TextStyle(
+              color: Theme.of(context).focusColor,
+            ),
+          ),
           title: Text(
             name.toUpperCase(),
           ),
@@ -293,8 +310,15 @@ class CodeWithForm extends StatelessWidget {
         );
       },
       child: Column(children: <Widget>[
-        ListTile(
-          leading: Icon(code.icon, color: Theme.of(context).focusColor),
+        GFListTile(
+          margin: EdgeInsets.all(3),
+          avatar: Icon(code.icon, color: Theme.of(context).focusColor),
+          description: Text(
+            code.description,
+            style: TextStyle(
+              color: Theme.of(context).focusColor,
+            ),
+          ),
           title: Text(code.name.toUpperCase()),
         ),
         Divider(

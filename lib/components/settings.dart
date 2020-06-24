@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/pages/download_ussd_page.dart';
 import 'package:todo/services/AppStateNotifier.dart';
-import 'package:todo/themes/colors.dart';
 import 'package:todo/components/disclaim.dart';
 
 class SettingsWidget extends StatefulWidget {
@@ -41,7 +40,7 @@ class _SettingsState extends State<SettingsWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Versión 1.0.0 | 22-06-2020',
+              'Versión 1.1.0 | 23-06-2020',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -63,7 +62,7 @@ class _SettingsState extends State<SettingsWidget> {
                   ),
                 ),
                 Switch(
-                  activeColor: GFColors.SUCCESS,
+                  activeColor: Theme.of(context).focusColor,
                   value: darkMode,
                   onChanged: (value) {
                     setState(() {
@@ -89,7 +88,7 @@ class _SettingsState extends State<SettingsWidget> {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      'Descargar códigos USSD',
+                      'Actualizar códigos USSD',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -100,7 +99,10 @@ class _SettingsState extends State<SettingsWidget> {
                     margin: EdgeInsets.symmetric(horizontal: 15),
                     child: Icon(
                       Icons.file_download,
-                      color: GFColors.SUCCESS,
+                      color: Theme.of(context).scaffoldBackgroundColor ==
+                              Theme.of(context).focusColor
+                          ? Colors.white
+                          : Theme.of(context).focusColor,
                     ),
                   ),
                 ],

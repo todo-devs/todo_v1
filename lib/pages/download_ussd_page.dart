@@ -57,8 +57,8 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
           } else {
             throw Exception(
               'Request failed: ${resp.request.url}\n'
-                  'StatusCode: ${resp.statusCode}\n'
-                  'Body: ${resp.body}',
+              'StatusCode: ${resp.statusCode}\n'
+              'Body: ${resp.body}',
             );
           }
         }
@@ -66,8 +66,8 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
       } else {
         throw Exception(
           'Request failed: ${resp.request.url}\n'
-              'StatusCode: ${resp.statusCode}\n'
-              'Body: ${resp.body}',
+          'StatusCode: ${resp.statusCode}\n'
+          'Body: ${resp.body}',
         );
       }
       Navigator.pushReplacement(
@@ -80,8 +80,7 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
         loading = false;
         message = 'Ha ocurrido un error en la descarga de los códigos USSD.\n\n'
             'Revise su conexión e intentelo nuevamente.\n\n'
-            'Si el error continúa póngase en contacto con el soporte para '
-            'clientes.';
+            'Si el error continúa póngase en contacto con el equipo de desarrollo.';
         buttonText = 'CERRAR';
       });
     }
@@ -113,6 +112,7 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ),

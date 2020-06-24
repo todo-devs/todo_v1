@@ -18,8 +18,9 @@ abstract class UssdItem {
   String name;
   IconData icon;
   String type;
+  String description;
 
-  UssdItem({this.name, this.icon, this.type});
+  UssdItem({this.name, this.icon, this.type, this.description});
 
   factory UssdItem.fromJson(Map<String, dynamic> parsedJson) {
     final type = parsedJson['type'];
@@ -35,8 +36,9 @@ abstract class UssdItem {
 class UssdCategory extends UssdItem {
   List<UssdItem> items;
 
-  UssdCategory({name, icon, this.items})
-      : super(name: name, icon: icon, type: 'category');
+  UssdCategory({name, icon, description, this.items})
+      : super(
+            name: name, icon: icon, type: 'category', description: description);
 
   factory UssdCategory.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['items'] as List;
@@ -49,7 +51,12 @@ class UssdCategory extends UssdItem {
       icon = Icons.code;
     }
 
-    return UssdCategory(name: parsedJson['name'], icon: icon, items: itemList);
+    return UssdCategory(
+      name: parsedJson['name'],
+      icon: icon,
+      description: parsedJson['description'],
+      items: itemList,
+    );
   }
 }
 
@@ -58,8 +65,8 @@ class UssdCode extends UssdItem {
 
   List<UssdCodeField> fields;
 
-  UssdCode({name, icon, this.code, this.fields})
-      : super(name: name, icon: icon, type: 'code');
+  UssdCode({name, icon, description, this.code, this.fields})
+      : super(name: name, icon: icon, type: 'code', description: description);
 
   factory UssdCode.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['fields'] as List;
@@ -78,6 +85,7 @@ class UssdCode extends UssdItem {
       name: parsedJson['name'],
       icon: icon,
       code: parsedJson['code'],
+      description: parsedJson['description'],
       fields: fieldsList,
     );
   }

@@ -114,6 +114,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+  getflutter:
+    dependency: "direct main"
+    description:
+      name: getflutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.11"
   hex:
     dependency: transitive
     description:

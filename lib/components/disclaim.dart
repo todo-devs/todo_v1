@@ -41,7 +41,7 @@ class DisclaimerWidget extends StatelessWidget {
             child: MaterialButton(
               onPressed: () {
                 SharedPreferences.getInstance().then((prefs) {
-                  prefs.setBool('dok1', true);
+                  prefs.setBool('dok1.1', true);
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (context) => HomePage(
@@ -87,10 +87,14 @@ UNA VEZ MÁS. HACEMOS ÉNFASIS EN QUE LOS USUARIOS DEBEN DESCARGAR LA APLICACIÓ
 
 FUENTES OFICIALES:
 
-1. Releases generados automáticamente a partir del código oficial alojado en Github: 
+1. Releases generados automáticamente a partir del código oficial en Github: 
 
 https://github.com/todo-devs/todo/releases
 
-Fecha de actualización: 22 de junio del 2020
+2. Tienda cubana de aplicaciones Apklis
+
+https://www.apklis.cu/application/com.cubanopensource.todo
+
+Fecha de actualización: 23 de junio del 2020
 """;
 }

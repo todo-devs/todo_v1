@@ -162,7 +162,11 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.red,
           content: Text(
             e.message,
-            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 18,
+              color: Colors.white,
+            ),
           ),
         ),
       );
