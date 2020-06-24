@@ -17,6 +17,14 @@
       "code": "*222*328#"
     },
     {
+      "name": "Bonos",
+      "description": "Consulte el saldo actual de su Bono",
+      "icon": "star_border",
+      "type": "code",
+      "fields": [],
+      "code": "*222*266#"
+    },
+    {
       "name": "Gestionar Llamadas",
       "description": "Realice llamadas de manera fácil",
       "icon": "call",

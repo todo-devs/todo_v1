@@ -40,7 +40,7 @@ class _SettingsState extends State<SettingsWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Versión 1.1.0 | 23-06-2020',
+              'Versión 1.1.1 | 23-06-2020',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

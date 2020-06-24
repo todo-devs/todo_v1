@@ -138,7 +138,7 @@ class UssdCategoryWidget extends StatelessWidget {
       },
       child: Column(children: <Widget>[
         GFListTile(
-          margin: EdgeInsets.all(3),
+          margin: EdgeInsets.all(0),
           avatar: Icon(category.icon, color: Theme.of(context).focusColor),
           description: Text(
             category.description,
@@ -271,7 +271,7 @@ class SimpleCode extends StatelessWidget {
       },
       child: Column(children: <Widget>[
         GFListTile(
-          margin: EdgeInsets.all(3),
+          margin: EdgeInsets.all(0),
           avatar: Icon(icon, color: Theme.of(context).focusColor),
           description: Text(
             description,
@@ -311,7 +311,7 @@ class CodeWithForm extends StatelessWidget {
       },
       child: Column(children: <Widget>[
         GFListTile(
-          margin: EdgeInsets.all(3),
+          margin: EdgeInsets.all(0),
           avatar: Icon(code.icon, color: Theme.of(context).focusColor),
           description: Text(
             code.description,
