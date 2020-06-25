@@ -44,7 +44,7 @@
           "code": "*99{telefono}"
         },
         {
-          "name": "Mi numero oculto",
+          "name": "Mi número oculto",
           "description": "Llame sin mostrar su número",
           "icon": "call",
           "type": "code",
@@ -138,7 +138,7 @@
         },
         {
           "name": "Recargar",
-          "description": "Recarge su línea facilmente",
+          "description": "Recarge su línea fácilmente",
           "icon": "monetization_on",
           "type": "code",
           "fields": [
@@ -151,7 +151,7 @@
         },
         {
           "name": "Transferir Saldo",
-          "description": "Transferir de saldo a otro",
+          "description": "Transferir saldo a otro",
           "icon": "mobile_screen_share",
           "type": "code",
           "fields": [
@@ -226,7 +226,7 @@
             },
             {
               "name": "Bolsa Correo",
-              "description": "Comprar plan solo para correo nauta",
+              "description": "Comprar plan sólo para correo nauta",
               "icon": "mail",
               "type": "code",
               "fields": [],
