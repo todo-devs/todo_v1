@@ -239,8 +239,16 @@
               "type": "category",
               "items": [
                 {
+                  "name": "Bolsa Diaria LTE",
+                  "description": "Paquete de 200MB por 1 CUC vence en 24h",
+                  "icon": "data_usage",
+                  "type": "code",
+                  "fields": [],
+                  "code": "*133*1*3#"
+                },
+                {
                   "name": "400MB - 5 CUC",
-                  "description": "Paquete de 400MB por 5 CUC (+bono 4G)",
+                  "description": "Paquete de 400MB por 5 CUC (+500MB bono 4G)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -248,7 +256,7 @@
                 },
                 {
                   "name": "600MB - 7 CUC",
-                  "description": "Paquete de 600MB por 7 CUC (+bono 4G)",
+                  "description": "Paquete de 600MB por 7 CUC (+800MB bono 4G)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -256,7 +264,7 @@
                 },
                 {
                   "name": "1GB - 10 CUC",
-                  "description": "Paquete de 1GB por 10 CUC (+bono 4G)",
+                  "description": "Paquete de 1GB por 10 CUC (+1.5GB bono 4G)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -264,7 +272,7 @@
                 },
                 {
                   "name": "2.5GB - 20 CUC",
-                  "description": "Paquete de 2.5GB por 20 CUC (+bono 4G)",
+                  "description": "Paquete de 2.5GB por 20 CUC (+3GB bono 4G)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -272,33 +280,41 @@
                 },
                 {
                   "name": "4GB - 30 CUC",
-                  "description": "Paquete de 4GB por 30 CUC (+bono 4G)",
+                  "description": "Paquete de 4GB por 30 CUC (+5GB bono 4G)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*4*5#"
                 },
                 {
-                  "name": "6.5GB - 35 CUC",
-                  "description": "Paquete de 6.5GB por 35 CUC (+bono 4G)",
+                  "name": "1GB - 4 CUC",
+                  "description": "Paquete de 1GB por 4 CUC (sólo 4G)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*5*1#"
                 },
                 {
-                  "name": "10GB - 45 CUC",
-                  "description": "Paquete LTE 10GB por 45 CUC (sólo 4G)",
+                  "name": "2.5GB - 8 CUC",
+                  "description": "Paquete LTE de 2.5GB por 8 CUC (sólo 4G)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*5*2#"
+                },
+                {
+                  "name": "14GB - 45 CUC",
+                  "description": "Paquete LTE 14GB por 45 CUC (sólo 4G)",
+                  "icon": "data_usage",
+                  "type": "code",
+                  "fields": [],
+                  "code": "*133*1*5*3#"
                 }
               ]
             },
             {
               "name": "Paquetes solo 3G",
-              "description": "Paquetes de internet para usuarios no han activado 4G",
+              "description": "Paquetes de internet para usuarios que no han activado 4G",
               "icon": "data_usage",
               "type": "category",
               "items": [
