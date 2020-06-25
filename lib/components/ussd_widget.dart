@@ -33,6 +33,15 @@ class _UssdRootState extends State<UssdRootWidget> {
       var lastHash = prefs.getString('hash');
       var lastDay = prefs.getInt('day');
       var actualDay = DateTime.now().day;
+
+      data ??= prefs.getString('config');
+      data ??= await rootBundle.loadString('config/ussd_codes.json');
+      parsedJson = jsonDecode(data);
+
+      setState(() {
+        items = UssdRoot.fromJson(parsedJson).items;
+      });
+
       if (lastDay == null || lastDay != actualDay) {
         try {
           var resp = await get(

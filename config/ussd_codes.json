@@ -193,7 +193,7 @@
           "type": "category",
           "items": [
             {
-              "name": "Saldo",
+              "name": "Megas disponibles",
               "description": "Consultar los megas disponibles",
               "icon": "data_usage",
               "type": "code",
