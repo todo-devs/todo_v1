@@ -23,7 +23,7 @@ class App extends StatelessWidget {
           title: 'TODO',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          themeMode: appState.isDarkModeOn ? ThemeMode.dark : ThemeMode.system,
+          themeMode: appState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
           home: HomePage(title: 'TODO'),
         );
       },

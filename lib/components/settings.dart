@@ -4,6 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/pages/download_ussd_page.dart';
 import 'package:todo/services/AppStateNotifier.dart';
 import 'package:todo/components/disclaim.dart';
+import 'package:getflutter/getflutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsWidget extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
@@ -80,7 +83,7 @@ class _SettingsState extends State<SettingsWidget> {
               ],
             ),
             SizedBox(
-              height: 48,
+              height: 30,
             ),
             GestureDetector(
               child: Row(
@@ -117,36 +120,71 @@ class _SettingsState extends State<SettingsWidget> {
               },
             ),
             SizedBox(
-              height: 48,
+              height: 30,
             ),
-            MaterialButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => DisclaimerWidget(),
                   ),
                 );
               },
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Icon(
-                    Icons.verified_user,
-                    color: Colors.white,
-                    size: 64,
+                  Expanded(
+                    child: Text(
+                      'Términos de uso',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    height: 11,
-                  ),
-                  Text(
-                    'Términos de uso',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    child: Icon(
+                      Icons.verified_user,
+                      color: Theme.of(context).scaffoldBackgroundColor ==
+                              Theme.of(context).focusColor
+                          ? Colors.white
+                          : Theme.of(context).focusColor,
                     ),
                   ),
                 ],
               ),
-            )
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              child: GFButton(
+                icon: Icon(
+                  FontAwesomeIcons.telegram,
+                  color: Theme.of(context).scaffoldBackgroundColor ==
+                          Theme.of(context).focusColor
+                      ? Colors.white
+                      : Theme.of(context).focusColor,
+                ),
+                text: 'Habla con nosotros en Telegram',
+                textColor: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor ==
+                        Theme.of(context).focusColor
+                    ? Colors.white
+                    : Theme.of(context).focusColor,
+                size: GFSize.LARGE,
+                type: GFButtonType.outline2x,
+                fullWidthButton: true,
+                onPressed: () async {
+                  const url = 'https://t.me/todoapp_cuba';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),
