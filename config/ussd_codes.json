@@ -533,6 +533,14 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Línea corporativa",
+      "description": "Consulte el estado de su línea corporativa (Línea de empresas)",
+      "icon": "monetization_on",
+      "type": "code",
+      "fields": [],
+      "code": "*111#"
     }
   ]
 }
