@@ -188,7 +188,7 @@
       "items": [
         {
           "name": "Planes de Datos",
-          "description": "Getione su plan de datos",
+          "description": "Gestione su plan de datos",
           "icon": "data_usage",
           "type": "category",
           "items": [
@@ -419,14 +419,14 @@
           ]
         },
         {
-          "name": "Planes de sms",
-          "description": "Gestione su plan de sms",
+          "name": "Planes de SMS",
+          "description": "Gestione su plan de SMS",
           "icon": "sms",
           "type": "category",
           "items": [
             {
               "name": "Saldo",
-              "description": "Consultar los sms disponibles",
+              "description": "Consultar los SMS disponibles",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -434,7 +434,7 @@
             },
             {
               "name": "10 sms",
-              "description": "10 sms nacionales por 0.70 CUC",
+              "description": "10 SMS nacionales por 0.70 CUC",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -442,7 +442,7 @@
             },
             {
               "name": "20 sms",
-              "description": "20 sms nacionales por 1.30 CUC",
+              "description": "20 SMS nacionales por 1.30 CUC",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -450,7 +450,7 @@
             },
             {
               "name": "35 sms",
-              "description": "35 sms nacionales por 2.10 CUC",
+              "description": "35 SMS nacionales por 2.10 CUC",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -458,7 +458,7 @@
             },
             {
               "name": "45 sms",
-              "description": "45 sms nacionales por 2.50 CUC",
+              "description": "45 SMS nacionales por 2.50 CUC",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -524,7 +524,7 @@
             },
             {
               "name": "Lista de amigos",
-              "description": "Consulte los números de sus amigos",
+              "description": "Consulte la lista de números amigos",
               "icon": "list",
               "type": "code",
               "fields": [],
@@ -536,7 +536,7 @@
     },
     {
       "name": "Línea corporativa",
-      "description": "Consulte el estado de su línea corporativa (Línea de empresas)",
+      "description": "Consulte el estado de planes corporativos",
       "icon": "monetization_on",
       "type": "code",
       "fields": [],
