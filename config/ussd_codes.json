@@ -25,6 +25,19 @@
       "code": "*222*266#"
     },
     {
+      "name": "Asterisco 99",
+      "description": "Llamadas con pago revertido",
+      "icon": "call",
+      "type": "code",
+      "fields": [
+        {
+          "name": "telefono",
+          "type": "phone_number"
+        }
+      ],
+      "code": "*99{telefono}"
+    },
+    {
       "name": "Gestionar Llamadas",
       "description": "Realice llamadas de manera fácil",
       "icon": "call",
@@ -188,7 +201,7 @@
       "items": [
         {
           "name": "Planes de Datos",
-          "description": "Getione su plan de datos",
+          "description": "Gestione su plan de datos",
           "icon": "data_usage",
           "type": "category",
           "items": [
