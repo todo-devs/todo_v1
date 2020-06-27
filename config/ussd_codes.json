@@ -163,6 +163,30 @@
           "code": "*662*{numero tarjeta}#"
         },
         {
+          "name": "Adelantar Saldo",
+          "description": "Recargue con un adelanto de saldo",
+          "icon": "monetization_on",
+          "type": "category",
+          "items": [
+            {
+              "name": "Adelantar con 1 CUC",
+              "description": "",
+              "icon": "monetization_on",
+              "type": "code",
+              "fields": [],
+              "code": "*234*3*1*1*1#"
+            },
+            {
+              "name": "Adelantar con 2 CUC",
+              "description": "",
+              "icon": "monetization_on",
+              "type": "code",
+              "fields": [],
+              "code": "*234*3*1*2*1#"
+            }
+          ]
+        },         
+        {
           "name": "Transferir Saldo",
           "description": "Transferir saldo a otro",
           "icon": "mobile_screen_share",
