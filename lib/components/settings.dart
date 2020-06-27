@@ -213,7 +213,7 @@ class _SettingsState extends State<SettingsWidget> {
                     applicationLegalese:
                         'TODO es una aplicación multiplataforma para ayudar al usuario con los servicios de ETECSA',
                     //applicationIcon: Image.asset('todo.ico') too big,
-                    
+
                   );
                 },
               ),
