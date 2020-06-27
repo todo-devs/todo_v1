@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/themes/apptheme.dart';
 import 'package:todo/pages/home_page.dart';
@@ -25,6 +26,12 @@ class App extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: appState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
           home: HomePage(title: 'TODO'),
+          localizationsDelegates:
+          GlobalMaterialLocalizations.delegates,
+          supportedLocales: [
+            const Locale('es',)
+
+          ],
         );
       },
     );

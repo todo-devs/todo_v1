@@ -33,6 +33,8 @@ class _SettingsState extends State<SettingsWidget> {
     );
   }
 
+  static const String versionInfo = 'Versión 1.2.0 | 25-06-2020';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +45,7 @@ class _SettingsState extends State<SettingsWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Versión 1.2.0 | 25-06-2020',
+              versionInfo,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -182,6 +184,37 @@ class _SettingsState extends State<SettingsWidget> {
                   if (await canLaunch(url)) {
                     await launch(url);
                   }
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              child: GFButton(
+                icon: Icon(
+                  Icons.info,
+                  color: Theme.of(context).scaffoldBackgroundColor ==
+                          Theme.of(context).focusColor
+                      ? Colors.white
+                      : Theme.of(context).focusColor,
+                ),
+                text: 'Acerca',
+                textColor: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor ==
+                        Theme.of(context).focusColor
+                    ? Colors.white
+                    : Theme.of(context).focusColor,
+                size: GFSize.LARGE,
+                type: GFButtonType.outline2x,
+                fullWidthButton: true,
+                onPressed: () async {
+                  showAboutDialog(
+                    context: context,
+                    applicationVersion: versionInfo,
+                    applicationLegalese:
+                        'TODO es una aplicación multiplataforma para ayudar al usuario con los servicios de ETECSA',
+                    //applicationIcon: Image.asset('todo.ico') too big,
+                    
+                  );
                 },
               ),
             ),

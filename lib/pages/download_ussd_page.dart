@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,9 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
             Expanded(
               child: Center(
                 child: loading
-                    ? CircularProgressIndicator()
+                    ? Platform.isAndroid
+                        ? CircularProgressIndicator()
+                        : CupertinoActivityIndicator()
                     : Container(
                         margin: EdgeInsets.all(30),
                         child: Text(
