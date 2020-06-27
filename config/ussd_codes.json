@@ -169,20 +169,20 @@
           "type": "category",
           "items": [
             {
-              "name": "Adelantar con 1 CUC",
-              "description": "",
+              "name": "1 CUC",
+              "description": "Adelantar con $1.00 CUC de saldo",
               "icon": "monetization_on",
               "type": "code",
               "fields": [],
-              "code": "*234*3*1*1*1#"
+              "code": "*234*3*1*1#"
             },
             {
-              "name": "Adelantar con 2 CUC",
-              "description": "",
+              "name": "2 CUC",
+              "description": "Adelantar con $2.00 CUC de saldo",
               "icon": "monetization_on",
               "type": "code",
               "fields": [],
-              "code": "*234*3*1*2*1#"
+              "code": "*234*3*1*2#"
             }
           ]
         },         
