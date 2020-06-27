@@ -31,7 +31,10 @@ class _ConnectedFormState extends State<ConnectedForm> {
     super.initState();
 
     setState(() {
-      nautaClient = NautaClient(user: widget.username, password: '');
+      nautaClient = NautaClient(
+        user: widget.username,
+        password: '',
+      );
 
       nautaClient.loadLastSession().then((value) => {
             nautaClient.remainingTime().then((value) {
@@ -102,7 +105,10 @@ class _ConnectedFormState extends State<ConnectedForm> {
             padding: EdgeInsets.all(4.0),
             child: Text(
               'Conectado',
-              style: TextStyle(color: Colors.blue, fontSize: 20),
+              style: TextStyle(
+                color: Theme.of(context).focusColor,
+                fontSize: 20,
+              ),
             ),
           ),
           Padding(
@@ -111,7 +117,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
               child: Icon(
                 Icons.network_wifi,
                 size: 64,
-                color: Colors.blue,
+                color: Theme.of(context).focusColor,
               ),
             ),
           ),
@@ -119,7 +125,10 @@ class _ConnectedFormState extends State<ConnectedForm> {
             padding: EdgeInsets.all(5.0),
             child: Text(
               remaining == null ? '' : time,
-              style: TextStyle(color: Colors.red, fontSize: 20),
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 20,
+              ),
             ),
           ),
           refreshButton(),
@@ -135,7 +144,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
         padding: EdgeInsets.all(10.0),
         child: MaterialButton(
           elevation: 0.5,
-          color: Colors.blue,
+          color: Theme.of(context).focusColor,
           minWidth: MediaQuery.of(context).size.width,
           child: Text(
             'Salir',
@@ -167,7 +176,10 @@ class _ConnectedFormState extends State<ConnectedForm> {
                 backgroundColor: Colors.red,
                 content: Text(
                   e.message,
-                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 18,
+                  ),
                 ),
               ));
             }
@@ -181,10 +193,14 @@ class _ConnectedFormState extends State<ConnectedForm> {
   Widget refreshButton() {
     if (widget.username != null) {
       return Padding(
-        padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+        padding: EdgeInsets.only(
+          left: 10.0,
+          right: 10.0,
+          top: 10.0,
+        ),
         child: MaterialButton(
             elevation: 0.5,
-            color: Colors.blue,
+            color: Theme.of(context).focusColor,
             minWidth: MediaQuery.of(context).size.width,
             child: Text(
               'Actualizar',
