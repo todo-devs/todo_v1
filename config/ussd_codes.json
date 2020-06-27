@@ -163,6 +163,14 @@
           "code": "*662*{numero tarjeta}#"
         },
         {
+          "name": "Adelantar Saldo",
+          "description": "Recargue con un adelanto de saldo",
+          "icon": "monetization_on",
+          "type": "code",
+          "fields": [],
+          "code": "*234*3#"
+        },        
+        {
           "name": "Transferir Saldo",
           "description": "Transferir saldo a otro",
           "icon": "mobile_screen_share",
