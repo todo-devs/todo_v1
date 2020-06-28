@@ -188,7 +188,7 @@
         },         
         {
           "name": "Transferir Saldo",
-          "description": "Transferir saldo a otro",
+          "description": "Transfiere tu saldo",
           "icon": "mobile_screen_share",
           "type": "code",
           "fields": [
@@ -209,7 +209,7 @@
         },
         {
           "name": "Bono",
-          "description": "Consulte el saldo actual de su Bono",
+          "description": "Consulte el saldo actual de su bono",
           "icon": "star_border",
           "type": "code",
           "fields": [],
@@ -262,86 +262,86 @@
               ]
             },
             {
-              "name": "Bolsa Correo",
-              "description": "Comprar plan sólo para correo nauta",
+              "name": "Bolsa Correo - $1.50 CUC",
+              "description": "Paquete de 50 MB sólo para correo nauta",
               "icon": "mail",
               "type": "code",
               "fields": [],
               "code": "*133*1*2#"
             },
             {
-              "name": "Paquetes con 4G",
+              "name": "Paquetes 4G",
               "description": "Paquetes de internet para usuarios que han activado 4G",
               "icon": "data_usage",
               "type": "category",
               "items": [
                 {
-                  "name": "Bolsa Diaria LTE",
-                  "description": "Paquete de 200MB por 1 CUC vence en 24h",
+                  "name": "Bolsa Diaria - $1 CUC",
+                  "description": "200 MB (vence en 24h)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*3#"
                 },
                 {
-                  "name": "400MB - 5 CUC",
-                  "description": "Paquete de 400MB por 5 CUC (+500MB bono 4G)",
+                  "name": "400 MB - $5 CUC",
+                  "description": "+500 MB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*4*1#"
                 },
                 {
-                  "name": "600MB - 7 CUC",
-                  "description": "Paquete de 600MB por 7 CUC (+800MB bono 4G)",
+                  "name": "600 MB - $7 CUC",
+                  "description": "+800 MB bono 4G +300 MB bono .cu)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*4*2#"
                 },
                 {
-                  "name": "1GB - 10 CUC",
-                  "description": "Paquete de 1GB por 10 CUC (+1.5GB bono 4G)",
+                  "name": "1 GB - $10 CUC",
+                  "description": "+1.5GB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*4*3#"
                 },
                 {
-                  "name": "2.5GB - 20 CUC",
-                  "description": "Paquete de 2.5GB por 20 CUC (+3GB bono 4G)",
+                  "name": "2.5 GB - $20 CUC",
+                  "description": "+3 GB bono 4G +300 MB bono .cu)",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*4*4#"
                 },
                 {
-                  "name": "4GB - 30 CUC",
-                  "description": "Paquete de 4GB por 30 CUC (+5GB bono 4G)",
+                  "name": "4 GB - $30 CUC",
+                  "description": "+5GB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*4*5#"
                 },
                 {
-                  "name": "1GB - 4 CUC",
-                  "description": "Paquete de 1GB por 4 CUC (sólo 4G)",
+                  "name": "1 GB - $4 CUC",
+                  "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*5*1#"
                 },
                 {
-                  "name": "2.5GB - 8 CUC",
-                  "description": "Paquete LTE de 2.5GB por 8 CUC (sólo 4G)",
+                  "name": "2.5 GB - $8 CUC",
+                  "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*5*2#"
                 },
                 {
-                  "name": "14GB - 45 CUC",
-                  "description": "Paquete LTE 14GB por 45 CUC (sólo 4G)",
+                  "name": "14 GB - $45 CUC",
+                  "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -356,40 +356,40 @@
               "type": "category",
               "items": [
                 {
-                  "name": "Paquete 400 MB - 5 CUC",
-                  "description": "Paquete de 400MB por 5 CUC",
+                  "name": "Paquete 400 MB - $5 CUC",
+                  "description": "+500 MB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*3*1#"
                 },
                 {
-                  "name": "Paquete 600 MB - 7 CUC",
-                  "description": "Paquete de 600MB por 7 CUC",
+                  "name": "Paquete 600 MB - $7 CUC",
+                  "description": "+800 MB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*3*2#"
                 },
                 {
-                  "name": "Paquete 1GB - 10 CUC",
-                  "description": "Paquete de 1GB por 10 CUC",
+                  "name": "Paquete 1 GB - $10 CUC",
+                  "description": "+1.5 GB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*3*3#"
                 },
                 {
-                  "name": "Paquete 2.5GB - 20 CUC",
-                  "description": "Paquete de 2.5GB por 20 CUC",
+                  "name": "Paquete 2.5 GB - $20 CUC",
+                  "description": "+3 GB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
                   "code": "*133*1*3*4#"
                 },
                 {
-                  "name": "Paquete 4GB - 30 CUC",
-                  "description": "Paquete de 4GB por 30 CUC",
+                  "name": "Paquete 4 GB - $30 CUC",
+                  "description": "+5 GB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -415,7 +415,7 @@
             },
             {
               "name": "5 min",
-              "description": "Plan de 5 min por 1.50 CUC ($0.30 por min)",
+              "description": "Plan de 5 min por $1.50 CUC ($0.30 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -423,7 +423,7 @@
             },
             {
               "name": "10 min",
-              "description": "Plan de 10 min por 2.90 CUC ($0.29 por min)",
+              "description": "Plan de 10 min por $2.90 CUC ($0.29 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -431,7 +431,7 @@
             },
             {
               "name": "15 min",
-              "description": "Plan de 15 min por 4.20 CUC ($0.28 por min)",
+              "description": "Plan de 15 min por $4.20 CUC ($0.28 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -439,7 +439,7 @@
             },
             {
               "name": "25 min",
-              "description": "Plan de 25 min por 6.50 CUC ($0.26 por min)",
+              "description": "Plan de 25 min por $6.50 CUC ($0.26 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -447,7 +447,7 @@
             },
             {
               "name": "40 min",
-              "description": "Plan de 40 min por 10 CUC ($0.25 por min)",
+              "description": "Plan de 40 min por $10 CUC ($0.25 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -471,7 +471,7 @@
             },
             {
               "name": "10 sms",
-              "description": "10 SMS nacionales por 0.70 CUC",
+              "description": "10 SMS nacionales por $0.70 CUC",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -479,7 +479,7 @@
             },
             {
               "name": "20 sms",
-              "description": "20 SMS nacionales por 1.30 CUC",
+              "description": "20 SMS nacionales por $1.30 CUC",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -487,7 +487,7 @@
             },
             {
               "name": "35 sms",
-              "description": "35 SMS nacionales por 2.10 CUC",
+              "description": "35 SMS nacionales por $2.10 CUC",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -495,7 +495,7 @@
             },
             {
               "name": "45 sms",
-              "description": "45 SMS nacionales por 2.50 CUC",
+              "description": "45 SMS nacionales por $2.50 CUC",
               "icon": "sms",
               "type": "code",
               "fields": [],
