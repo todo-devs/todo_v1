@@ -126,7 +126,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
             child: Text(
               remaining == null ? '' : time,
               style: TextStyle(
-                color: Colors.red,
+                color: Colors.white,
                 fontSize: 20,
               ),
             ),
