@@ -219,7 +219,7 @@
     },
     {
       "name": "Gestionar Planes",
-      "description": "Planes de Datos, Voz, Sms, y Amigo",
+      "description": "Planes de Datos, Voz, SMS, y Amigo",
       "icon": "shopping_cart",
       "type": "category",
       "items": [
@@ -293,7 +293,7 @@
                 },
                 {
                   "name": "600 MB - $7 CUC",
-                  "description": "+800 MB bono 4G +300 MB bono .cu)",
+                  "description": "+800 MB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -301,7 +301,7 @@
                 },
                 {
                   "name": "1 GB - $10 CUC",
-                  "description": "+1.5GB bono 4G +300 MB bono .cu",
+                  "description": "+1.5 GB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -309,7 +309,7 @@
                 },
                 {
                   "name": "2.5 GB - $20 CUC",
-                  "description": "+3 GB bono 4G +300 MB bono .cu)",
+                  "description": "+3 GB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -317,7 +317,7 @@
                 },
                 {
                   "name": "4 GB - $30 CUC",
-                  "description": "+5GB bono 4G +300 MB bono .cu",
+                  "description": "+5 GB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
