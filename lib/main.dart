@@ -26,11 +26,11 @@ class App extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: appState.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
           home: HomePage(title: 'TODO'),
-          localizationsDelegates:
-          GlobalMaterialLocalizations.delegates,
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
           supportedLocales: [
-            const Locale('es',)
-
+            const Locale(
+              'es',
+            )
           ],
         );
       },

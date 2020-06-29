@@ -10,6 +10,8 @@ import 'package:todo/pages/connected_page.dart';
 
 import 'package:get_ip/get_ip.dart';
 
+import 'package:connectivity/connectivity.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title = 'NAUTA'}) : super(key: key);
 
@@ -24,11 +26,21 @@ class _LoginPageState extends State<LoginPage> {
   String wlanIp;
   String ip;
 
+  IconData networkIcon;
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  var subscription;
 
   @override
   void initState() {
     super.initState();
+
+    Connectivity()
+        .checkConnectivity()
+        .then((value) => updateNetworkState(value));
+
+    subscription = Connectivity().onConnectivityChanged.listen(updateNetworkState);
 
     NautaClient().getWlanUserIP().then((value) {
       GetIp.ipAddress.then((value2) {
@@ -38,6 +50,27 @@ class _LoginPageState extends State<LoginPage> {
         });
       });
     });
+  }
+
+  void updateNetworkState(ConnectivityResult result) {
+    if (result == ConnectivityResult.mobile) {
+      setState(() {
+        networkIcon = Icons.network_cell;
+      });
+    } else if (result == ConnectivityResult.wifi) {
+      setState(() {
+        networkIcon = Icons.wifi_lock;
+      });
+    } else {
+      setState(() {
+        networkIcon = Icons.network_locked;
+      });
+    }
+  }
+
+  dispose() {
+    subscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -80,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
             color: Theme.of(context).scaffoldBackgroundColor,
             child: Center(
               child: Icon(
-                Icons.wifi_lock,
+                networkIcon,
                 size: 64,
                 color: Colors.white,
               ),
@@ -119,17 +152,22 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget checkIp() {
-    String ok =
-        "Usted se encuentra conectado directamente a la red WIFI_ETECSA.";
+    String ok = "Usted se encuentra conectado directamente a la red de ETECSA.";
     String bad =
-        "Usted está pasando por un intermediario para llegar a la red WIFI_ETECSA.";
+        "Usted está pasando por un intermediario para conectarse a la red de ETECSA.";
     bool cmp = ip == wlanIp;
 
-    return Text(
-      cmp ? ok : bad,
-      style: TextStyle(
-        color: cmp ? Colors.lightGreenAccent : Colors.pinkAccent,
-        fontWeight: FontWeight.bold,
+    return Container(
+      color: cmp ? Colors.lightGreenAccent : Colors.pinkAccent,
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          cmp ? ok : bad,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

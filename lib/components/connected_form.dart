@@ -8,6 +8,10 @@ import 'package:todo/pages/login_page.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:todo/components/portal_nauta.dart';
+
+import 'package:connectivity/connectivity.dart';
+
 class ConnectedForm extends StatefulWidget {
   final String username;
 
@@ -26,9 +30,19 @@ class _ConnectedFormState extends State<ConnectedForm> {
   Duration remaining;
   Timer _timer;
 
+  IconData networkIcon;
+
+  var suscription;
+
   @override
   void initState() {
     super.initState();
+
+    Connectivity()
+        .checkConnectivity()
+        .then((value) => updateNetworkState(value));
+
+    suscription = Connectivity().onConnectivityChanged.listen(updateNetworkState);
 
     setState(() {
       nautaClient = NautaClient(
@@ -55,6 +69,22 @@ class _ConnectedFormState extends State<ConnectedForm> {
     if (widget.username != null) startTime();
   }
 
+  void updateNetworkState(ConnectivityResult result) {
+    if (result == ConnectivityResult.mobile) {
+      setState(() {
+        networkIcon = Icons.network_cell;
+      });
+    } else if (result == ConnectivityResult.wifi) {
+      setState(() {
+        networkIcon = Icons.network_wifi;
+      });
+    } else {
+      setState(() {
+        networkIcon = Icons.network_locked;
+      });
+    }
+  }
+
   void startTime() {
     const oneSec = const Duration(seconds: 1);
 
@@ -78,6 +108,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
   @override
   void dispose() {
     _timer.cancel();
+    suscription.cancel();
     super.dispose();
   }
 
@@ -115,7 +146,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
             padding: EdgeInsets.all(20),
             child: Center(
               child: Icon(
-                Icons.network_wifi,
+                networkIcon,
                 size: 64,
                 color: Theme.of(context).focusColor,
               ),
@@ -126,13 +157,17 @@ class _ConnectedFormState extends State<ConnectedForm> {
             child: Text(
               remaining == null ? '' : time,
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).focusColor,
                 fontSize: 20,
               ),
             ),
           ),
           refreshButton(),
-          exitButton()
+          exitButton(),
+          Divider(
+            color: Theme.of(context).focusColor,
+          ),
+          portalButton(),
         ],
       ),
     );
@@ -224,5 +259,33 @@ class _ConnectedFormState extends State<ConnectedForm> {
       );
     }
     return Text("");
+  }
+
+  Widget portalButton() {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 10.0,
+        right: 10.0,
+        top: 10.0,
+      ),
+      child: MaterialButton(
+        elevation: 0.5,
+        color: Theme.of(context).focusColor,
+        child: Text(
+          'Portal Nauta',
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: portalNauta,
+      ),
+    );
+  }
+
+  void portalNauta() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PortalNauta(),
+      ),
+    );
   }
 }

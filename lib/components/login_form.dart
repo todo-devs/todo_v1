@@ -6,7 +6,7 @@ import 'package:todo/pages/connected_page.dart';
 
 import 'package:nauta_api/nauta_api.dart';
 
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:todo/components/portal_nauta.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -246,27 +246,4 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
-class PortalNauta extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        title: Text(
-          'Portal Nauta',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        elevation: 0,
-      ),
-      body: WebView(
-        initialUrl: "https://www.portal.nauta.cu",
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
-    );
-  }
-}
+

@@ -8,6 +8,8 @@ import 'package:todo/components/ussd_widget.dart';
 import 'package:todo/components/settings.dart';
 import 'package:todo/components/disclaim.dart';
 
+import 'package:connectivity/connectivity.dart';
+
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
 
@@ -19,6 +21,37 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var showSettings = false;
+  IconData networkIcon;
+  var suscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    suscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.mobile) {
+        setState(() {
+          networkIcon = Icons.network_cell;
+        });
+      }
+      else if (result == ConnectivityResult.wifi) {
+        setState(() {
+          networkIcon = Icons.network_wifi;
+        });
+      }
+      else {
+        setState(() {
+          networkIcon = Icons.network_locked;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    suscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +70,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: showSettings
           ? null
           : FloatingActionButton(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: Theme.of(context).focusColor,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -62,6 +95,10 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
         actions: <Widget>[
+          IconButton(
+            icon: Icon(networkIcon),
+            onPressed: () {},
+          ),
           IconButton(
             icon: Icon(showSettings ? Icons.expand_less : Icons.expand_more),
             onPressed: () {
