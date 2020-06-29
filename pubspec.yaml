@@ -3,7 +3,7 @@ description: Helper app to aid user with ETECSA services.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -31,7 +31,7 @@ dependencies:
 
   nauta_api:
     path: ./nauta_api
-  
+
   intent: ^1.3.4
   permission_handler: ^3.1.0
   shared_preferences: ^0.5.7
@@ -41,7 +41,7 @@ dependencies:
   provider: ^4.1.3
   http: ^0.12.0+4
   getflutter: ^1.0.11
-  url_launcher: ^5.4.1  
+  url_launcher: ^5.4.1
   font_awesome_flutter: ^8.5.0
 
   # The following adds the Cupertino Icons font to your application.
@@ -50,6 +50,8 @@ dependencies:
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.3"
+  test:
+  mockito:
   flutter_test:
     sdk: flutter
 
@@ -58,13 +60,11 @@ flutter_icons:
   ios: true
   image_path: "todo.png"
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
