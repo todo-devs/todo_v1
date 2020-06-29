@@ -528,11 +528,19 @@ class _CodeFormState extends State<CodeForm> {
                     }
 
                     try {
-                      if (int.parse(value) <= 0) {
+                      final cant = double.parse(value);
+
+                      if (cant.isNegative) {
                         return 'Debe poner una cantidad mayor que cero';
                       }
-                    } catch (e) {
-                      return 'Este campo solo puede conetener digitos';
+                      if(value.split('.')[1].length > 2) {
+                        return 'Solo se admiten valores de tipo monetario';
+                      }
+                    } on RangeError {
+                      return null;
+                    }
+                    catch(e) {
+                      return 'Solo se admiten valores de tipo monetario';
                     }
 
                     return null;
@@ -566,6 +574,15 @@ class _CodeFormState extends State<CodeForm> {
 
                   if (value.length != 4) {
                     return 'La clave debe contener 4 dígitos';
+                  }
+
+                  try {
+                    if(int.parse(value) < 0) {
+                      return 'La clave no debe contener símbolos';
+                    }
+                  }
+                  catch(e) {
+                    return 'La clave no debe contener símbolos';
                   }
 
                   return null;
