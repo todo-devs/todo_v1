@@ -16,7 +16,7 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
-      - run: flutter build apk --target-platform android-arm,android-arm64
+      - run: flutter build apk --target-platform android-arm,android-arm64 --split-per-abi
       - name: Sign apk
         uses: r0adkll/sign-android-release@v1
         with:
@@ -28,5 +28,5 @@ jobs:
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
         with:
-          artifacts: build/app/outputs/apk/release/app-release-signed.apk
+          artifacts: build/app/outputs/apk/release/*.apk
           token: ${{ secrets.GITHUB_TOKEN }}
