@@ -18,7 +18,27 @@ class _LoginFormState extends State<LoginForm> {
 
   User _user = User();
 
+  List<User> _users;
+
   ProgressDialog pr;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _loadData();
+  }
+
+  void _loadData() async {
+    final users = await User.getAll();
+    print(users);
+
+    setState(() {
+      _users = users;
+    });
+
+    print(_users);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +224,9 @@ class _LoginFormState extends State<LoginForm> {
         _user.username += '@nauta.com.cu';
       }
 
+      _user.id = _users.length;
+      await _user.save();
+
       var nautaClient =
           NautaClient(user: _user.username, password: _user.password);
 
@@ -245,5 +268,3 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 }
-
-
