@@ -222,7 +222,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
         ),
       );
 
-    return Text('');
+    return SizedBox.shrink();
   }
 
   Widget refreshButton() {
@@ -258,7 +258,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
             }),
       );
     }
-    return Text("");
+    return SizedBox.shrink();
   }
 
   Widget portalButton() {
