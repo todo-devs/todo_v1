@@ -26,6 +26,9 @@ class _LoginPageState extends State<LoginPage> {
   String wlanIp;
   String ip;
 
+  String wifiSSID = '';
+  String wifiIP = '';
+
   IconData networkIcon;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -40,7 +43,8 @@ class _LoginPageState extends State<LoginPage> {
         .checkConnectivity()
         .then((value) => updateNetworkState(value));
 
-    subscription = Connectivity().onConnectivityChanged.listen(updateNetworkState);
+    subscription =
+        Connectivity().onConnectivityChanged.listen(updateNetworkState);
 
     NautaClient().getWlanUserIP().then((value) {
       GetIp.ipAddress.then((value2) {
@@ -52,14 +56,19 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void updateNetworkState(ConnectivityResult result) {
+  void updateNetworkState(ConnectivityResult result) async {
     if (result == ConnectivityResult.mobile) {
       setState(() {
         networkIcon = Icons.network_cell;
       });
     } else if (result == ConnectivityResult.wifi) {
+      final wifiName = await (Connectivity().getWifiName());
+      final ip = await (Connectivity().getWifiIP());
       setState(() {
         networkIcon = Icons.wifi_lock;
+
+        wifiSSID = wifiName;
+        wifiIP = ip;
       });
     } else {
       setState(() {
@@ -109,13 +118,23 @@ class _LoginPageState extends State<LoginPage> {
       body: ListView(
         children: <Widget>[
           Container(
-            height: 100,
+            height: 40,
             color: Theme.of(context).scaffoldBackgroundColor,
             child: Center(
               child: Icon(
                 networkIcon,
-                size: 64,
+                size: 32,
                 color: Colors.white,
+              ),
+            ),
+          ),
+          Container(
+            height: 40,
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Center(
+              child: Text(
+                'SSID:  ' + wifiSSID + '   IP:  ' + wifiIP,
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),

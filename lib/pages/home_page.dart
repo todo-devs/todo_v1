@@ -28,18 +28,18 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    suscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+    suscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
       if (result == ConnectivityResult.mobile) {
         setState(() {
           networkIcon = Icons.network_cell;
         });
-      }
-      else if (result == ConnectivityResult.wifi) {
+      } else if (result == ConnectivityResult.wifi) {
         setState(() {
           networkIcon = Icons.network_wifi;
         });
-      }
-      else {
+      } else {
         setState(() {
           networkIcon = Icons.network_locked;
         });
@@ -97,7 +97,16 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(networkIcon),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(
+                    title: 'NAUTA',
+                  ),
+                ),
+              );
+            },
           ),
           IconButton(
             icon: Icon(showSettings ? Icons.expand_less : Icons.expand_more),

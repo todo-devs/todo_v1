@@ -32,8 +32,8 @@ class _ConnectedPageState extends State<ConnectedPage> {
   }
 
   updateNetworkState(ConnectivityResult result) async {
-    var wifiName = await (Connectivity().getWifiName());
-    var ip = await (Connectivity().getWifiIP());
+    final wifiName = await (Connectivity().getWifiName());
+    final ip = await (Connectivity().getWifiIP());
 
     setState(() {
       wifiSSID = wifiName;
