@@ -94,9 +94,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Montserrat
+    - family: Poppins
       fonts:
-        - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Poppins-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
