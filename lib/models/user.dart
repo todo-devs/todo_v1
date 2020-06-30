@@ -9,7 +9,6 @@ class User {
   Future<Database> _database;
 
   User({this.id, this.username, this.password}) {
-    print('getting datbase');
     _database = getDataBase();
   }
 
@@ -20,11 +19,18 @@ class User {
   Future<void> save() async {
     final Database db = await _database;
 
-    await db.insert(
-      'users',
-      this.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    final result = await db
+        .query('users', where: "username = ?", whereArgs: [this.username]);
+
+    if (result.length > 0) {
+      this.update();
+    } else {
+      await db.insert(
+        'users',
+        this.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    }
   }
 
   Future<void> update() async {
@@ -36,6 +42,26 @@ class User {
       where: "id = ?",
       whereArgs: [this.id],
     );
+  }
+
+  static Future<User> findByName(String uname) async {
+    final db = await getDataBase();
+
+    final List<Map<String, dynamic>> maps = await db.query(
+      'users',
+      where: "username = ?",
+      whereArgs: [uname],
+    );
+
+    final ll = List.generate(maps.length, (i) {
+      return User(
+        id: maps[i]['id'],
+        username: maps[i]['username'],
+        password: maps[i]['password'],
+      );
+    });
+
+    return ll.length != 0 ? ll.first : null;
   }
 
   Future<void> delete() async {

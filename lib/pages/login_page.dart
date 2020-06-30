@@ -3,10 +3,13 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:todo/components/login_form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nauta_api/nauta_api.dart';
+import 'package:todo/models/user.dart';
 import 'package:todo/pages/connected_page.dart';
 import 'package:get_ip/get_ip.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:todo/pages/account_page.dart';
+import 'package:todo/components/last_account.dart';
+import 'package:todo/components/portal_nauta.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title = 'NAUTA'}) : super(key: key);
@@ -31,6 +34,8 @@ class _LoginPageState extends State<LoginPage> {
 
   var subscription;
 
+  User lastUser;
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +55,23 @@ class _LoginPageState extends State<LoginPage> {
         });
       });
     });
+
+    _loadLastAccount();
+  }
+
+  void _loadLastAccount() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String username = prefs.getString('lastAccount');
+
+    if (username != null) {
+      User user = await User.findByName(username);
+
+      if (user != null) {
+        setState(() {
+          lastUser = user;
+        });
+      }
+    }
   }
 
   void updateNetworkState(ConnectivityResult result) async {
@@ -143,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  height: 40,
+                  height: 18,
                   color: Theme.of(context).scaffoldBackgroundColor,
                   child: Center(
                     child: Text(
@@ -155,36 +177,82 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   child: Padding(
                     padding: EdgeInsets.only(left: 30, right: 30, bottom: 10),
-                    child: wlanIp != null && ip != null
-                        ? Center(child: checkIp())
-                        : null,
+                    child: wlanIp != null && ip != null ? checkIp() : null,
                   ),
                 ),
                 Container(
                   decoration: BoxDecoration(
                     color: Theme.of(context).dialogBackgroundColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   alignment: Alignment.center,
                   child: Center(
                     child: Padding(
                       padding: EdgeInsets.only(left: 10.0, right: 10.0),
                       child: Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: LoginForm(),
+                        padding: EdgeInsets.all(10.0),
+                        child: lastUser != null
+                            ? LastAccount(
+                                user: lastUser,
+                              )
+                            : LoginForm(),
                       ),
                     ),
                   ),
                 ),
+                showFormButton()
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Widget showFormButton() {
+    if (lastUser != null) {
+      return Row(
+        children: <Widget>[
+          MaterialButton(
+            onPressed: () {
+              setState(() {
+                lastUser = null;
+              });
+            },
+            color: Theme.of(context).focusColor,
+            child: Text(
+              'Mostrar fomulario',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            minWidth: MediaQuery.of(context).size.width / 2,
+          ),
+          MaterialButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PortalNauta(),
+                ),
+              );
+            },
+            color: Theme.of(context).focusColor,
+            child: Text(
+              'Portal Nauta',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            minWidth: MediaQuery.of(context).size.width / 2,
+          )
+        ],
+      );
+    } else {
+      return SizedBox.shrink();
+    }
   }
 
   Widget checkIp() {
@@ -194,6 +262,7 @@ class _LoginPageState extends State<LoginPage> {
     bool cmp = ip == wlanIp;
 
     return Container(
+      width: MediaQuery.of(context).size.width,
       color: cmp ? Colors.lightGreenAccent : Colors.pinkAccent,
       child: Padding(
         padding: EdgeInsets.all(5),

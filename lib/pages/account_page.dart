@@ -4,6 +4,8 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:todo/models/user.dart';
 import 'package:nauta_api/nauta_api.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:todo/pages/connected_page.dart';
 
 class AccountPage extends StatefulWidget {
   _AccountPageState createState() => _AccountPageState();
@@ -37,7 +39,6 @@ class _AccountPageState extends State<AccountPage> {
 
   void _loadData() async {
     final users = await User.getAll();
-    print(users);
 
     setState(() {
       _users = users;
@@ -96,15 +97,18 @@ class _AccountPageState extends State<AccountPage> {
                 Form(
                   key: formState,
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       TextFormField(
                         autovalidate: true,
                         decoration: InputDecoration(
                           labelText: 'Usuario',
-                          prefixIcon: Icon(
-                            Icons.alternate_email,
-                            size: 28,
+                          icon: IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.user,
+                              size: 28,
+                            ),
+                            onPressed: () {},
                           ),
                         ),
                         validator: (value) {
@@ -117,7 +121,7 @@ class _AccountPageState extends State<AccountPage> {
 
                             if (domain != 'nauta.com.cu' &&
                                 domain != 'nauta.co.cu') {
-                              return 'Recuerde @nauta.com.cu o @nauta.co.cu';
+                              return '@nauta.com.cu o @nauta.co.cu';
                             }
                           }
 
@@ -129,13 +133,15 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       TextFormField(
                         enableInteractiveSelection: false,
-                        obscureText: true,
                         autovalidate: true,
                         decoration: InputDecoration(
                           labelText: 'Contraseña',
-                          prefixIcon: Icon(
-                            Icons.lock_outline,
-                            size: 28,
+                          icon: IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.eye,
+                              size: 28,
+                            ),
+                            onPressed: () {},
                           ),
                         ),
                         validator: (value) {
@@ -167,9 +173,16 @@ class _AccountPageState extends State<AccountPage> {
                                 .save();
 
                             _loadData();
+
+                            Navigator.of(context).pop();
                           }
                         },
-                        child: Text('Guardar'),
+                        child: Text(
+                          'Guardar',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -228,54 +241,72 @@ class _AccountPageState extends State<AccountPage> {
                     var item = _users[index];
 
                     return Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).dialogBackgroundColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(index == 0 ? 20 : 0),
-                            topRight: Radius.circular(index == 0 ? 20 : 0),
-                          ),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).dialogBackgroundColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(index == 0 ? 20 : 0),
+                          topRight: Radius.circular(index == 0 ? 20 : 0),
                         ),
-                        child: Column(
-                          children: <Widget>[
-                            GFListTile(
-                              margin: EdgeInsets.all(0),
-                              avatar: Icon(
-                                Icons.account_circle,
-                                color: Theme.of(context).focusColor,
-                              ),
-                              title: Text(item.username),
-                              description: item.username.contains('.com.cu')
-                                  ? Text('Internacional')
-                                  : Text('Nacional'),
-                              icon: Row(
-                                children: <Widget>[
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.monetization_on,
-                                      color: Theme.of(context).focusColor,
-                                    ),
-                                    onPressed: () {
-                                      credit(item.username, item.password);
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.delete_forever,
-                                      color: Theme.of(context).focusColor,
-                                    ),
-                                    onPressed: () {
-                                      item.delete();
-                                      _loadData();
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          GFListTile(
+                            margin: EdgeInsets.all(0),
+                            avatar: Icon(
+                              Icons.account_circle,
                               color: Theme.of(context).focusColor,
-                            )
-                          ],
-                        ));
+                            ),
+                            title: Text(item.username.split('@')[0]),
+                            description: item.username.contains('.com.cu')
+                                ? Text('Internacional')
+                                : Text('Nacional'),
+                            icon: Row(
+                              children: <Widget>[
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.monetization_on,
+                                    color: Theme.of(context).focusColor,
+                                  ),
+                                  onPressed: () {
+                                    credit(
+                                      context,
+                                      item.username,
+                                      item.password,
+                                    );
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    FontAwesomeIcons.globeAmericas,
+                                    color: Theme.of(context).focusColor,
+                                  ),
+                                  onPressed: () {
+                                    login(
+                                      context,
+                                      item.username,
+                                      item.password,
+                                    );
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.delete_forever,
+                                    color: Theme.of(context).focusColor,
+                                  ),
+                                  onPressed: () {
+                                    item.delete();
+                                    _loadData();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Divider(
+                            color: Theme.of(context).focusColor,
+                          )
+                        ],
+                      ),
+                    );
                   }
 
                   return SizedBox.shrink();
@@ -289,7 +320,45 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  void credit(user, pass) async {
+  void login(BuildContext ctx, String user, String pass) async {
+    final nautaClient = NautaClient(user: user, password: pass);
+
+    pr.style(message: 'Conectando');
+    await pr.show();
+
+    try {
+      await nautaClient.login();
+
+      await pr.hide();
+
+      Navigator.push(
+        ctx,
+        MaterialPageRoute(
+          builder: (context) => ConnectedPage(
+            title: 'Conectado',
+            username: user,
+          ),
+        ),
+      );
+    } on NautaException catch (e) {
+      await pr.hide();
+      Scaffold.of(ctx).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(
+            e.message,
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 18,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
+    }
+  } // end login()
+
+  void credit(BuildContext ctx, String user, String pass) async {
     final nautaClient = NautaClient(user: user, password: pass);
 
     pr.style(message: 'Solicitando');
@@ -300,21 +369,23 @@ class _AccountPageState extends State<AccountPage> {
 
       await pr.hide();
 
-      Scaffold.of(context).showSnackBar(SnackBar(
-        duration: Duration(seconds: 10),
-        backgroundColor: Theme.of(context).focusColor,
-        content: Text(
-          'Crédito: $userCredit',
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 20,
-            color: Colors.white,
+      Scaffold.of(ctx).showSnackBar(
+        SnackBar(
+          duration: Duration(seconds: 3),
+          backgroundColor: Theme.of(context).focusColor,
+          content: Text(
+            'Crédito: $userCredit',
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 20,
+              color: Colors.white,
+            ),
           ),
         ),
-      ));
+      );
     } on NautaException catch (e) {
       await pr.hide();
-      Scaffold.of(context).showSnackBar(
+      Scaffold.of(ctx).showSnackBar(
         SnackBar(
           backgroundColor: Colors.red,
           content: Text(
