@@ -19,9 +19,23 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Access to apple music</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Access to calendar</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Access to contacts</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Access to motion</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Access to speech</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Access to location</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Access to location</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
