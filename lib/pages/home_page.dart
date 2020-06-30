@@ -8,6 +8,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:todo/pages/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/services/AppStateNotifier.dart';
+import 'package:todo/pages/account_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -104,6 +105,16 @@ class _HomePageState extends State<HomePage> {
                       builder: (context) => LoginPage(
                         title: 'NAUTA',
                       ),
+                    ),
+                  );
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.account_circle),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AccountPage(),
                     ),
                   );
                 },

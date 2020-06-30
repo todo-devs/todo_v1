@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:todo/components/login_form.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:nauta_api/nauta_api.dart';
-
 import 'package:todo/pages/connected_page.dart';
-
 import 'package:get_ip/get_ip.dart';
-
 import 'package:connectivity/connectivity.dart';
+import 'package:todo/pages/account_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title = 'NAUTA'}) : super(key: key);
@@ -77,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  dispose() {
+  void dispose() {
     subscription.cancel();
     super.dispose();
   }
@@ -106,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
         slivers: <Widget>[
           SliverAppBar(
             centerTitle: true,
-            expandedHeight: MediaQuery.of(context).size.height/4,
+            expandedHeight: MediaQuery.of(context).size.height / 4,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(
@@ -130,6 +126,18 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.of(context).pop();
               },
             ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.account_circle),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AccountPage(),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
           SliverList(
             delegate: SliverChildListDelegate(

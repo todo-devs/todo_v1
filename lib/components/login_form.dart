@@ -76,6 +76,14 @@ class _LoginFormState extends State<LoginForm> {
                   return 'Este campo no debe estar vacío';
                 }
 
+                if (value.contains('@')) {
+                  final domain = value.split('@')[1];
+
+                  if (domain != 'nauta.com.cu' && domain != 'nauta.co.cu') {
+                    return 'Recuerde @nauta.com.cu o @nauta.co.cu';
+                  }
+                }
+
                 return null;
               },
               enableSuggestions: true,
@@ -86,6 +94,7 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: EdgeInsets.all(5.0),
             child: TextFormField(
+              enableInteractiveSelection: false,
               obscureText: true,
               autovalidate: true,
               decoration: InputDecoration(
@@ -224,7 +233,7 @@ class _LoginFormState extends State<LoginForm> {
         _user.username += '@nauta.com.cu';
       }
 
-      _user.id = _users.length;
+      _user.id = _users.length == 0 ? 0 : _users.last.id + 1;
       await _user.save();
 
       var nautaClient =
@@ -243,7 +252,11 @@ class _LoginFormState extends State<LoginForm> {
           backgroundColor: Theme.of(context).focusColor,
           content: Text(
             'Crédito: $userCredit',
-            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 20,
+              color: Colors.white,
+            ),
           ),
         ));
       } on NautaException catch (e) {
