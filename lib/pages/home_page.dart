@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:todo/pages/login_page.dart';
@@ -86,85 +87,56 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
               ),
             ),
-      appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(networkIcon),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginPage(
-                    title: 'NAUTA',
-                  ),
-                ),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(showSettings ? Icons.expand_less : Icons.expand_more),
-            onPressed: () {
-              setState(() {
-                showSettings = !showSettings;
-              });
-            },
-          )
-        ],
-      ),
-      body: ListView(
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.transparent,
-              ),
-              Container(
-                child: SettingsWidget(),
-              ),
-              AnimatedPositioned(
-                duration: Duration(milliseconds: 300),
-                top:
-                    showSettings ? MediaQuery.of(context).size.height - 180 : 0,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      child: Center(
-                        child: Icon(
-                          Icons.developer_mode,
-                          size: 64,
-                          color: Colors.white,
-                        ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            centerTitle: true,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(networkIcon),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginPage(
+                        title: 'NAUTA',
                       ),
                     ),
-                    Container(
-                      height: MediaQuery.of(context).size.height - 180.0,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).dialogBackgroundColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(45.0),
-                          bottomRight: Radius.circular(45.0),
-                        ),
-                      ),
-                      child: UssdRootWidget(),
-                    )
-                  ],
-                ),
-              )
+                  );
+                },
+              ),
+              IconButton(
+                icon:
+                    Icon(showSettings ? Icons.expand_less : Icons.expand_more),
+                onPressed: () {
+                  setState(() {
+                    showSettings = !showSettings;
+                  });
+                },
+              ),
             ],
-          )
+            expandedHeight: MediaQuery.of(context).size.height / 3,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 0,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                widget.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              centerTitle: true,
+              background: Center(
+                child: Icon(
+                  Icons.developer_mode,
+                  size: 64,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          UssdRootWidget(),
         ],
       ),
     );

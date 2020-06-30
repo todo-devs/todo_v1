@@ -102,67 +102,76 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          widget.title,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 40,
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Center(
-              child: Icon(
-                networkIcon,
-                size: 32,
-                color: Colors.white,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            centerTitle: true,
+            expandedHeight: MediaQuery.of(context).size.height/4,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(
+                widget.title,
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-            ),
-          ),
-          Container(
-            height: 40,
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Center(
-              child: Text(
-                'SSID:  ' + wifiSSID + '   IP:  ' + wifiIP,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          Container(
-            child: Padding(
-              padding: EdgeInsets.only(left: 30, right: 30, bottom: 10),
-              child: wlanIp != null && ip != null
-                  ? Center(child: checkIp())
-                  : null,
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).dialogBackgroundColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(45.0),
-                bottomRight: Radius.circular(45.0),
-              ),
-            ),
-            alignment: Alignment.center,
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: LoginForm(),
+              background: Container(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                child: Center(
+                  child: Icon(
+                    networkIcon,
+                    size: 32,
+                    color: Colors.white,
+                  ),
                 ),
               ),
+            ),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  height: 40,
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: Center(
+                    child: Text(
+                      'SSID:  ' + wifiSSID + '   IP:  ' + wifiIP,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 30, right: 30, bottom: 10),
+                    child: wlanIp != null && ip != null
+                        ? Center(child: checkIp())
+                        : null,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).dialogBackgroundColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: LoginForm(),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
