@@ -145,10 +145,10 @@ class _HomePageState extends State<HomePage> {
               ),
               centerTitle: true,
               background: Center(
-                child: Icon(
-                  Icons.developer_mode,
-                  size: 64,
+                child: ImageIcon(
+                  AssetImage("logo.png"),
                   color: Colors.white,
+                  size: 96,
                 ),
               ),
             ),

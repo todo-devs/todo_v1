@@ -40,10 +40,10 @@ class _SettingsState extends State<SettingsWidget> {
     return SliverList(
       delegate: SliverChildListDelegate([
         Center(
-          child: Icon(
-            Icons.developer_mode,
-            size: 46,
+          child: ImageIcon(
+            AssetImage("logo.png"),
             color: Colors.white,
+            size: 96,
           ),
         ),
         Container(
