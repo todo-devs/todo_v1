@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:todo/pages/login_page.dart';
-
 import 'package:todo/components/ussd_widget.dart';
-
-import 'package:todo/components/settings.dart';
 import 'package:todo/components/disclaim.dart';
-
 import 'package:connectivity/connectivity.dart';
+import 'package:todo/pages/settings_page.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/services/AppStateNotifier.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -21,13 +19,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var showSettings = false;
   IconData networkIcon;
   var suscription;
 
   @override
   void initState() {
     super.initState();
+
+    SharedPreferences.getInstance().then(
+      (prefs) {
+        final dm = prefs.getBool('darkmode');
+        if (dm != null)
+          Provider.of<AppStateNotifier>(context, listen: false).updateTheme(dm);
+      },
+    );
 
     suscription = Connectivity()
         .onConnectivityChanged
@@ -68,25 +73,23 @@ class _HomePageState extends State<HomePage> {
     });
 
     return Scaffold(
-      floatingActionButton: showSettings
-          ? null
-          : FloatingActionButton(
-              backgroundColor: Theme.of(context).focusColor,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(
-                      title: 'NAUTA',
-                    ),
-                  ),
-                );
-              },
-              child: Icon(
-                Icons.wifi,
-                color: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).focusColor,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginPage(
+                title: 'NAUTA',
               ),
             ),
+          );
+        },
+        child: Icon(
+          Icons.wifi,
+          color: Colors.white,
+        ),
+      ),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -106,12 +109,15 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               IconButton(
-                icon:
-                    Icon(showSettings ? Icons.expand_less : Icons.expand_more),
+                icon: Icon(Icons.more_vert),
                 onPressed: () {
-                  setState(() {
-                    showSettings = !showSettings;
-                  });
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SettingsPage(
+                        title: 'Ajustes',
+                      ),
+                    ),
+                  );
                 },
               ),
             ],
