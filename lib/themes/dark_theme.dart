@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 final themeDark = ThemeData(
   brightness: Brightness.dark,
-  fontFamily: 'Montserrat',
+  fontFamily: 'Poppins',
   appBarTheme: AppBarTheme(
     color: Colors.transparent,
     elevation: 0.0,

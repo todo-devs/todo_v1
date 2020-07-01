@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.2.0+5
+version: 1.2.2+8
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sqflite:
+  path:
   flutter_localizations:
     sdk: flutter
   # External depencies
@@ -78,7 +80,7 @@ flutter:
 
   assets:
     - config/ussd_codes.json
-    - todo.ico
+    - logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -92,9 +94,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Montserrat
+    - family: Poppins
       fonts:
-        - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Poppins-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

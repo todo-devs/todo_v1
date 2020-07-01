@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:todo/components/login_form.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:nauta_api/nauta_api.dart';
-
+import 'package:todo/models/user.dart';
 import 'package:todo/pages/connected_page.dart';
-
 import 'package:get_ip/get_ip.dart';
-
 import 'package:connectivity/connectivity.dart';
+import 'package:todo/pages/account_page.dart';
+import 'package:todo/components/last_account.dart';
+import 'package:todo/components/portal_nauta.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title = 'NAUTA'}) : super(key: key);
@@ -32,6 +31,8 @@ class _LoginPageState extends State<LoginPage> {
 
   var subscription;
 
+  User lastUser;
+
   @override
   void initState() {
     super.initState();
@@ -40,7 +41,8 @@ class _LoginPageState extends State<LoginPage> {
         .checkConnectivity()
         .then((value) => updateNetworkState(value));
 
-    subscription = Connectivity().onConnectivityChanged.listen(updateNetworkState);
+    subscription =
+        Connectivity().onConnectivityChanged.listen(updateNetworkState);
 
     NautaClient().getWlanUserIP().then((value) {
       GetIp.ipAddress.then((value2) {
@@ -50,9 +52,26 @@ class _LoginPageState extends State<LoginPage> {
         });
       });
     });
+
+    _loadLastAccount();
   }
 
-  void updateNetworkState(ConnectivityResult result) {
+  void _loadLastAccount() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String username = prefs.getString('lastAccount');
+
+    if (username != null) {
+      User user = await User.findByName(username);
+
+      if (user != null) {
+        setState(() {
+          lastUser = user;
+        });
+      }
+    }
+  }
+
+  void updateNetworkState(ConnectivityResult result) async {
     if (result == ConnectivityResult.mobile) {
       setState(() {
         networkIcon = Icons.network_cell;
@@ -68,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  dispose() {
+  void dispose() {
     subscription.cancel();
     super.dispose();
   }
@@ -93,62 +112,129 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          widget.title,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 100,
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Center(
-              child: Icon(
-                networkIcon,
-                size: 64,
-                color: Colors.white,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            centerTitle: true,
+            expandedHeight: MediaQuery.of(context).size.height / 4,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(
+                widget.title,
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-            ),
-          ),
-          Container(
-            child: Padding(
-              padding: EdgeInsets.only(left: 30, right: 30, bottom: 10),
-              child: wlanIp != null && ip != null
-                  ? Center(child: checkIp())
-                  : null,
-            ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).dialogBackgroundColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(45.0),
-                bottomRight: Radius.circular(45.0),
-              ),
-            ),
-            alignment: Alignment.center,
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: LoginForm(),
+              background: Container(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                child: Center(
+                  child: Icon(
+                    networkIcon,
+                    size: 32,
+                    color: Colors.white,
+                  ),
                 ),
               ),
+            ),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.account_circle),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AccountPage(),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 30, right: 30, bottom: 10),
+                    child: wlanIp != null && ip != null ? checkIp() : null,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).dialogBackgroundColor,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  alignment: Alignment.center,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: lastUser != null
+                            ? LastAccount(
+                                user: lastUser,
+                              )
+                            : LoginForm(),
+                      ),
+                    ),
+                  ),
+                ),
+                showFormButton()
+              ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Widget showFormButton() {
+    if (lastUser != null) {
+      return Row(
+        children: <Widget>[
+          MaterialButton(
+            onPressed: () {
+              setState(() {
+                lastUser = null;
+              });
+            },
+            color: Theme.of(context).focusColor,
+            child: Text(
+              'Mostrar fomulario',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            minWidth: MediaQuery.of(context).size.width / 2,
+          ),
+          MaterialButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PortalNauta(),
+                ),
+              );
+            },
+            color: Theme.of(context).focusColor,
+            child: Text(
+              'Portal Nauta',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            minWidth: MediaQuery.of(context).size.width / 2,
+          )
+        ],
+      );
+    } else {
+      return SizedBox.shrink();
+    }
   }
 
   Widget checkIp() {
@@ -158,6 +244,7 @@ class _LoginPageState extends State<LoginPage> {
     bool cmp = ip == wlanIp;
 
     return Container(
+      width: MediaQuery.of(context).size.width,
       color: cmp ? Colors.lightGreenAccent : Colors.pinkAccent,
       child: Padding(
         padding: EdgeInsets.all(5),
