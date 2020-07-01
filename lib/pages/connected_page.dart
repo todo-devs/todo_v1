@@ -64,7 +64,7 @@ class _ConnectedPageState extends State<ConnectedPage> {
                 color: Theme.of(context).scaffoldBackgroundColor,
                 child: Center(
                   child: Text(
-                    'SSID:  ' + wifiSSID + '   IP:  ' + wifiIP,
+                    'SSID:   $wifiSSID   IP:  $wifiIP',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
