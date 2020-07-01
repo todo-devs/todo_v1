@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                   color: Theme.of(context).scaffoldBackgroundColor,
                   child: Center(
                     child: Text(
-                      'SSID:  ' + wifiSSID + '   IP:  ' + wifiIP,
+                      'SSID:   $wifiSSID   IP:  $wifiIP',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
