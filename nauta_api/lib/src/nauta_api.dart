@@ -10,6 +10,7 @@ class SessionObject {
   String wlanuserip;
   String attributeUuid;
   String ssid;
+  String loggerId;
   static Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   SessionObject({
@@ -18,6 +19,7 @@ class SessionObject {
     this.wlanuserip,
     this.attributeUuid,
     this.ssid,
+    this.loggerId,
   });
 
   bool isLoggedIn() {
@@ -32,6 +34,7 @@ class SessionObject {
     prefs.setString('nauta_wlanuserip', wlanuserip);
     prefs.setString('nauta_attribute_uuid', attributeUuid);
     prefs.setString('nauta_ssid', ssid);
+    prefs.setString('nauta_loggerID', loggerId);
   }
 
   static Future<SessionObject> load() async {
@@ -43,6 +46,7 @@ class SessionObject {
       wlanuserip: prefs.getString('nauta_wlanuserip'),
       attributeUuid: prefs.getString('nauta_attribute_uuid'),
       ssid: prefs.getString('nauta_ssid'),
+      loggerId: prefs.getString('nauta_loggerID'),
     );
   }
 
@@ -54,6 +58,7 @@ class SessionObject {
     prefs.remove('nauta_wlanuserip');
     prefs.remove('nauta_attribute_uuid');
     prefs.remove('nauta_ssid');
+    prefs.remove('nauta_loggerID');
   }
 }
 
@@ -124,6 +129,7 @@ class NautaProtocol {
     session.csrfhw = data['CSRFHW'];
     session.wlanuserip = data['wlanuserip'];
     session.ssid = data['ssid'];
+    session.loggerId = data['loggerId'];
 
     return session;
   }
@@ -144,6 +150,7 @@ class NautaProtocol {
         "username": username,
         "password": password,
         "ssid": session.ssid,
+        "loggerId": session.loggerId,
       },
       bodyEncoding: RequestBodyEncoding.FormURLEncoded,
     );
@@ -182,7 +189,8 @@ class NautaProtocol {
         "CSRFHW=${session.csrfhw}&" +
         "wlanuserip=${session.wlanuserip}&" +
         "ssid=${session.ssid}&" +
-        "username=$username&";
+        "loggerId=${session.loggerId}+$username&" +
+        "username=$username";
 
     final r = await Requests.get(logoutUrl);
     r.raiseForStatus();
@@ -233,8 +241,9 @@ class NautaProtocol {
         "ATTRIBUTE_UUID": session.attributeUuid,
         "CSRFHW": session.csrfhw,
         "wlanuserip": session.wlanuserip,
-        "username": username,
         "ssid": session.ssid,
+        "loggerId": "$session.loggerId+$username",
+        "username": username,
       },
       bodyEncoding: RequestBodyEncoding.FormURLEncoded,
     );
