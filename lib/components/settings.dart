@@ -33,7 +33,7 @@ class _SettingsState extends State<SettingsWidget> {
     );
   }
 
-  static const String versionInfo = 'Versión 1.2.0 | 25-06-2020';
+  static const String versionInfo = 'Versión 1.2.1 | 30-06-2020';
 
   @override
   Widget build(BuildContext context) {

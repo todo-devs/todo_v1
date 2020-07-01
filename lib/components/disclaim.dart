@@ -78,6 +78,7 @@ con el objetivo de facilitar el acceso a los servicios de ETECSA.
 Se recomienda al usuario descargar siempre la aplicación desde las fuentes oficiales, las cuales se listan al final de este escrito y que esté al tanto de las actualizaciones para que la aplicación funcione correctamente. 
 
 No se almacena ni se exporta ningún tipo de información personal del usuario ni del uso que hace de la aplicación.
+La información almacenada con respecto a las cuentas de navegación se guarda de manera segura en el dispositivo del usuario y con previa autorización del mismo.
 
 Los servicios solicitados mediante la aplicación responden a las prestaciones de ETECSA, la aplicación solo actúa como una herramienta para facilitar la ejecución de los códigos ussd y la gestión de conexión en el servicio de WIFI_ETECSA y Nauta Hogar. No nos hacemos responsables por demoras o mal funcionamiento de los servicios de la compañía. 
 
@@ -95,6 +96,6 @@ https://github.com/todo-devs/todo/releases
 
 https://www.apklis.cu/application/com.cubanopensource.todo
 
-Fecha de actualización: 23 de junio del 2020
+Fecha de actualización: 30 de junio del 2020
 """;
 }
