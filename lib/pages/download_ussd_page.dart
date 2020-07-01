@@ -71,9 +71,10 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
           'Body: ${resp.body}',
         );
       }
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => HomePage(title: 'TODO')),
+        (Route<dynamic> route) => false,
       );
     } catch (e) {
       log(e.toString());

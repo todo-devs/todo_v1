@@ -96,7 +96,7 @@ class NautaProtocol {
   static Future<SessionObject> createSession() async {
     if (await isConnected()) {
       if (isLoggedIn()) {
-        throw NautaPreLoginException("Hay una session abierta");
+        throw NautaPreLoginException("Hay una sesión abierta");
       } else {
         throw NautaPreLoginException("Hay una conexion activa");
       }

@@ -25,9 +25,6 @@ class _LoginPageState extends State<LoginPage> {
   String wlanIp;
   String ip;
 
-  String wifiSSID = '';
-  String wifiIP = '';
-
   IconData networkIcon;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -80,13 +77,8 @@ class _LoginPageState extends State<LoginPage> {
         networkIcon = Icons.network_cell;
       });
     } else if (result == ConnectivityResult.wifi) {
-      final wifiName = await (Connectivity().getWifiName());
-      final ip = await (Connectivity().getWifiIP());
       setState(() {
         networkIcon = Icons.wifi_lock;
-
-        wifiSSID = wifiName;
-        wifiIP = ip;
       });
     } else {
       setState(() {
@@ -164,16 +156,6 @@ class _LoginPageState extends State<LoginPage> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Container(
-                  height: 18,
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  child: Center(
-                    child: Text(
-                      'SSID:   $wifiSSID   IP:  $wifiIP',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
                 Container(
                   child: Padding(
                     padding: EdgeInsets.only(left: 30, right: 30, bottom: 10),

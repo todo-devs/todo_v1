@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todo/components/connected_form.dart';
-import 'package:connectivity/connectivity.dart';
 
 class ConnectedPage extends StatefulWidget {
   ConnectedPage({Key key, this.title = 'Conectado', this.username})
@@ -14,39 +13,6 @@ class ConnectedPage extends StatefulWidget {
 }
 
 class _ConnectedPageState extends State<ConnectedPage> {
-  String wifiSSID = '';
-  String wifiIP = '';
-
-  var suscription;
-
-  @override
-  void initState() {
-    super.initState();
-
-    Connectivity()
-        .checkConnectivity()
-        .then((value) => updateNetworkState(value));
-
-    suscription =
-        Connectivity().onConnectivityChanged.listen(updateNetworkState);
-  }
-
-  updateNetworkState(ConnectivityResult result) async {
-    final wifiName = await (Connectivity().getWifiName());
-    final ip = await (Connectivity().getWifiIP());
-
-    setState(() {
-      wifiSSID = wifiName;
-      wifiIP = ip;
-    });
-  }
-
-  @override
-  void dispose() {
-    suscription.cancel();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,15 +25,6 @@ class _ConnectedPageState extends State<ConnectedPage> {
               title: Text(
                 widget.title,
                 style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              background: Container(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                child: Center(
-                  child: Text(
-                    'SSID:   $wifiSSID   IP:  $wifiIP',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
               ),
             ),
             elevation: 0,

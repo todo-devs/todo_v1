@@ -42,7 +42,8 @@ class _ConnectedFormState extends State<ConnectedForm> {
         .checkConnectivity()
         .then((value) => updateNetworkState(value));
 
-    suscription = Connectivity().onConnectivityChanged.listen(updateNetworkState);
+    suscription =
+        Connectivity().onConnectivityChanged.listen(updateNetworkState);
 
     setState(() {
       nautaClient = NautaClient(
@@ -133,16 +134,6 @@ class _ConnectedFormState extends State<ConnectedForm> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(4.0),
-            child: Text(
-              'Conectado',
-              style: TextStyle(
-                color: Theme.of(context).focusColor,
-                fontSize: 20,
-              ),
-            ),
-          ),
-          Padding(
             padding: EdgeInsets.all(20),
             child: Center(
               child: Icon(
@@ -182,7 +173,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
           color: Theme.of(context).focusColor,
           minWidth: MediaQuery.of(context).size.width,
           child: Text(
-            'Salir',
+            'Cerrar sesión',
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () async {
@@ -191,8 +182,12 @@ class _ConnectedFormState extends State<ConnectedForm> {
 
             try {
               SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.remove('nauta_username');
+
+              // Que primero haga logout
               await nautaClient.logout();
+
+              // Y luego borre la sessión
+              await prefs.remove('nauta_username');
 
               _timer.cancel();
               await pr.hide();
