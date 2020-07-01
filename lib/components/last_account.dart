@@ -40,47 +40,56 @@ class _LastAccountState extends State<LastAccount> {
       ),
       child: Column(
         children: <Widget>[
-          GFListTile(
-            margin: EdgeInsets.all(0),
-            avatar: Icon(
-              Icons.account_circle,
-              color: Theme.of(context).focusColor,
-            ),
-            title: Text(widget.user.username.split('@')[0]),
-            description: widget.user.username.contains('.com.cu')
-                ? Text('Internacional')
-                : Text('Nacional'),
-            icon: Row(
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.monetization_on,
-                    color: Theme.of(context).focusColor,
+          InkWell(
+            onTap: () {
+              login(
+                context,
+                widget.user.username,
+                widget.user.password,
+              );
+            },
+            child: GFListTile(
+              margin: EdgeInsets.all(0),
+              avatar: Icon(
+                Icons.account_circle,
+                color: Theme.of(context).focusColor,
+              ),
+              title: Text(widget.user.username.split('@')[0]),
+              description: widget.user.username.contains('.com.cu')
+                  ? Text('Internacional')
+                  : Text('Nacional'),
+              icon: Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.monetization_on,
+                      color: Theme.of(context).focusColor,
+                    ),
+                    onPressed: () {
+                      credit(
+                        context,
+                        widget.user.username,
+                        widget.user.password,
+                      );
+                    },
                   ),
-                  onPressed: () {
-                    credit(
-                      context,
-                      widget.user.username,
-                      widget.user.password,
-                    );
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    FontAwesomeIcons.globeAmericas,
-                    color: Theme.of(context).focusColor,
+                  IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.globeAmericas,
+                      color: Theme.of(context).focusColor,
+                    ),
+                    onPressed: () {
+                      login(
+                        context,
+                        widget.user.username,
+                        widget.user.password,
+                      );
+                    },
                   ),
-                  onPressed: () {
-                    login(
-                      context,
-                      widget.user.username,
-                      widget.user.password,
-                    );
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          )
         ],
       ),
     );

@@ -6,6 +6,7 @@ import 'package:nauta_api/nauta_api.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todo/pages/connected_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountPage extends StatefulWidget {
   _AccountPageState createState() => _AccountPageState();
@@ -330,6 +331,10 @@ class _AccountPageState extends State<AccountPage> {
       await nautaClient.login();
 
       await pr.hide();
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      prefs.setString('lastAccount', user);
 
       Navigator.push(
         ctx,

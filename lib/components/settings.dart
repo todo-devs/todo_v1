@@ -61,7 +61,7 @@ class _SettingsState extends State<SettingsWidget> {
                   ),
                 ),
                 SizedBox(
-                  height: 48,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

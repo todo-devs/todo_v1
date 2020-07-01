@@ -90,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
             ],
-            expandedHeight: 100,
+            expandedHeight: 10,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0,
             pinned: true,
