@@ -242,7 +242,7 @@ class NautaProtocol {
         "CSRFHW": session.csrfhw,
         "wlanuserip": session.wlanuserip,
         "ssid": session.ssid,
-        "loggerId": "$session.loggerId+$username",
+        "loggerId": "$session.loggerId+$username&",
         "username": username,
       },
       bodyEncoding: RequestBodyEncoding.FormURLEncoded,
