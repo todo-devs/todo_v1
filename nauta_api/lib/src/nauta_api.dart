@@ -178,10 +178,11 @@ class NautaProtocol {
     prefs.remove('nauta_username');
 
     final logoutUrl = "https://secure.etecsa.net:8443/LogoutServlet?" +
-        "CSRFHW=${session.csrfhw}&" +
-        "username=$username&" +
         "ATTRIBUTE_UUID=${session.attributeUuid}&" +
-        "wlanuserip=${session.wlanuserip}";
+        "CSRFHW=${session.csrfhw}&" +
+        "wlanuserip=${session.wlanuserip}&" +
+        "ssid=${session.ssid}&" +
+        "username=$username&";
 
     final r = await Requests.get(logoutUrl);
     r.raiseForStatus();
