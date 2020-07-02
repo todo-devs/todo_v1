@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
             centerTitle: true,
             actions: <Widget>[
               IconButton(
-                icon: Icon(networkIcon),
+                icon: Icon(networkIcon, semanticLabel: "Conexión a Nauta"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -110,7 +110,8 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.account_circle),
+                icon: Icon(Icons.account_circle,
+                    semanticLabel: "Gestión de cuentas"),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -120,7 +121,8 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.more_vert),
+                icon: Icon(Icons.more_vert,
+                    semanticLabel: "Opciones de configuración"),
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
