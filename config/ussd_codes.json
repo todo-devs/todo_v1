@@ -270,7 +270,7 @@
               "code": "*133*1*2#"
             },
             {
-              "name": "Para USIM (líneas nuevas)",
+              "name": "Líneas USIM (nuevas)",
               "description": "Paquetes de internet para usuarios que tienen activado el servicio LTE.",
               "icon": "data_usage",
               "type": "category",
@@ -350,7 +350,7 @@
               ]
             },
             {
-              "name": "Para SIM (líneas tradicionales)",
+              "name": "Líneas SIM (tradicionales)",
               "description": "Paquetes de internet para usuarios que no han activado el servicio LTE.",
               "icon": "data_usage",
               "type": "category",
