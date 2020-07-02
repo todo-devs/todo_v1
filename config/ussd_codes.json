@@ -357,7 +357,7 @@
               "items": [
                 {
                   "name": "400 MB - $5 CUC",
-                  "description": "+500 MB (solo 4G) +300 MB bono .cu",
+                  "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -365,7 +365,7 @@
                 },
                 {
                   "name": "600 MB - $7 CUC",
-                  "description": "+800 MB (solo 4G) +300 MB bono .cu",
+                  "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -373,7 +373,7 @@
                 },
                 {
                   "name": "1 GB - $10 CUC",
-                  "description": "+1.5 GB (solo 4G) +300 MB bono .cu",
+                  "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -381,7 +381,7 @@
                 },
                 {
                   "name": "2.5 GB - $20 CUC",
-                  "description": "+3 GB (solo 4G) +300 MB bono .cu",
+                  "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
@@ -389,7 +389,7 @@
                 },
                 {
                   "name": "4 GB - $30 CUC",
-                  "description": "+5 GB (solo 4G) +300 MB bono .cu",
+                  "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
                   "fields": [],
