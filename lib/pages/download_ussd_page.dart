@@ -81,7 +81,7 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
       setState(() {
         loading = false;
         message = 'Ha ocurrido un error en la descarga de los códigos USSD.\n\n'
-            'Revise su conexión e intentelo nuevamente.\n\n'
+            'Revise su conexión e inténtelo nuevamente.\n\n'
             'Si el error continúa póngase en contacto con el equipo de desarrollo.';
         buttonText = 'CERRAR';
       });
