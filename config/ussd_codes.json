@@ -270,8 +270,8 @@
               "code": "*133*1*2#"
             },
             {
-              "name": "Paquetes 4G",
-              "description": "Paquetes de internet para usuarios que han activado 4G",
+              "name": "Paquetes para líneas USIM (nuevas)",
+              "description": "Paquetes de internet para usuarios que tienen activado el servicio LTE.",
               "icon": "data_usage",
               "type": "category",
               "items": [
@@ -350,8 +350,8 @@
               ]
             },
             {
-              "name": "Paquetes solo 3G",
-              "description": "Paquetes de internet para usuarios que no han activado 4G",
+              "name": "Paquetes para líneas SIM (tradicionales)",
+              "description": "Paquetes de internet para usuarios que no han activado el servicio LTE.",
               "icon": "data_usage",
               "type": "category",
               "items": [
