@@ -10,7 +10,7 @@
     },
     {
       "name": "Consultar datos",
-      "description": "Consultar los megas disponibles",
+      "description": "Consulte los megas disponibles",
       "icon": "data_usage",
       "type": "code",
       "fields": [],
@@ -18,7 +18,7 @@
     },
     {
       "name": "Consultar bono",
-      "description": "Consulte el saldo actual de su Bono",
+      "description": "Consulte el estado actual de su bono",
       "icon": "star_border",
       "type": "code",
       "fields": [],
@@ -151,7 +151,7 @@
         },
         {
           "name": "Recargar",
-          "description": "Recarge su línea fácilmente",
+          "description": "Recargue su línea fácilmente",
           "icon": "monetization_on",
           "type": "code",
           "fields": [
@@ -170,7 +170,7 @@
           "items": [
             {
               "name": "1 CUC",
-              "description": "Adelantar con $1.00 CUC de saldo",
+              "description": "Adelante con $1.00 CUC de saldo",
               "icon": "monetization_on",
               "type": "code",
               "fields": [],
@@ -178,17 +178,17 @@
             },
             {
               "name": "2 CUC",
-              "description": "Adelantar con $2.00 CUC de saldo",
+              "description": "Adelante con $2.00 CUC de saldo",
               "icon": "monetization_on",
               "type": "code",
               "fields": [],
               "code": "*234*3*1*2#"
             }
           ]
-        },         
+        },
         {
           "name": "Transferir Saldo",
-          "description": "Transfiere tu saldo",
+          "description": "Transfiera su saldo",
           "icon": "mobile_screen_share",
           "type": "code",
           "fields": [
@@ -209,7 +209,7 @@
         },
         {
           "name": "Bono",
-          "description": "Consulte el saldo actual de su bono",
+          "description": "Consulte el estado actual de su bono",
           "icon": "star_border",
           "type": "code",
           "fields": [],
@@ -231,7 +231,7 @@
           "items": [
             {
               "name": "Megas disponibles",
-              "description": "Consultar los megas disponibles",
+              "description": "Consulte los megas disponibles",
               "icon": "data_usage",
               "type": "code",
               "fields": [],
@@ -356,7 +356,7 @@
               "type": "category",
               "items": [
                 {
-                  "name": "Paquete 400 MB - $5 CUC",
+                  "name": "400 MB - $5 CUC",
                   "description": "+500 MB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -364,7 +364,7 @@
                   "code": "*133*1*3*1#"
                 },
                 {
-                  "name": "Paquete 600 MB - $7 CUC",
+                  "name": "600 MB - $7 CUC",
                   "description": "+800 MB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -372,7 +372,7 @@
                   "code": "*133*1*3*2#"
                 },
                 {
-                  "name": "Paquete 1 GB - $10 CUC",
+                  "name": "1 GB - $10 CUC",
                   "description": "+1.5 GB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -380,7 +380,7 @@
                   "code": "*133*1*3*3#"
                 },
                 {
-                  "name": "Paquete 2.5 GB - $20 CUC",
+                  "name": "2.5 GB - $20 CUC",
                   "description": "+3 GB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -388,7 +388,7 @@
                   "code": "*133*1*3*4#"
                 },
                 {
-                  "name": "Paquete 4 GB - $30 CUC",
+                  "name": "4 GB - $30 CUC",
                   "description": "+5 GB (solo 4G) +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -407,7 +407,7 @@
           "items": [
             {
               "name": "Saldo",
-              "description": "Consultar el tiempo disponible",
+              "description": "Consulte el tiempo disponible",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -463,7 +463,7 @@
           "items": [
             {
               "name": "Saldo",
-              "description": "Consultar los SMS disponibles",
+              "description": "Consulte los SMS disponibles",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -511,7 +511,7 @@
           "items": [
             {
               "name": "Estado",
-              "description": "Consultar el estado del plan",
+              "description": "Consulte el estado del plan",
               "icon": "people",
               "type": "code",
               "fields": [],
@@ -519,7 +519,7 @@
             },
             {
               "name": "Activar",
-              "description": "Activar el plan",
+              "description": "Active el plan",
               "icon": "offline_pin",
               "type": "code",
               "fields": [],
@@ -527,7 +527,7 @@
             },
             {
               "name": "Desactivar",
-              "description": "Desactivar el plan",
+              "description": "Desactive el plan",
               "icon": "cancel",
               "type": "code",
               "fields": [],
@@ -535,7 +535,7 @@
             },
             {
               "name": "Agregar amigo",
-              "description": "Agregar el número de un amigo",
+              "description": "Agregue el número de un amigo",
               "icon": "add_circle_outline",
               "type": "code",
               "fields": [
@@ -548,7 +548,7 @@
             },
             {
               "name": "Eliminar amigo",
-              "description": "Eliminar el número de un amigo",
+              "description": "Elimine el número de un amigo",
               "icon": "remove_circle_outline",
               "type": "code",
               "fields": [
