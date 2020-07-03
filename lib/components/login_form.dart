@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-
 import 'package:todo/models/user.dart';
 import 'package:todo/pages/connected_page.dart';
-
 import 'package:nauta_api/nauta_api.dart';
-
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:todo/components/portal_nauta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -18,7 +17,26 @@ class _LoginFormState extends State<LoginForm> {
 
   User _user = User();
 
+  List<User> _users;
+
   ProgressDialog pr;
+
+  bool hidePass = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _loadData();
+  }
+
+  void _loadData() async {
+    final users = await User.getAll();
+
+    setState(() {
+      _users = users;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +64,12 @@ class _LoginFormState extends State<LoginForm> {
               autovalidate: true,
               decoration: InputDecoration(
                 labelText: 'Usuario',
-                prefixIcon: Icon(
-                  Icons.alternate_email,
-                  size: 28,
+                icon: IconButton(
+                  icon: Icon(
+                    FontAwesomeIcons.user,
+                    size: 28,
+                  ),
+                  onPressed: () {},
                 ),
               ),
               validator: (value) {
@@ -56,9 +77,16 @@ class _LoginFormState extends State<LoginForm> {
                   return 'Este campo no debe estar vacío';
                 }
 
+                if (value.contains('@')) {
+                  final domain = value.split('@')[1];
+
+                  if (domain != 'nauta.com.cu' && domain != 'nauta.co.cu') {
+                    return '@nauta.com.cu o @nauta.co.cu';
+                  }
+                }
+
                 return null;
               },
-              enableSuggestions: true,
               keyboardType: TextInputType.emailAddress,
               onSaved: (val) => setState(() => _user.username = val),
             ),
@@ -66,13 +94,21 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: EdgeInsets.all(5.0),
             child: TextFormField(
-              obscureText: true,
+              enableInteractiveSelection: false,
+              obscureText: hidePass,
               autovalidate: true,
               decoration: InputDecoration(
                 labelText: 'Contraseña',
-                prefixIcon: Icon(
-                  Icons.lock_outline,
-                  size: 28,
+                icon: IconButton(
+                  icon: Icon(
+                    hidePass ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
+                    size: 28,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      hidePass = !hidePass;
+                    });
+                  },
                 ),
               ),
               validator: (value) {
@@ -164,6 +200,10 @@ class _LoginFormState extends State<LoginForm> {
 
         await pr.hide();
 
+        if (_users == null || !accountSaved()) {
+          await showSaveAccountDialog(context);
+        }
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -191,6 +231,13 @@ class _LoginFormState extends State<LoginForm> {
       }
     } // end if (form.validate())
   } // end login()
+
+  bool accountSaved() {
+    for (var i = 0; i < _users.length; i++)
+      if (_users[i].username == _user.username) return true;
+
+    return false;
+  }
 
   void credit() async {
     // Hide keyboard
@@ -220,7 +267,11 @@ class _LoginFormState extends State<LoginForm> {
           backgroundColor: Theme.of(context).focusColor,
           content: Text(
             'Crédito: $userCredit',
-            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 20,
+              color: Colors.white,
+            ),
           ),
         ));
       } on NautaException catch (e) {
@@ -244,29 +295,45 @@ class _LoginFormState extends State<LoginForm> {
       ),
     );
   }
-}
 
-class PortalNauta extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        title: Text(
-          'Portal Nauta',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        elevation: 0,
-      ),
-      body: WebView(
-        initialUrl: "https://www.portal.nauta.cu",
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+  showSaveAccountDialog(BuildContext context) async {
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text("No"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = FlatButton(
+      child: Text("Si"),
+      onPressed: () async {
+        _user.id = _users.length == 0 ? 0 : _users.last.id + 1;
+        await _user.save();
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        prefs.setString('lastAccount', _user.username);
+
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Guardar cuenta"),
+      content: Text("¿Desea guardar su cuenta?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

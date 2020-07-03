@@ -88,39 +88,57 @@ class _UssdRootState extends State<UssdRootWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (items != null)
-      return ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          var item = items[index];
+    if (items != null) {
+      return Container(
+        child: SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            var item = items[index];
 
-          if (item.type == 'code')
-            return Padding(
-              padding: EdgeInsets.only(
-                left: 14.0,
-                right: 14.0,
-                top: index == 0 ? 10 : 0,
-              ),
-              child: UssdWidget(
-                ussdCode: item,
-              ),
-            );
-          else
-            return Padding(
-              padding: EdgeInsets.only(
-                left: 14.0,
-                right: 14.0,
-                top: index == 0 ? 10 : 0,
-              ),
-              child: UssdCategoryWidget(
-                category: item,
-              ),
-            );
-        },
+            if (item.type == 'code')
+              return Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).dialogBackgroundColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(index == 0 ? 20 : 0),
+                    topRight: Radius.circular(index == 0 ? 20 : 0),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 14.0,
+                    right: 14.0,
+                    top: index == 0 ? 10 : 0,
+                  ),
+                  child: UssdWidget(
+                    ussdCode: item,
+                  ),
+                ),
+              );
+            else
+              return Container(
+                color: Theme.of(context).dialogBackgroundColor,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 14.0,
+                    right: 14.0,
+                    top: index == 0 ? 10 : 0,
+                  ),
+                  child: UssdCategoryWidget(
+                    category: item,
+                  ),
+                ),
+              );
+          }, childCount: items.length),
+        ),
       );
+    }
 
-    return Center(
-      child: CircularProgressIndicator(),
+    return SliverList(
+      delegate: SliverChildListDelegate([
+        Center(
+          child: CircularProgressIndicator(),
+        )
+      ]),
     );
   }
 }
@@ -177,44 +195,49 @@ class UssdWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          title,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 100,
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Icon(icon, size: 64, color: Colors.white),
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).dialogBackgroundColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(45.0),
-                bottomRight: Radius.circular(45.0),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            centerTitle: true,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            expandedHeight: MediaQuery.of(context).size.height / 3,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 0,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              background: Container(
+                height: 100,
+                color: Theme.of(context).scaffoldBackgroundColor,
+                child: Icon(icon, size: 64, color: Colors.white),
               ),
             ),
-            height: MediaQuery.of(context).size.height - 180,
-            child: ListView.builder(
-              itemCount: ussdItems.length,
-              itemBuilder: (context, index) {
-                var item = ussdItems[index];
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              var item = ussdItems[index];
 
-                if (item.type == 'code')
-                  return Padding(
+              if (item.type == 'code')
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).dialogBackgroundColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(index == 0 ? 20 : 0),
+                      topRight: Radius.circular(index == 0 ? 20 : 0),
+                    ),
+                  ),
+                  child: Padding(
                     padding: EdgeInsets.only(
                       left: 14.0,
                       right: 14.0,
@@ -223,9 +246,18 @@ class UssdWidgets extends StatelessWidget {
                     child: UssdWidget(
                       ussdCode: item,
                     ),
-                  );
-                else
-                  return Padding(
+                  ),
+                );
+              else
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).dialogBackgroundColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(index == 0 ? 20 : 0),
+                      topRight: Radius.circular(index == 0 ? 20 : 0),
+                    ),
+                  ),
+                  child: Padding(
                     padding: EdgeInsets.only(
                       left: 14.0,
                       right: 14.0,
@@ -234,9 +266,9 @@ class UssdWidgets extends StatelessWidget {
                     child: UssdCategoryWidget(
                       category: item,
                     ),
-                  );
-              },
-            ),
+                  ),
+                );
+            }, childCount: ussdItems.length),
           ),
         ],
       ),
@@ -346,46 +378,56 @@ class CodeFormPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          code.name.toUpperCase(),
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height - 80,
-            decoration: BoxDecoration(
-              color: Theme.of(context).dialogBackgroundColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(45.0),
-                bottomRight: Radius.circular(45.0),
-              ),
-            ),
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: CodeForm(
-                    code: code.code,
-                    fields: code.fields,
-                    type: code.type,
-                  ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height / 3,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 0,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                code.name.toUpperCase(),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
+              centerTitle: true,
             ),
-          )
+            leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(Icons.arrow_back_ios),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Container(
+                height: MediaQuery.of(context).size.height - 80,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).dialogBackgroundColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: CodeForm(
+                        code: code.code,
+                        fields: code.fields,
+                        type: code.type,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ]),
+          ),
         ],
       ),
     );
@@ -528,11 +570,18 @@ class _CodeFormState extends State<CodeForm> {
                     }
 
                     try {
-                      if (int.parse(value) <= 0) {
+                      final cant = double.parse(value);
+
+                      if (cant.isNegative) {
                         return 'Debe poner una cantidad mayor que cero';
                       }
+                      if (value.split('.')[1].length > 2) {
+                        return 'Solo se admiten valores de tipo monetario';
+                      }
+                    } on RangeError {
+                      return null;
                     } catch (e) {
-                      return 'Este campo solo puede conetener digitos';
+                      return 'Solo se admiten valores de tipo monetario';
                     }
 
                     return null;
@@ -541,7 +590,12 @@ class _CodeFormState extends State<CodeForm> {
                   onSaved: (val) {
                     String rem = '{${field.name}}';
 
-                    String newCode = code.replaceAll(rem, val);
+                    String newCode;
+
+                    if (val.contains('.'))
+                      newCode = code.replaceAll('*$rem', '');
+                    else
+                      newCode = code.replaceAll(rem, val);
 
                     setState(() {
                       code = newCode;
@@ -566,6 +620,14 @@ class _CodeFormState extends State<CodeForm> {
 
                   if (value.length != 4) {
                     return 'La clave debe contener 4 dígitos';
+                  }
+
+                  try {
+                    if (int.parse(value) < 0) {
+                      return 'La clave no debe contener símbolos';
+                    }
+                  } catch (e) {
+                    return 'La clave no debe contener símbolos';
                   }
 
                   return null;

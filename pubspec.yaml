@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.2.0+5
+version: 1.2.2+9
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sqflite:
+  path:
   flutter_localizations:
     sdk: flutter
   # External depencies
@@ -43,6 +45,7 @@ dependencies:
   getflutter: ^1.0.11
   url_launcher: ^5.4.1
   font_awesome_flutter: ^8.5.0
+  connectivity: ^0.4.8+6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -57,7 +60,7 @@ dev_dependencies:
 
 flutter_icons:
   android: "launcher_icon"
-  ios: true
+  ios: false
   image_path: "todo.png"
 
 # For information on the generic Dart part of this file, see the
@@ -77,7 +80,7 @@ flutter:
 
   assets:
     - config/ussd_codes.json
-    - todo.ico
+    - logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -91,9 +94,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Montserrat
+    - family: Poppins
       fonts:
-        - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Poppins-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
