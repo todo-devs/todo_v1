@@ -46,24 +46,6 @@ Future<String> fetchUssdConfig(http.Client client) async {
 
 main() {
   group("Flujo de descarga de los codigos USSD", () {
-    test("Retorna el hash", () async {
-      final client = MockClient();
-
-      // Mockito para devolver una respuesta exitosa cuando llama al
-      // http.Client proporcionado.
-      when(client.get('https://todo-devs.github.io/todo-json/hash.json'))
-          .thenAnswer(
-        (_) async => http.Response("""
-          {
-              "hash":"44cfca8f4f10aed9759043198f0f92917a559a7f"
-          }
-          """, 200),
-      );
-
-      expect(
-          await fetchHash(client), "44cfca8f4f10aed9759043198f0f92917a559a7f");
-    });
-
     test("Retorna el objeto body con las configuraciones del fichero json",
         () async {
       final client = MockClient();
