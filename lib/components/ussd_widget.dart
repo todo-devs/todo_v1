@@ -590,7 +590,12 @@ class _CodeFormState extends State<CodeForm> {
                   onSaved: (val) {
                     String rem = '{${field.name}}';
 
-                    String newCode = code.replaceAll(rem, val);
+                    String newCode;
+
+                    if (val.contains('.'))
+                      newCode = code.replaceAll('*$rem', '');
+                    else
+                      newCode = code.replaceAll(rem, val);
 
                     setState(() {
                       code = newCode;
