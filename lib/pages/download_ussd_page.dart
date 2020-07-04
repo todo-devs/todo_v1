@@ -4,10 +4,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/models/ussd_codes.dart';
 import 'package:todo/pages/home_page.dart';
+import 'package:todo/services/download_ussd.dart';
 import 'package:todo/themes/colors.dart';
 
 class DownloadUssdPage extends StatefulWidget {
@@ -19,6 +19,7 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
   var loading = true;
   var message = '';
   var buttonText = 'CANCELAR DESCARGA';
+  var ussdService = DownloadUssdService();
 
   @override
   void initState() {
@@ -33,44 +34,16 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
       var prefs = await SharedPreferences.getInstance();
       var lastHash = prefs.getString('hash');
       var actualDay = DateTime.now().day;
-      var resp = await get(
-        'https://todo-devs.github.io/todo-json/hash.json',
-        headers: {
-          'Accept-Encoding': 'gzip, deflate, br',
-        },
-      );
-      if (resp.statusCode == 200) {
-        var json = jsonDecode(utf8.decode(resp.bodyBytes));
-        var actualHash = json['hash'];
-        if (actualHash != lastHash) {
-          var resp = await get(
-            'https://todo-devs.github.io/todo-json/config.json',
-            headers: {
-              'Accept-Encoding': 'gzip, deflate, br',
-            },
-          );
-          if (resp.statusCode == 200) {
-            var body = utf8.decode(resp.bodyBytes);
-            var parsedJson = jsonDecode(body);
-            UssdRoot.fromJson(parsedJson);
-            prefs.setString('hash', actualHash);
-            prefs.setString('config', body);
-          } else {
-            throw Exception(
-              'Request failed: ${resp.request.url}\n'
-              'StatusCode: ${resp.statusCode}\n'
-              'Body: ${resp.body}',
-            );
-          }
-        }
-        prefs.setInt('day', actualDay);
-      } else {
-        throw Exception(
-          'Request failed: ${resp.request.url}\n'
-          'StatusCode: ${resp.statusCode}\n'
-          'Body: ${resp.body}',
-        );
+      var actualHash = await ussdService.fetchHash();
+      if (actualHash != lastHash) {
+        var body = await ussdService.fetchUssdConfig();
+        var parsedJson = jsonDecode(body);
+        UssdRoot.fromJson(parsedJson);
+        prefs.setString('hash', actualHash);
+        prefs.setString('config', body);
       }
+      prefs.setInt('day', actualDay);
+
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => HomePage(title: 'TODO')),
