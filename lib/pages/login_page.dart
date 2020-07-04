@@ -265,6 +265,11 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       if (await NautaProtocol.isConnected()) {
+        var connectivityResult = await (new Connectivity().checkConnectivity());
+        var title = 'Conectado';
+        if (connectivityResult == ConnectivityResult.mobile){
+          title = 'Conectado via datos móviles';
+        }
         pr.style(message: 'Reconectando');
         await pr.show();
         await pr.hide();
@@ -273,7 +278,7 @@ class _LoginPageState extends State<LoginPage> {
           context,
           MaterialPageRoute(
             builder: (context) => ConnectedPage(
-              title: 'Conectado',
+              title: title,
               username: username,
             ),
           ),
