@@ -268,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
         var connectivityResult = await (new Connectivity().checkConnectivity());
         var title = 'Conectado';
         if (connectivityResult == ConnectivityResult.mobile){
-          title = 'Conectado via datos móviles';
+          title = 'Conectado vía datos móviles';
         }
         pr.style(message: 'Reconectando');
         await pr.show();
