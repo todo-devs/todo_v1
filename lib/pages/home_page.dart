@@ -76,19 +76,25 @@ class _HomePageState extends State<HomePage> {
 
     quickActions.setShortcutItems(<ShortcutItem>[
       const ShortcutItem(
-        type: 'saldo',
-        localizedTitle: 'Consultar saldo',
-        icon: 'ic_launcher',
+        type: 'corp',
+        localizedTitle: 'Corporativo',
+        icon: 'saldo',
+      ),
+      const ShortcutItem(
+        type: 'bono',
+        localizedTitle: 'Bono',
+        icon: 'bono',
       ),
       const ShortcutItem(
         type: 'datos',
-        localizedTitle: 'Consultar datos',
-        icon: 'ic_launcher',
+        localizedTitle: 'Datos',
+        icon: 'datos',
       ),
       const ShortcutItem(
-          type: 'bono', localizedTitle: 'Consultar bono', icon: 'ic_launcher'),
-      const ShortcutItem(
-          type: 'corp', localizedTitle: 'Línea corportativa', icon: 'ic_launcher'),
+        type: 'saldo',
+        localizedTitle: 'Saldo',
+        icon: 'saldo',
+      ),
     ]);
   }
 
