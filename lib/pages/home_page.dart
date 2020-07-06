@@ -9,6 +9,8 @@ import 'package:todo/pages/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/services/AppStateNotifier.dart';
 import 'package:todo/pages/account_page.dart';
+import 'package:quick_actions/quick_actions.dart';
+import 'package:todo/services/phone.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -52,6 +54,42 @@ class _HomePageState extends State<HomePage> {
         });
       }
     });
+
+    final QuickActions quickActions = QuickActions();
+
+    quickActions.initialize((String shortcutType) {
+      switch (shortcutType) {
+        case 'saldo':
+          callTo('*222#');
+          break;
+        case 'datos':
+          callTo('*222*328#');
+          break;
+        case 'bono':
+          callTo('*222*266#');
+          break;
+        case 'corp':
+          callTo('*111#');
+          break;
+      }
+    });
+
+    quickActions.setShortcutItems(<ShortcutItem>[
+      const ShortcutItem(
+        type: 'saldo',
+        localizedTitle: 'Consultar saldo',
+        icon: 'ic_launcher',
+      ),
+      const ShortcutItem(
+        type: 'datos',
+        localizedTitle: 'Consultar datos',
+        icon: 'ic_launcher',
+      ),
+      const ShortcutItem(
+          type: 'bono', localizedTitle: 'Consultar bono', icon: 'ic_launcher'),
+      const ShortcutItem(
+          type: 'corp', localizedTitle: 'Línea corportativa', icon: 'ic_launcher'),
+    ]);
   }
 
   @override
