@@ -1,4 +1,6 @@
 /*
+*/
+
 import 'dart:convert';
 
 import 'package:mockito/mockito.dart';
@@ -7,63 +9,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
 import 'package:todo/models/ussd_codes.dart';
+import 'package:todo/services/download_ussd.dart';
 
 class MockClient extends Mock implements http.Client {}
 
-Future<String> fetchHash(http.Client client) async {
-  final resp = await http.get(
-    'https://todo-devs.github.io/todo-json/hash.json',
-    headers: {
-      'Accept-Encoding': 'gzip, deflate, br',
-    },
-  );
-  if (resp.statusCode == 200) {
-    var json = jsonDecode(resp.body);
-    var hash = json['hash'];
-    return hash;
-  } else {
-    throw Exception("Error al cargar el hash");
-  }
-}
-
-Future<String> fetchUssdConfig(http.Client client) async {
-  final resp = await http.get(
-    'https://todo-devs.github.io/todo-json/config.json',
-    headers: {
-      'Accept-Encoding': 'gzip, deflate, br',
-    },
-  );
-  if (resp.statusCode == 200) {
-    var body = utf8.decode(resp.bodyBytes);
-
-    return body;
-  } else {
-    throw Exception("Error al cargar el hash");
-  }
-}
-
 main() {
-  group("Flujo de descarga de los codigos USSD", () {
-    test("Retorna el hash", () async {
-      final client = MockClient();
-
-      // Mockito para devolver una respuesta exitosa cuando llama al
-      // http.Client proporcionado.
-      when(client.get('https://todo-devs.github.io/todo-json/hash.json'))
-          .thenAnswer(
-        (_) async => http.Response("""
-          {
-              "hash":"44cfca8f4f10aed9759043198f0f92917a559a7f"
-          }
-          """, 200),
-      );
-
-      expect(
-          await fetchHash(client), "44cfca8f4f10aed9759043198f0f92917a559a7f");
-    });
-
-    test("Retorna el objeto body con las configuraciones del fichero json",
-        () async {
+  group("Descarga de los codigos USSD", () {
+    test("Retorna las configuraciones del fichero json", () async {
+      var ussdService = DownloadUssdService();
       final client = MockClient();
       when(client.get('https://todo-devs.github.io/todo-json/config.json'))
           .thenAnswer(
@@ -653,22 +606,23 @@ main() {
           }
           """, 200),
       );
-      var body = await fetchUssdConfig(client);
+      var body = await ussdService.fetchUssdConfig();
       var parsedJson = jsonDecode(body);
       expect(UssdRoot.fromJson(parsedJson), isA<UssdRoot>());
     });
 
     test(
-        "Almacena el hash actual y comprueba si es desigual del anterior para permitir realizar la descarga del body config.json",
+        "Almacena el hash actual y comprueba si es desigual del anterior para permitir realizar la descarga del config.json",
         () async {
-      final client = MockClient();
+      // final client = MockClient();
+      var ussdService = DownloadUssdService();
 
       SharedPreferences.setMockInitialValues({"hash": "hashold"});
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var lastHash = prefs.getString('hash');
-      var actualHash = await fetchHash(client);
+      var actualHash = await ussdService.fetchHash();
       if (actualHash != lastHash) {
-        var body = await fetchUssdConfig(client);
+        var body = await ussdService.fetchUssdConfig();
         prefs.setString('hash', actualHash);
         prefs.setString('config', body);
         expect(actualHash, prefs.getString('hash'));
@@ -676,4 +630,3 @@ main() {
     });
   });
 }
-*/

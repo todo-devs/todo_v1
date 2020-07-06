@@ -170,7 +170,7 @@ class _SettingsState extends State<SettingsWidget> {
                   height: 30,
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  margin: EdgeInsets.only(left: 2, right: 8, bottom: 10),
                   child: GFButton(
                     icon: Icon(
                       FontAwesomeIcons.telegram,
@@ -197,7 +197,7 @@ class _SettingsState extends State<SettingsWidget> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  margin: EdgeInsets.only(left: 2, right: 8, bottom: 10),
                   child: GFButton(
                     icon: Icon(
                       Icons.info,
