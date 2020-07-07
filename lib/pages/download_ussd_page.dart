@@ -41,14 +41,23 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
         UssdRoot.fromJson(parsedJson);
         prefs.setString('hash', actualHash);
         prefs.setString('config', body);
+        setState(() {
+          loading = false;
+          message =
+              'Comprobación exitosa.\n\n'
+              'Se han actualizado los códigos USSD.\n\n';
+          buttonText = 'CERRAR';
+        });
+      } else {
+        setState(() {
+          loading = false;
+          message =
+              'Comprobación exitosa.\n\n'
+              'No hay cambios en los códios USSD.\n\n';
+          buttonText = 'CERRAR';
+        });
       }
       prefs.setInt('day', actualDay);
-
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage(title: 'TODO')),
-        (Route<dynamic> route) => false,
-      );
     } catch (e) {
       log(e.toString());
       setState(() {
