@@ -117,6 +117,7 @@ class _SettingsState extends State<SettingsWidget> {
                                   Theme.of(context).focusColor
                               ? Colors.white
                               : Theme.of(context).focusColor,
+                              semanticLabel: "Actualizar códigos USSD"
                         ),
                       ),
                     ],
@@ -161,6 +162,7 @@ class _SettingsState extends State<SettingsWidget> {
                                   Theme.of(context).focusColor
                               ? Colors.white
                               : Theme.of(context).focusColor,
+                              semanticLabel: "Leer Térmios de uso",
                         ),
                       ),
                     ],
@@ -178,6 +180,7 @@ class _SettingsState extends State<SettingsWidget> {
                               Theme.of(context).focusColor
                           ? Colors.white
                           : Theme.of(context).focusColor,
+                          semanticLabel: "Habla con nosotros en Telegram",
                     ),
                     text: 'Habla con nosotros en Telegram',
                     textColor: Colors.white,
@@ -205,6 +208,7 @@ class _SettingsState extends State<SettingsWidget> {
                               Theme.of(context).focusColor
                           ? Colors.white
                           : Theme.of(context).focusColor,
+                          semanticLabel: "Información",
                     ),
                     text: 'Acerca',
                     textColor: Colors.white,

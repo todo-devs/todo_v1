@@ -133,6 +133,7 @@ class _HomePageState extends State<HomePage> {
         child: Icon(
           Icons.wifi,
           color: Colors.white,
+          semanticLabel: "Conexión a Nauta",
         ),
       ),
       body: CustomScrollView(

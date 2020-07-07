@@ -228,7 +228,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
             ),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(Icons.arrow_back_ios, semanticLabel: "Regresar"),
               onPressed: () {
                 Navigator.of(context).pop();
               },

@@ -68,7 +68,7 @@ class _SettingsPageState extends State<SettingsPage> {
         slivers: <Widget>[
           SliverAppBar(
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(Icons.arrow_back_ios, semanticLabel: "Regresar"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -77,7 +77,7 @@ class _SettingsPageState extends State<SettingsPage> {
             title: Text(widget.title),
             actions: <Widget>[
               IconButton(
-                icon: Icon(networkIcon),
+                icon: Icon(networkIcon, semanticLabel: "Conexión a Nauta"),
                 onPressed: () {
                   Navigator.push(
                     context,

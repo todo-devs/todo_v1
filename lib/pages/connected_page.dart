@@ -30,7 +30,7 @@ class _ConnectedPageState extends State<ConnectedPage> {
             ),
             elevation: 0,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(Icons.arrow_back_ios, semanticLabel: "Regresar"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
