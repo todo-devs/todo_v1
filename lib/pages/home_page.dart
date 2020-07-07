@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     SharedPreferences.getInstance().then((prefs) {
-      final dok = prefs.getBool('dok1.1');
+      final dok = prefs.getBool('dok1.2');
 
       if (dok == null || !dok)
         Navigator.of(context).push(
@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.more_vert,
+                icon: Icon(Icons.settings,
                     semanticLabel: "Opciones de configuración"),
                 onPressed: () {
                   Navigator.of(context).push(

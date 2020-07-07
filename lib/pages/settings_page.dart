@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     SharedPreferences.getInstance().then((prefs) {
-      final dok = prefs.getBool('dok1.1');
+      final dok = prefs.getBool('dok1.2');
 
       if (dok == null || !dok)
         Navigator.of(context).push(
