@@ -165,95 +165,89 @@ class _ConnectedFormState extends State<ConnectedForm> {
   }
 
   Widget exitButton() {
-    if (widget.username != null)
-      return Padding(
-        padding: EdgeInsets.all(10.0),
-        child: MaterialButton(
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: MaterialButton(
+        elevation: 0.5,
+        color: Theme.of(context).focusColor,
+        minWidth: MediaQuery.of(context).size.width,
+        child: Text(
+          'Cerrar sesión',
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () async {
+          pr.style(message: 'Desconectando');
+          await pr.show();
+
+          try {
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+
+            // Que primero haga logout
+            await nautaClient.logout();
+
+            // Y luego borre la sessión
+            await prefs.remove('nauta_username');
+
+            _timer.cancel();
+            await pr.hide();
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginPage(
+                  title: 'NAUTA',
+                ),
+              ),
+            );
+          } on NautaLogoutException catch (e) {
+            await pr.hide();
+            Scaffold.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(
+                e.message,
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 18,
+                ),
+              ),
+            ));
+          }
+        },
+      ),
+    );
+  }
+
+  Widget refreshButton() {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 10.0,
+        right: 10.0,
+        top: 10.0,
+      ),
+      child: MaterialButton(
           elevation: 0.5,
           color: Theme.of(context).focusColor,
           minWidth: MediaQuery.of(context).size.width,
           child: Text(
-            'Cerrar sesión',
+            'Actualizar',
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () async {
-            pr.style(message: 'Desconectando');
-            await pr.show();
-
-            try {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-
-              // Que primero haga logout
-              await nautaClient.logout();
-
-              // Y luego borre la sessión
-              await prefs.remove('nauta_username');
-
-              _timer.cancel();
-              await pr.hide();
-
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginPage(
-                    title: 'NAUTA',
-                  ),
-                ),
-              );
-            } on NautaLogoutException catch (e) {
-              await pr.hide();
-              Scaffold.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.red,
-                content: Text(
-                  e.message,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 18,
-                  ),
-                ),
-              ));
-            }
-          },
-        ),
-      );
-
-    return SizedBox.shrink();
-  }
-
-  Widget refreshButton() {
-    if (widget.username != null) {
-      return Padding(
-        padding: EdgeInsets.only(
-          left: 10.0,
-          right: 10.0,
-          top: 10.0,
-        ),
-        child: MaterialButton(
-            elevation: 0.5,
-            color: Theme.of(context).focusColor,
-            minWidth: MediaQuery.of(context).size.width,
-            child: Text(
-              'Actualizar',
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () async {
-              nautaClient.remainingTime().then((value) {
-                final rtime = value.split(':');
-                final hour = rtime[0];
-                final min = rtime[1];
-                final sec = rtime[2];
-                setState(() {
-                  remaining = Duration(
-                    hours: int.parse(hour),
-                    minutes: int.parse(min),
-                    seconds: int.parse(sec),
-                  );
-                });
+            nautaClient.remainingTime().then((value) {
+              final rtime = value.split(':');
+              final hour = rtime[0];
+              final min = rtime[1];
+              final sec = rtime[2];
+              setState(() {
+                remaining = Duration(
+                  hours: int.parse(hour),
+                  minutes: int.parse(min),
+                  seconds: int.parse(sec),
+                );
               });
-            }),
-      );
-    }
-    return SizedBox.shrink();
+            });
+          }),
+    );
   }
 
   Widget portalButton() {

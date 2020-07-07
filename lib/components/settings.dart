@@ -111,14 +111,12 @@ class _SettingsState extends State<SettingsWidget> {
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 15),
-                        child: Icon(
-                          Icons.file_download,
-                          color: Theme.of(context).scaffoldBackgroundColor ==
-                                  Theme.of(context).focusColor
-                              ? Colors.white
-                              : Theme.of(context).focusColor,
-                              semanticLabel: "Actualizar códigos USSD"
-                        ),
+                        child: Icon(Icons.file_download,
+                            color: Theme.of(context).scaffoldBackgroundColor ==
+                                    Theme.of(context).focusColor
+                                ? Colors.white
+                                : Theme.of(context).focusColor,
+                            semanticLabel: "Actualizar códigos USSD"),
                       ),
                     ],
                   ),
@@ -162,7 +160,7 @@ class _SettingsState extends State<SettingsWidget> {
                                   Theme.of(context).focusColor
                               ? Colors.white
                               : Theme.of(context).focusColor,
-                              semanticLabel: "Leer Térmios de uso",
+                          semanticLabel: "Leer Térmios de uso",
                         ),
                       ),
                     ],
@@ -180,7 +178,7 @@ class _SettingsState extends State<SettingsWidget> {
                               Theme.of(context).focusColor
                           ? Colors.white
                           : Theme.of(context).focusColor,
-                          semanticLabel: "Habla con nosotros en Telegram",
+                      semanticLabel: "Habla con nosotros en Telegram",
                     ),
                     text: 'Habla con nosotros en Telegram',
                     textColor: Colors.white,
@@ -208,7 +206,7 @@ class _SettingsState extends State<SettingsWidget> {
                               Theme.of(context).focusColor
                           ? Colors.white
                           : Theme.of(context).focusColor,
-                          semanticLabel: "Información",
+                      semanticLabel: "Información",
                     ),
                     text: 'Acerca',
                     textColor: Colors.white,

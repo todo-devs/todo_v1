@@ -63,7 +63,7 @@ class SessionObject {
 }
 
 class NautaProtocol {
-  static const CHECK_PAGE = "http://cubasi.cu";
+  static const CHECK_PAGE = "http://www.cubadebate.cu/rss";
 
   static SessionObject session;
 

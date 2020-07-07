@@ -264,10 +264,10 @@ class _LoginPageState extends State<LoginPage> {
     String username = prefs.getString('nauta_username');
 
     try {
-      if (await NautaProtocol.isConnected()) {
+      if (await NautaProtocol.isConnected() && username != null) {
         var connectivityResult = await (new Connectivity().checkConnectivity());
         var title = 'Conectado';
-        if (connectivityResult == ConnectivityResult.mobile){
+        if (connectivityResult == ConnectivityResult.mobile) {
           title = 'Conectado vía datos móviles';
         }
         pr.style(message: 'Reconectando');
