@@ -488,11 +488,18 @@ class _CodeFormState extends State<CodeForm> {
                       Scaffold.of(context).showSnackBar(SnackBar(
                         content: Text('Run USSD Code\n$code'),
                       ));
+
+                      setState(() {
+                        code = widget.code;
+                      });
                     }
                   } else {
                     if (form.validate()) {
                       form.save();
                       callTo(code);
+                      setState(() {
+                        code = widget.code;
+                      });
                     }
                   }
                 },
