@@ -135,7 +135,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                semanticLabel: "Regresar",
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
