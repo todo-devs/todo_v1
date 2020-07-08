@@ -200,7 +200,10 @@ class UssdWidgets extends StatelessWidget {
           SliverAppBar(
             centerTitle: true,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                semanticLabel: "Regresar",
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -215,6 +218,7 @@ class UssdWidgets extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
               background: Container(
@@ -398,7 +402,10 @@ class CodeFormPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                semanticLabel: "Regresar",
+              ),
             ),
           ),
           SliverList(
@@ -485,9 +492,11 @@ class _CodeFormState extends State<CodeForm> {
                     if (form.validate()) {
                       form.save();
 
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text('Run USSD Code\n$code'),
-                      ));
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Run USSD Code\n$code'),
+                        ),
+                      );
 
                       setState(() {
                         code = widget.code;
@@ -517,24 +526,27 @@ class _CodeFormState extends State<CodeForm> {
                 maxLength: 8,
                 autovalidate: true,
                 decoration: InputDecoration(
-                    labelText: field.name.toUpperCase(),
-                    suffixIcon: FlatButton(
-                        onPressed: () async {
-                          String number = await getContactPhoneNumber();
+                  labelText: field.name.toUpperCase(),
+                  suffixIcon: FlatButton(
+                    onPressed: () async {
+                      String number = await getContactPhoneNumber();
 
-                          phoneNumberController.text = number;
-                          phoneNumberController.addListener(() {
-                            phoneNumberController.selection =
-                                TextSelection(baseOffset: 8, extentOffset: 8);
-                          });
-                        },
-                        child: Icon(
-                          Icons.contacts,
-                          color: Theme.of(context).focusColor,
-                        )),
-                    prefixIcon: Icon(
-                      Icons.phone,
-                    )),
+                      phoneNumberController.text = number;
+                      phoneNumberController.addListener(() {
+                        phoneNumberController.selection =
+                            TextSelection(baseOffset: 8, extentOffset: 8);
+                      });
+                    },
+                    child: Icon(
+                      Icons.contacts,
+                      color: Theme.of(context).focusColor,
+                      semanticLabel: "Seleccionar contacto",
+                    ),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.phone,
+                  ),
+                ),
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Este campo no debe estar vacío';
@@ -567,10 +579,11 @@ class _CodeFormState extends State<CodeForm> {
               return TextFormField(
                   autovalidate: true,
                   decoration: InputDecoration(
-                      labelText: field.name.toUpperCase(),
-                      prefixIcon: Icon(
-                        Icons.attach_money,
-                      )),
+                    labelText: field.name.toUpperCase(),
+                    prefixIcon: Icon(
+                      Icons.attach_money,
+                    ),
+                  ),
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Este campo no debe estar vacío';
@@ -616,10 +629,11 @@ class _CodeFormState extends State<CodeForm> {
                 maxLength: 4,
                 autovalidate: true,
                 decoration: InputDecoration(
-                    labelText: field.name.toUpperCase(),
-                    prefixIcon: Icon(
-                      Icons.vpn_key,
-                    )),
+                  labelText: field.name.toUpperCase(),
+                  prefixIcon: Icon(
+                    Icons.vpn_key,
+                  ),
+                ),
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Este campo no debe estar vacío';
@@ -657,10 +671,11 @@ class _CodeFormState extends State<CodeForm> {
                 maxLength: 16,
                 autovalidate: true,
                 decoration: InputDecoration(
-                    labelText: field.name.toUpperCase(),
-                    prefixIcon: Icon(
-                      Icons.credit_card,
-                    )),
+                  labelText: field.name.toUpperCase(),
+                  prefixIcon: Icon(
+                    Icons.credit_card,
+                  ),
+                ),
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Este campo no debe estar vacío';
