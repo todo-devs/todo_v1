@@ -14,6 +14,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="TODO"
         android:icon="@mipmap/launcher_icon">
+
+        <service android:name=".FloatingWindow" />
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

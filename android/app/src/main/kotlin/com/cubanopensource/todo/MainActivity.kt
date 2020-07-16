@@ -23,6 +23,10 @@ class MainActivity: FlutterActivity() {
                 else -> result.notImplemented()
             }
         }
+
+        if(getDrawPermissionState()) {
+            startService(Intent(this, FloatingWindow::class.java))
+        }
     }
 
     private fun getDrawPermissionState(): Boolean {
