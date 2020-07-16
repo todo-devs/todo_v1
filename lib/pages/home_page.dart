@@ -1,15 +1,16 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo/pages/login_page.dart';
-import 'package:todo/components/ussd_widget.dart';
-import 'package:todo/components/disclaim.dart';
-import 'package:connectivity/connectivity.dart';
-import 'package:todo/pages/settings_page.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/services/AppStateNotifier.dart';
-import 'package:todo/pages/account_page.dart';
 import 'package:quick_actions/quick_actions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/components/disclaim.dart';
+import 'package:todo/components/ussd_widget.dart';
+import 'package:todo/pages/account_page.dart';
+import 'package:todo/pages/login_page.dart';
+import 'package:todo/pages/settings_page.dart';
+import 'package:todo/services/AppStateNotifier.dart';
+import 'package:todo/services/PlatformService.dart';
 import 'package:todo/services/phone.dart';
 
 class HomePage extends StatefulWidget {
@@ -117,6 +118,8 @@ class _HomePageState extends State<HomePage> {
         );
     });
 
+    showReqDrawDialog(context);
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).focusColor,
@@ -203,6 +206,39 @@ class _HomePageState extends State<HomePage> {
           UssdRootWidget(),
         ],
       ),
+    );
+  }
+
+  showReqDrawDialog(BuildContext context) async {
+    if (await getDrawPermissionState()) {
+      return;
+    }
+
+    Widget continueButton = FlatButton(
+      child: Text("Continuar"),
+      onPressed: () async {
+        await reqDrawPermission();
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Solicitud de permiso"),
+      content: Text(
+          "Hola, perdona la molestia pero necesito permiso para poder mostrarte información sobre tu velocidad de conexión,"
+          " por favor toca en el botón de continuar y habilita la superposición de pantalla"),
+      actions: [
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
