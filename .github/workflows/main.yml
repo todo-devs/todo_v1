@@ -12,7 +12,6 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-      - name: Build apk
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
@@ -26,14 +25,8 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-      - name: Build aab
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: "stable"
-      - run: flutter pub get
-      - run: flutter build appbundle --release --no-shrink
       - name: Create a Release APK
         uses: ncipollo/release-action@v1
         with:
-          artifacts: build/app/outputs/apk/release/app-release-signed.apk, build/app/outputs/bundle/release/app-release.aab
+          artifacts: build/app/outputs/apk/release/app-release-signed.apk
           token: ${{ secrets.GITHUB_TOKEN }}
