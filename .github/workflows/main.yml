@@ -13,7 +13,7 @@ jobs:
         with:
           java-version: "12.x"
       - name: Build apk
-      - uses: subosito/flutter-action@v1
+        uses: subosito/flutter-action@v1
         with:
           channel: "stable"
       - run: flutter pub get
@@ -27,7 +27,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
       - name: Build aab
-      - uses: subosito/flutter-action@v1
+        uses: subosito/flutter-action@v1
         with:
           channel: "stable"
       - run: flutter pub get
