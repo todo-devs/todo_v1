@@ -38,7 +38,7 @@
       "code": "*99{telefono}"
     },
     {
-      "name": "Gestionar Llamadas",
+      "name": "Gestionar Llamadas ...",
       "description": "Realice llamadas de manera fácil",
       "icon": "call",
       "type": "category",
@@ -70,7 +70,7 @@
           "code": "#31#{telefono}"
         },
         {
-          "name": "Números útiles",
+          "name": "Números útiles ...",
           "description": "Ambulancia, Bomberos, Policía, Etc.",
           "icon": "call",
           "type": "category",
@@ -136,7 +136,7 @@
       ]
     },
     {
-      "name": "Gestionar Saldo",
+      "name": "Gestionar Saldo ...",
       "description": "Gestione el balance de su línea",
       "icon": "attach_money",
       "type": "category",
@@ -163,7 +163,7 @@
           "code": "*662*{numero tarjeta}#"
         },
         {
-          "name": "Adelantar Saldo",
+          "name": "Adelantar Saldo ...",
           "description": "Recargue con un adelanto de saldo",
           "icon": "monetization_on",
           "type": "category",
@@ -218,13 +218,13 @@
       ]
     },
     {
-      "name": "Gestionar Planes",
+      "name": "Gestionar Planes ...",
       "description": "Planes de Datos, Voz, SMS, y Amigo",
       "icon": "shopping_cart",
       "type": "category",
       "items": [
         {
-          "name": "Planes de Datos",
+          "name": "Planes de Datos ...",
           "description": "Gestione su plan de datos",
           "icon": "data_usage",
           "type": "category",
@@ -238,7 +238,7 @@
               "code": "*222*328#"
             },
             {
-              "name": "Tarifa por consumo",
+              "name": "Tarifa por consumo ...",
               "description": "Consumo directo del saldo",
               "icon": "network_cell",
               "type": "category",
@@ -270,7 +270,7 @@
               "code": "*133*1*2#"
             },
             {
-              "name": "Líneas USIM (nuevas)",
+              "name": "Líneas USIM (nuevas) ...",
               "description": "Paquetes de internet para usuarios que tienen activado el servicio LTE.",
               "icon": "data_usage",
               "type": "category",
@@ -350,7 +350,7 @@
               ]
             },
             {
-              "name": "Líneas SIM (tradicionales)",
+              "name": "Líneas SIM (tradicionales) ...",
               "description": "Paquetes de internet para usuarios que no han activado el servicio LTE.",
               "icon": "data_usage",
               "type": "category",
@@ -400,7 +400,7 @@
           ]
         },
         {
-          "name": "Planes de voz",
+          "name": "Planes de voz ...",
           "description": "Gestione su plan de voz",
           "icon": "phone_in_talk",
           "type": "category",
@@ -456,7 +456,7 @@
           ]
         },
         {
-          "name": "Planes de SMS",
+          "name": "Planes de SMS ...",
           "description": "Gestione su plan de SMS",
           "icon": "sms",
           "type": "category",
@@ -504,7 +504,7 @@
           ]
         },
         {
-          "name": "Plan amigos",
+          "name": "Plan amigos ...",
           "description": "Gestione sus números amigos",
           "icon": "people",
           "type": "category",
