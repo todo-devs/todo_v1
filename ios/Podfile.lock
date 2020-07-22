@@ -1,19 +1,35 @@
 PODS:
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
+  - connectivity_macos (0.0.1):
+    - Flutter
   - contact_picker (0.0.1):
     - Flutter
+  - device_proxy (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - get_ip (0.0.1):
     - Flutter
   - intent (0.0.1):
     - Flutter
   - permission_handler (3.3.0):
     - Flutter
+  - quick_actions (0.0.1):
+    - Flutter
+  - Reachability (3.2)
   - shared_preferences (0.0.1):
     - Flutter
   - shared_preferences_macos (0.0.1):
     - Flutter
   - shared_preferences_web (0.0.1):
     - Flutter
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
   - url_launcher (0.0.1):
     - Flutter
   - url_launcher_macos (0.0.1):
@@ -24,22 +40,38 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
+  - connectivity_macos (from `.symlinks/plugins/connectivity_macos/ios`)
   - contact_picker (from `.symlinks/plugins/contact_picker/ios`)
+  - device_proxy (from `.symlinks/plugins/device_proxy/ios`)
   - Flutter (from `Flutter`)
   - get_ip (from `.symlinks/plugins/get_ip/ios`)
   - intent (from `.symlinks/plugins/intent/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - quick_actions (from `.symlinks/plugins/quick_actions/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
   - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
   - url_launcher_macos (from `.symlinks/plugins/url_launcher_macos/ios`)
   - url_launcher_web (from `.symlinks/plugins/url_launcher_web/ios`)
   - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
 
+SPEC REPOS:
+  trunk:
+    - FMDB
+    - Reachability
+
 EXTERNAL SOURCES:
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
+  connectivity_macos:
+    :path: ".symlinks/plugins/connectivity_macos/ios"
   contact_picker:
     :path: ".symlinks/plugins/contact_picker/ios"
+  device_proxy:
+    :path: ".symlinks/plugins/device_proxy/ios"
   Flutter:
     :path: Flutter
   get_ip:
@@ -48,12 +80,16 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/intent/ios"
   permission_handler:
     :path: ".symlinks/plugins/permission_handler/ios"
+  quick_actions:
+    :path: ".symlinks/plugins/quick_actions/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   shared_preferences_macos:
     :path: ".symlinks/plugins/shared_preferences_macos/ios"
   shared_preferences_web:
     :path: ".symlinks/plugins/shared_preferences_web/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
   url_launcher_macos:
@@ -64,14 +100,21 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
+  connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
+  connectivity_macos: e2e9731b6b22dda39eb1b128f6969d574460e191
   contact_picker: 57db5d8b410b52a0457d88f7b15de7d3307e8f16
+  device_proxy: cd467c4ca97cc8fbc23d9252043bdc4fc2ecc02f
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   get_ip: c063133e0a399ae4089048c90d6a232cb2344846
   intent: 6bad0aafb370628d22974ab363692a373cf18304
   permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73
+  quick_actions: 6cb2390c4dab0e737c94573c27e18d9666710720
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
+  sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   url_launcher_macos: fd7894421cd39320dce5f292fc99ea9270b2a313
   url_launcher_web: e5527357f037c87560776e36436bf2b0288b965c

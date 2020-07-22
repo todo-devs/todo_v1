@@ -1,5 +1,7 @@
 # TODO
 
+[![Codemagic build status](https://api.codemagic.io/apps/5ef3dcbdea72d100155fe6dd/5ef3dcbdea72d100155fe6dc/status_badge.svg)](https://codemagic.io/apps/5ef3dcbdea72d100155fe6dd/5ef3dcbdea72d100155fe6dc/latest_build)
+
 Helper app to aid user with ETECSA services
 
 ## Instalación del entorno de desarrollo
