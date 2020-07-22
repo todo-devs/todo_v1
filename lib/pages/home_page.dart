@@ -14,6 +14,7 @@ import 'package:todo/pages/settings_page.dart';
 import 'package:todo/services/AppStateNotifier.dart';
 import 'package:todo/services/PlatformService.dart';
 import 'package:todo/services/phone.dart';
+import 'package:todo/utils/transitions.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -118,7 +119,7 @@ class _HomePageState extends State<HomePage> {
 
       if (dok == null || !dok)
         Navigator.of(context).push(
-          MaterialPageRoute(
+          TodoPageRoute(
             builder: (context) => DisclaimerWidget(),
           ),
         );
@@ -136,7 +137,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
+            TodoPageRoute(
               builder: (context) => LoginPage(
                 title: 'NAUTA',
               ),
@@ -159,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => LoginPage(
                         title: 'NAUTA',
                       ),
@@ -172,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                     semanticLabel: "Gestión de cuentas"),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => AccountPage(),
                     ),
                   );
@@ -183,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                     semanticLabel: "Opciones de configuración"),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => SettingsPage(
                         title: 'Ajustes',
                       ),

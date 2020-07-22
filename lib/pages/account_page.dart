@@ -7,6 +7,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todo/pages/connected_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/utils/transitions.dart';
 
 class AccountPage extends StatefulWidget {
   _AccountPageState createState() => _AccountPageState();
@@ -338,7 +339,7 @@ class _AccountPageState extends State<AccountPage> {
 
       Navigator.push(
         ctx,
-        MaterialPageRoute(
+        TodoPageRoute(
           builder: (context) => ConnectedPage(
             title: 'Conectado',
             username: user,

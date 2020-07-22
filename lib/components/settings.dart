@@ -7,6 +7,7 @@ import 'package:todo/components/disclaim.dart';
 import 'package:todo/pages/download_ussd_page.dart';
 import 'package:todo/services/AppStateNotifier.dart';
 import 'package:todo/services/PlatformService.dart';
+import 'package:todo/utils/transitions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsWidget extends StatefulWidget {
@@ -161,7 +162,7 @@ class _SettingsState extends State<SettingsWidget> {
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
+                      TodoPageRoute(
                         builder: (context) => DownloadUssdPage(),
                       ),
                     );
@@ -173,7 +174,7 @@ class _SettingsState extends State<SettingsWidget> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
+                      TodoPageRoute(
                         builder: (context) => DisclaimerWidget(),
                       ),
                     );

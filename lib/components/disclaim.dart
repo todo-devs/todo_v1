@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/themes/colors.dart';
 import 'package:todo/pages/home_page.dart';
+import 'package:todo/utils/transitions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DisclaimerWidget extends StatelessWidget {
@@ -35,7 +36,7 @@ class DisclaimerWidget extends StatelessWidget {
                 SharedPreferences.getInstance().then((prefs) {
                   prefs.setBool('dok1.2', true);
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
+                      TodoPageRoute(
                         builder: (context) => HomePage(
                           title: 'TODO',
                         ),

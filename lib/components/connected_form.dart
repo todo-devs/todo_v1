@@ -1,16 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-
-import 'package:nauta_api/nauta_api.dart';
-import 'package:todo/pages/login_page.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:todo/components/portal_nauta.dart';
-
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/material.dart';
+import 'package:nauta_api/nauta_api.dart';
+import 'package:progress_dialog/progress_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/components/portal_nauta.dart';
+import 'package:todo/pages/login_page.dart';
+import 'package:todo/utils/transitions.dart';
 
 class ConnectedForm extends StatefulWidget {
   final String username;
@@ -193,7 +190,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
 
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
+              TodoPageRoute(
                 builder: (context) => LoginPage(
                   title: 'NAUTA',
                 ),
@@ -272,7 +269,7 @@ class _ConnectedFormState extends State<ConnectedForm> {
   void portalNauta() {
     Navigator.push(
       context,
-      MaterialPageRoute(
+      TodoPageRoute(
         builder: (context) => PortalNauta(),
       ),
     );

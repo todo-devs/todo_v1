@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/models/ussd_codes.dart';
 import 'package:todo/services/contacts.dart';
 import 'package:todo/services/phone.dart';
+import 'package:todo/utils/transitions.dart';
 
 class UssdRootWidget extends StatefulWidget {
   _UssdRootState createState() => _UssdRootState();
@@ -156,7 +157,7 @@ class UssdCategoryWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+          TodoPageRoute(
             builder: (context) => UssdWidgets(
               title: category.name.toUpperCase(),
               ussdItems: category.items,
@@ -367,7 +368,7 @@ class CodeWithForm extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+          TodoPageRoute(
             builder: (context) => CodeFormPage(
               code: code,
             ),

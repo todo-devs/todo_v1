@@ -5,6 +5,7 @@ import 'package:nauta_api/nauta_api.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:todo/pages/connected_page.dart';
+import 'package:todo/utils/transitions.dart';
 
 class LastAccount extends StatefulWidget {
   final User user;
@@ -147,7 +148,7 @@ class _LastAccountState extends State<LastAccount> {
 
       Navigator.push(
         ctx,
-        MaterialPageRoute(
+        TodoPageRoute(
           builder: (context) => ConnectedPage(
             title: 'Conectado',
             username: user,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nauta_api/nauta_api.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/components/portal_nauta.dart';
 import 'package:todo/models/user.dart';
 import 'package:todo/pages/connected_page.dart';
-import 'package:nauta_api/nauta_api.dart';
-import 'package:todo/components/portal_nauta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/utils/transitions.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -206,7 +207,7 @@ class _LoginFormState extends State<LoginForm> {
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
+          TodoPageRoute(
             builder: (context) => ConnectedPage(
               title: 'Conectado',
               username: _user.username,
@@ -290,7 +291,7 @@ class _LoginFormState extends State<LoginForm> {
   void portalNauta() {
     Navigator.push(
       context,
-      MaterialPageRoute(
+      TodoPageRoute(
         builder: (context) => PortalNauta(),
       ),
     );
