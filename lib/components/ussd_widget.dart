@@ -170,6 +170,11 @@ class UssdCategoryWidget extends StatelessWidget {
         GFListTile(
           margin: EdgeInsets.all(0),
           avatar: Icon(category.icon, color: Theme.of(context).focusColor),
+          icon: Icon(
+            Icons.arrow_forward_ios,
+            color: Theme.of(context).focusColor,
+            size: 16,
+          ),
           description: Text(
             category.description,
             style: TextStyle(
