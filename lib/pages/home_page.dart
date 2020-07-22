@@ -118,7 +118,11 @@ class _HomePageState extends State<HomePage> {
         );
     });
 
-    showReqDrawDialog(context);
+    getShowWidgetPreference().then(
+      (value) => {
+        if (value) {showReqDrawDialog(context)}
+      },
+    );
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
