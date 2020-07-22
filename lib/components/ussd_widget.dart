@@ -3,13 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:getflutter/getflutter.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:todo/models/ussd_codes.dart';
 import 'package:todo/services/contacts.dart';
 import 'package:todo/services/phone.dart';
-import 'package:todo/models/ussd_codes.dart';
-import 'package:getflutter/getflutter.dart';
 
 class UssdRootWidget extends StatefulWidget {
   _UssdRootState createState() => _UssdRootState();
@@ -111,6 +110,7 @@ class _UssdRootState extends State<UssdRootWidget> {
                   ),
                   child: UssdWidget(
                     ussdCode: item,
+                    isLast: (index == items.length - 1),
                   ),
                 ),
               );
@@ -125,6 +125,7 @@ class _UssdRootState extends State<UssdRootWidget> {
                   ),
                   child: UssdCategoryWidget(
                     category: item,
+                    isLast: (index == items.length - 1),
                   ),
                 ),
               );
@@ -145,8 +146,9 @@ class _UssdRootState extends State<UssdRootWidget> {
 
 class UssdCategoryWidget extends StatelessWidget {
   final UssdCategory category;
+  final bool isLast;
 
-  UssdCategoryWidget({this.category});
+  UssdCategoryWidget({this.category, this.isLast});
 
   @override
   Widget build(BuildContext context) {
@@ -177,9 +179,13 @@ class UssdCategoryWidget extends StatelessWidget {
             category.name.toUpperCase(),
           ),
         ),
-        Divider(
-          color: Theme.of(context).focusColor,
-        )
+        isLast
+            ? Divider(
+                color: Colors.transparent,
+              )
+            : Divider(
+                color: Theme.of(context).focusColor,
+              )
       ]),
     );
   }
@@ -249,6 +255,7 @@ class UssdWidgets extends StatelessWidget {
                     ),
                     child: UssdWidget(
                       ussdCode: item,
+                      isLast: (index == ussdItems.length - 1),
                     ),
                   ),
                 );
@@ -269,6 +276,7 @@ class UssdWidgets extends StatelessWidget {
                     ),
                     child: UssdCategoryWidget(
                       category: item,
+                      isLast: (index == ussdItems.length - 1),
                     ),
                   ),
                 );
@@ -282,8 +290,9 @@ class UssdWidgets extends StatelessWidget {
 
 class UssdWidget extends StatelessWidget {
   final UssdCode ussdCode;
+  final bool isLast;
 
-  UssdWidget({this.ussdCode});
+  UssdWidget({this.ussdCode, this.isLast});
 
   @override
   Widget build(BuildContext context) {
@@ -293,10 +302,14 @@ class UssdWidget extends StatelessWidget {
         name: ussdCode.name,
         icon: ussdCode.icon,
         description: ussdCode.description,
+        isLast: this.isLast,
       );
     }
 
-    return CodeWithForm(code: ussdCode);
+    return CodeWithForm(
+      code: ussdCode,
+      isLast: this.isLast,
+    );
   }
 }
 
@@ -306,7 +319,9 @@ class SimpleCode extends StatelessWidget {
   final String description;
   final IconData icon;
 
-  SimpleCode({this.code, this.name, this.icon, this.description});
+  final bool isLast;
+
+  SimpleCode({this.code, this.name, this.icon, this.description, this.isLast});
 
   @override
   Widget build(BuildContext context) {
@@ -328,9 +343,13 @@ class SimpleCode extends StatelessWidget {
             name.toUpperCase(),
           ),
         ),
-        Divider(
-          color: Theme.of(context).focusColor,
-        )
+        this.isLast
+            ? Divider(
+                color: Colors.transparent,
+              )
+            : Divider(
+                color: Theme.of(context).focusColor,
+              )
       ]),
     );
   }
@@ -338,8 +357,9 @@ class SimpleCode extends StatelessWidget {
 
 class CodeWithForm extends StatelessWidget {
   final UssdCode code;
+  final bool isLast;
 
-  CodeWithForm({this.code});
+  CodeWithForm({this.code, this.isLast});
 
   @override
   Widget build(BuildContext context) {
@@ -366,9 +386,13 @@ class CodeWithForm extends StatelessWidget {
           ),
           title: Text(code.name.toUpperCase()),
         ),
-        Divider(
-          color: Theme.of(context).focusColor,
-        )
+        this.isLast
+            ? Divider(
+                color: Colors.transparent,
+              )
+            : Divider(
+                color: Theme.of(context).focusColor,
+              )
       ]),
     );
   }
