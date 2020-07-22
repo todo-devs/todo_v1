@@ -90,13 +90,16 @@ class FloatingWindow : Service() {
         mLastTxBytes = TrafficStats.getTotalTxBytes()
         mLastTime = System.currentTimeMillis()
 
+        preferences = applicationContext.getSharedPreferences("${packageName}_preferences", Activity.MODE_PRIVATE)
         showFloatWidget()
     }
 
-    private fun showFloatWidget() {
-        if (getDrawPermissionState()) {
-            preferences = applicationContext.getSharedPreferences("${packageName}_preferences", Activity.MODE_PRIVATE)
+    private fun getShowWidgetPreference(): Boolean {
+        return preferences.getBoolean("showWidget", true)
+    }
 
+    private fun showFloatWidget() {
+        if (getDrawPermissionState() && getShowWidgetPreference()) {
             val displayMetrics = DisplayMetrics()
             (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getMetrics(displayMetrics)
             val height = displayMetrics.heightPixels

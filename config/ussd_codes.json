@@ -2,7 +2,7 @@
   "items": [
     {
       "name": "Consultar saldo",
-      "description": "Consulte su saldo actual",
+      "description": "Consulta tu saldo",
       "icon": "attach_money",
       "type": "code",
       "fields": [],
@@ -10,7 +10,7 @@
     },
     {
       "name": "Consultar datos",
-      "description": "Consulte los megas disponibles",
+      "description": "Consulta los megas disponibles",
       "icon": "data_usage",
       "type": "code",
       "fields": [],
@@ -18,7 +18,7 @@
     },
     {
       "name": "Consultar bono",
-      "description": "Consulte el estado actual de su bono",
+      "description": "Consulta el estado de tu bono",
       "icon": "star_border",
       "type": "code",
       "fields": [],
@@ -26,7 +26,7 @@
     },
     {
       "name": "Asterisco 99",
-      "description": "Llamadas con pago revertido",
+      "description": "Llamada con pago revertido",
       "icon": "call",
       "type": "code",
       "fields": [
@@ -39,13 +39,13 @@
     },
     {
       "name": "Gestionar Llamadas",
-      "description": "Realice llamadas de manera fácil",
+      "description": "Realiza llamadas de manera fácil",
       "icon": "call",
       "type": "category",
       "items": [
         {
           "name": "Asterisco 99",
-          "description": "Llamadas con pago revertido",
+          "description": "Llamada con pago revertido",
           "icon": "call",
           "type": "code",
           "fields": [
@@ -58,7 +58,7 @@
         },
         {
           "name": "Mi número oculto",
-          "description": "Llame sin mostrar su número",
+          "description": "Llama sin mostrar tu número",
           "icon": "call",
           "type": "code",
           "fields": [
@@ -137,13 +137,13 @@
     },
     {
       "name": "Gestionar Saldo",
-      "description": "Gestione el balance de su línea",
+      "description": "Gestiona el saldo de tu línea",
       "icon": "attach_money",
       "type": "category",
       "items": [
         {
           "name": "Saldo",
-          "description": "Consulte su saldo actual",
+          "description": "Consulta tu saldo",
           "icon": "attach_money",
           "type": "code",
           "fields": [],
@@ -151,7 +151,7 @@
         },
         {
           "name": "Recargar",
-          "description": "Recargue su línea fácilmente",
+          "description": "Recarga tu línea fácilmente",
           "icon": "monetization_on",
           "type": "code",
           "fields": [
@@ -164,13 +164,13 @@
         },
         {
           "name": "Adelantar Saldo",
-          "description": "Recargue con un adelanto de saldo",
+          "description": "Recarga con un adelanto de saldo",
           "icon": "monetization_on",
           "type": "category",
           "items": [
             {
               "name": "1 CUC",
-              "description": "Adelante con $1.00 CUC de saldo",
+              "description": "Adelanta con $1.00 CUC de saldo",
               "icon": "monetization_on",
               "type": "code",
               "fields": [],
@@ -178,7 +178,7 @@
             },
             {
               "name": "2 CUC",
-              "description": "Adelante con $2.00 CUC de saldo",
+              "description": "Adelanta con $2.00 CUC de saldo",
               "icon": "monetization_on",
               "type": "code",
               "fields": [],
@@ -188,7 +188,7 @@
         },
         {
           "name": "Transferir Saldo",
-          "description": "Transfiera su saldo",
+          "description": "Transfiere tu saldo",
           "icon": "mobile_screen_share",
           "type": "code",
           "fields": [
@@ -209,7 +209,7 @@
         },
         {
           "name": "Bono",
-          "description": "Consulte el estado actual de su bono",
+          "description": "Consulta el estado de tu bono",
           "icon": "star_border",
           "type": "code",
           "fields": [],
@@ -225,13 +225,13 @@
       "items": [
         {
           "name": "Planes de Datos",
-          "description": "Gestione su plan de datos",
+          "description": "Gestiona tu plan de datos",
           "icon": "data_usage",
           "type": "category",
           "items": [
             {
               "name": "Megas disponibles",
-              "description": "Consulte los megas disponibles",
+              "description": "Consulta tus megas disponibles",
               "icon": "data_usage",
               "type": "code",
               "fields": [],
@@ -239,7 +239,7 @@
             },
             {
               "name": "Tarifa por consumo",
-              "description": "Consumo directo del saldo",
+              "description": "Consumir directo del saldo",
               "icon": "network_cell",
               "type": "category",
               "items": [
@@ -401,13 +401,13 @@
         },
         {
           "name": "Planes de voz",
-          "description": "Gestione su plan de voz",
+          "description": "Gestiona tu plan de voz",
           "icon": "phone_in_talk",
           "type": "category",
           "items": [
             {
               "name": "Saldo",
-              "description": "Consulte el tiempo disponible",
+              "description": "Consulta el tiempo disponible",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -457,13 +457,13 @@
         },
         {
           "name": "Planes de SMS",
-          "description": "Gestione su plan de SMS",
+          "description": "Gestiona tu plan de SMS",
           "icon": "sms",
           "type": "category",
           "items": [
             {
               "name": "Saldo",
-              "description": "Consulte los SMS disponibles",
+              "description": "Consulta los SMS disponibles",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -505,13 +505,13 @@
         },
         {
           "name": "Plan amigos",
-          "description": "Gestione sus números amigos",
+          "description": "Gestiona tus números amigos",
           "icon": "people",
           "type": "category",
           "items": [
             {
               "name": "Estado",
-              "description": "Consulte el estado del plan",
+              "description": "Consulta el estado del plan",
               "icon": "people",
               "type": "code",
               "fields": [],
@@ -519,7 +519,7 @@
             },
             {
               "name": "Activar",
-              "description": "Active el plan",
+              "description": "Activa el plan",
               "icon": "offline_pin",
               "type": "code",
               "fields": [],
@@ -527,7 +527,7 @@
             },
             {
               "name": "Desactivar",
-              "description": "Desactive el plan",
+              "description": "Desactiva el plan",
               "icon": "cancel",
               "type": "code",
               "fields": [],
@@ -535,7 +535,7 @@
             },
             {
               "name": "Agregar amigo",
-              "description": "Agregue el número de un amigo",
+              "description": "Agrega el número de un amigo",
               "icon": "add_circle_outline",
               "type": "code",
               "fields": [
@@ -548,7 +548,7 @@
             },
             {
               "name": "Eliminar amigo",
-              "description": "Elimine el número de un amigo",
+              "description": "Elimina el número de un amigo",
               "icon": "remove_circle_outline",
               "type": "code",
               "fields": [
@@ -561,7 +561,7 @@
             },
             {
               "name": "Lista de amigos",
-              "description": "Consulte la lista de números amigos",
+              "description": "Consulta tu lista de números amigos",
               "icon": "list",
               "type": "code",
               "fields": [],
@@ -573,7 +573,7 @@
     },
     {
       "name": "Línea corporativa",
-      "description": "Consulte el estado de planes corporativos",
+      "description": "Consulta el estado tu plan corporativo",
       "icon": "monetization_on",
       "type": "code",
       "fields": [],

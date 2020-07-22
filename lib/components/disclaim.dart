@@ -15,10 +15,10 @@ class DisclaimerWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             color: Theme.of(context).scaffoldBackgroundColor,
             child: Center(
-              child: Icon(
-                Icons.developer_mode,
-                size: 64,
+              child: ImageIcon(
+                AssetImage("logo.png"),
                 color: Colors.white,
+                size: 96,
               ),
             ),
           ),
@@ -65,6 +65,12 @@ class DisclaimerWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
+        Center(
+          child: Text(
+            "Tu Operador de Datos Omnipotente\n",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
         Text(
           "TODO es una aplicación de código abierto creada por un grupo de desarrolladores cubanos:",
           style: TextStyle(color: Colors.white),
