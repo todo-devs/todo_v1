@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -62,15 +64,19 @@ class _HomePageState extends State<HomePage> {
       switch (shortcutType) {
         case 'saldo':
           callTo('*222#');
+          exit(0);
           break;
         case 'datos':
           callTo('*222*328#');
+          exit(0);
           break;
         case 'bono':
           callTo('*222*266#');
+          exit(0);
           break;
         case 'corp':
           callTo('*111#');
+          exit(0);
           break;
       }
     });
