@@ -76,12 +76,12 @@
           "type": "category",
           "items": [
             {
-              "name": "2266 - Atención al cliente",
+              "name": "*2266 - Atención al cliente",
               "description": "",
               "icon": "call",
               "type": "code",
               "fields": [],
-              "code": "2266"
+              "code": "*2266"
             },
             {
               "name": "103 - Línea Antidrogas",
