@@ -4,35 +4,32 @@ import 'dart:developer';
 import 'package:device_proxy/device_proxy.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 
 class DownloadUssdService {
   Future<String> fetchHash() async {
     var dio = await _getDio();
-    var response = await dio
-        .get('https://todo-devs.github.io/todo-json/hash.json',
+    var response = await dio.get(
+        'https://todo-devs.github.io/todo-json/hash.json',
         options: Options(headers: {'Accept-Encoding': 'gzip, deflate, br'}));
 
     if (response.statusCode == 200) {
-      
       var body = response.data as Map<String, dynamic>;
 
       return json.encode(body);
     } else {
       throw Exception(
         'Request failed: ${response.request.uri}\n'
-            'StatusCode: ${response.statusCode}\n'
-            'Body: ${response.data}',
+        'StatusCode: ${response.statusCode}\n'
+        'Body: ${response.data}',
       );
     }
-
   }
 
   Future<String> fetchUssdConfig() async {
     var dio = await _getDio();
     log('test');
-    var response = await dio
-        .get('https://todo-devs.github.io/todo-json/config.json',
+    var response = await dio.get(
+        'https://todo-devs.github.io/todo-json/config.json',
         options: Options(headers: {'Accept-Encoding': 'gzip, deflate, br'}));
 
     if (response.statusCode == 200) {
