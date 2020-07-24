@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:padding="2.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:background="@mipmap/back_widget_negro" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_centerVertical="true">
+            <LinearLayout android:orientation="horizontal" android:id="@+id/widget_layout_top" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="5.0dip" android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <LinearLayout android:gravity="center" android:layout_width="48.0dip" android:layout_height="48.0dip">
+                        <ImageView android:layout_width="48.0dip" android:layout_height="48.0dip" android:src="@mipmap/launcher_icon" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:id="@+id/linearLayout_button1" android:padding="15.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="5.0" android:layout_below="@id/widget_layout_top" android:layout_alignParentLeft="true">
+                <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <LinearLayout android:gravity="center" android:id="@+id/widget_button_saldo" android:background="@drawable/back_imagen_widget" android:layout_width="@dimen/widget_button_back" android:layout_height="@dimen/widget_button_back">
+                        <ImageView android:layout_width="@dimen/widget_button_icon" android:layout_height="@dimen/widget_button_icon" android:src="@mipmap/ic_main_list_item2" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <LinearLayout android:gravity="center" android:id="@+id/widget_button_bonos" android:background="@drawable/back_imagen_widget" android:layout_width="@dimen/widget_button_back" android:layout_height="@dimen/widget_button_back">
+                        <ImageView android:layout_width="@dimen/widget_button_icon" android:layout_height="@dimen/widget_button_icon" android:src="@mipmap/ic_saldo_list_item4" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <LinearLayout android:gravity="center" android:id="@+id/widget_button_saldo_datos" android:background="@drawable/back_imagen_widget" android:layout_width="@dimen/widget_button_back" android:layout_height="@dimen/widget_button_back">
+                        <ImageView android:layout_width="@dimen/widget_button_icon" android:layout_height="@dimen/widget_button_icon" android:src="@mipmap/ic_planes_datos_list_item1" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <LinearLayout android:gravity="center" android:id="@+id/widget_button_saldo_voz" android:background="@drawable/back_imagen_widget" android:layout_width="@dimen/widget_button_back" android:layout_height="@dimen/widget_button_back">
+                        <ImageView android:layout_width="@dimen/widget_button_icon" android:layout_height="@dimen/widget_button_icon" android:src="@mipmap/ic_planes_voz_list_item1" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                    <LinearLayout android:gravity="center" android:id="@+id/widget_button_saldo_sms" android:background="@drawable/back_imagen_widget" android:layout_width="@dimen/widget_button_back" android:layout_height="@dimen/widget_button_back">
+                        <ImageView android:layout_width="@dimen/widget_button_icon" android:layout_height="@dimen/widget_button_icon" android:src="@mipmap/ic_planes_sms_list_item1" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/themes/colors.dart';
 import 'package:todo/pages/home_page.dart';
+import 'package:todo/utils/transitions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DisclaimerWidget extends StatelessWidget {
@@ -15,10 +16,10 @@ class DisclaimerWidget extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             color: Theme.of(context).scaffoldBackgroundColor,
             child: Center(
-              child: Icon(
-                Icons.developer_mode,
-                size: 64,
+              child: ImageIcon(
+                AssetImage("logo.png"),
                 color: Colors.white,
+                size: 96,
               ),
             ),
           ),
@@ -35,7 +36,7 @@ class DisclaimerWidget extends StatelessWidget {
                 SharedPreferences.getInstance().then((prefs) {
                   prefs.setBool('dok1.2', true);
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
+                      TodoPageRoute(
                         builder: (context) => HomePage(
                           title: 'TODO',
                         ),
@@ -65,6 +66,12 @@ class DisclaimerWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
+        Center(
+          child: Text(
+            "Tu Operador de Datos Omnipotente\n",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
         Text(
           "TODO es una aplicación de código abierto creada por un grupo de desarrolladores cubanos:",
           style: TextStyle(color: Colors.white),

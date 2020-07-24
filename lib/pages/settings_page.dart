@@ -1,12 +1,10 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:todo/pages/login_page.dart';
-
-import 'package:todo/components/settings.dart';
 import 'package:todo/components/disclaim.dart';
-
-import 'package:connectivity/connectivity.dart';
+import 'package:todo/components/settings.dart';
+import 'package:todo/pages/login_page.dart';
+import 'package:todo/utils/transitions.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key, this.title}) : super(key: key);
@@ -57,7 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
       if (dok == null || !dok)
         Navigator.of(context).push(
-          MaterialPageRoute(
+          TodoPageRoute(
             builder: (context) => DisclaimerWidget(),
           ),
         );
@@ -81,7 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => LoginPage(
                         title: 'NAUTA',
                       ),

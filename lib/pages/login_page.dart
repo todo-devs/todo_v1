@@ -1,15 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:progress_dialog/progress_dialog.dart';
-import 'package:todo/components/login_form.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:nauta_api/nauta_api.dart';
-import 'package:todo/models/user.dart';
-import 'package:todo/pages/connected_page.dart';
-import 'package:get_ip/get_ip.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:todo/pages/account_page.dart';
+import 'package:flutter/material.dart';
+import 'package:get_ip/get_ip.dart';
+import 'package:nauta_api/nauta_api.dart';
+import 'package:progress_dialog/progress_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/components/last_account.dart';
+import 'package:todo/components/login_form.dart';
 import 'package:todo/components/portal_nauta.dart';
+import 'package:todo/models/user.dart';
+import 'package:todo/pages/account_page.dart';
+import 'package:todo/pages/connected_page.dart';
+import 'package:todo/utils/transitions.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title = 'NAUTA'}) : super(key: key);
@@ -148,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                 icon: Icon(Icons.account_circle),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => AccountPage(),
                     ),
                   );
@@ -218,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                TodoPageRoute(
                   builder: (context) => PortalNauta(),
                 ),
               );
@@ -279,7 +280,7 @@ class _LoginPageState extends State<LoginPage> {
 
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
+          TodoPageRoute(
             builder: (context) => ConnectedPage(
               title: title,
               username: username,

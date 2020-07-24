@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,6 +14,7 @@ import 'package:todo/pages/settings_page.dart';
 import 'package:todo/services/AppStateNotifier.dart';
 import 'package:todo/services/PlatformService.dart';
 import 'package:todo/services/phone.dart';
+import 'package:todo/utils/transitions.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -58,19 +61,27 @@ class _HomePageState extends State<HomePage> {
 
     final QuickActions quickActions = QuickActions();
 
-    quickActions.initialize((String shortcutType) {
+    quickActions.initialize((String shortcutType) async {
       switch (shortcutType) {
         case 'saldo':
           callTo('*222#');
+          await Future.delayed(Duration(seconds: 1));
+          exit(0);
           break;
         case 'datos':
           callTo('*222*328#');
+          await Future.delayed(Duration(seconds: 1));
+          exit(0);
           break;
         case 'bono':
           callTo('*222*266#');
+          await Future.delayed(Duration(seconds: 1));
+          exit(0);
           break;
         case 'corp':
           callTo('*111#');
+          await Future.delayed(Duration(seconds: 1));
+          exit(0);
           break;
       }
     });
@@ -112,13 +123,17 @@ class _HomePageState extends State<HomePage> {
 
       if (dok == null || !dok)
         Navigator.of(context).push(
-          MaterialPageRoute(
+          TodoPageRoute(
             builder: (context) => DisclaimerWidget(),
           ),
         );
     });
 
-    showReqDrawDialog(context);
+    getShowWidgetPreference().then(
+      (value) => {
+        if (value) {showReqDrawDialog(context)}
+      },
+    );
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -126,7 +141,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
+            TodoPageRoute(
               builder: (context) => LoginPage(
                 title: 'NAUTA',
               ),
@@ -149,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => LoginPage(
                         title: 'NAUTA',
                       ),
@@ -162,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                     semanticLabel: "Gestión de cuentas"),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => AccountPage(),
                     ),
                   );
@@ -173,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                     semanticLabel: "Opciones de configuración"),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => SettingsPage(
                         title: 'Ajustes',
                       ),

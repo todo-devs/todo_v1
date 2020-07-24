@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="widget_button_icon">25.0dip</dimen>
+    <dimen name="widget_button_back">40.0dip</dimen>
+</resources>

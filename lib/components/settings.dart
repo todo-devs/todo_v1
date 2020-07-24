@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:getflutter/getflutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/components/disclaim.dart';
 import 'package:todo/pages/download_ussd_page.dart';
 import 'package:todo/services/AppStateNotifier.dart';
-import 'package:todo/components/disclaim.dart';
-import 'package:getflutter/getflutter.dart';
+import 'package:todo/services/PlatformService.dart';
+import 'package:todo/utils/transitions.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsWidget extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
@@ -14,6 +16,7 @@ class SettingsWidget extends StatefulWidget {
 
 class _SettingsState extends State<SettingsWidget> {
   var darkMode = false;
+  var showWidget = true;
 
   @override
   void initState() {
@@ -31,6 +34,12 @@ class _SettingsState extends State<SettingsWidget> {
         }
       },
     );
+
+    getShowWidgetPreference().then((value) {
+      setState(() {
+        showWidget = value;
+      });
+    });
   }
 
   static const String versionInfo = 'Versión 1.2.4 | 15-07-2020';
@@ -93,6 +102,36 @@ class _SettingsState extends State<SettingsWidget> {
                     ),
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Activar widget flotante',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Switch(
+                      activeColor: Theme.of(context).focusColor,
+                      activeTrackColor: this.darkMode ? null : Colors.white,
+                      value: showWidget,
+                      onChanged: (value) {
+                        setState(() {
+                          showWidget = value;
+                        });
+
+                        if (value) {
+                          setTrueShowWidget();
+                        } else {
+                          setFalseShowWidget();
+                        }
+                      },
+                    ),
+                  ],
+                ),
                 SizedBox(
                   height: 30,
                 ),
@@ -123,7 +162,7 @@ class _SettingsState extends State<SettingsWidget> {
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
+                      TodoPageRoute(
                         builder: (context) => DownloadUssdPage(),
                       ),
                     );
@@ -135,7 +174,7 @@ class _SettingsState extends State<SettingsWidget> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
+                      TodoPageRoute(
                         builder: (context) => DisclaimerWidget(),
                       ),
                     );

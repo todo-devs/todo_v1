@@ -9,6 +9,7 @@ import 'package:todo/models/ussd_codes.dart';
 import 'package:todo/pages/home_page.dart';
 import 'package:todo/services/download_ussd.dart';
 import 'package:todo/themes/colors.dart';
+import 'package:todo/utils/transitions.dart';
 
 class DownloadUssdPage extends StatefulWidget {
   @override
@@ -43,17 +44,15 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
         prefs.setString('config', body);
         setState(() {
           loading = false;
-          message =
-              'Comprobación exitosa.\n\n'
+          message = 'Comprobación exitosa.\n\n'
               'Se han actualizado los códigos USSD.\n\n';
           buttonText = 'CERRAR';
         });
       } else {
         setState(() {
           loading = false;
-          message =
-              'Comprobación exitosa.\n\n'
-              'No hay cambios en los códios USSD.\n\n';
+          message = 'Comprobación exitosa.\n\n'
+              'No hay cambios en los códigos USSD.\n\n';
           buttonText = 'CERRAR';
         });
       }
@@ -110,7 +109,7 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
+                    TodoPageRoute(
                       builder: (context) => HomePage(title: 'TODO'),
                     ),
                   );
