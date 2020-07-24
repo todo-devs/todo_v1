@@ -61,22 +61,26 @@ class _HomePageState extends State<HomePage> {
 
     final QuickActions quickActions = QuickActions();
 
-    quickActions.initialize((String shortcutType) {
+    quickActions.initialize((String shortcutType) async {
       switch (shortcutType) {
         case 'saldo':
           callTo('*222#');
+          await Future.delayed(Duration(seconds: 1));
           exit(0);
           break;
         case 'datos':
           callTo('*222*328#');
+          await Future.delayed(Duration(seconds: 1));
           exit(0);
           break;
         case 'bono':
           callTo('*222*266#');
+          await Future.delayed(Duration(seconds: 1));
           exit(0);
           break;
         case 'corp':
           callTo('*111#');
+          await Future.delayed(Duration(seconds: 1));
           exit(0);
           break;
       }
