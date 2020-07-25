@@ -118,7 +118,7 @@ class FloatingWindow : Service() {
         mLastTime = System.currentTimeMillis()
 
         preferences = applicationContext.getSharedPreferences("${packageName}_preferences", Activity.MODE_PRIVATE)
-        
+
         val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
         registerReceiver(networkChanged, intentFilter)
     }
@@ -136,6 +136,12 @@ class FloatingWindow : Service() {
 
     private fun showFloatWidget() {
         if (!widgetIsVisible && getDrawPermissionState() && getShowWidgetPreference() && wm != null) {
+            val fx = preferences.getInt("float_widget_x", 0)
+            val fy = preferences.getInt("float_widget_y", 0)
+
+            parameters.x = fx
+            parameters.y = fy
+
             wm?.addView(widgetView, parameters)
             widgetIsVisible = true
         }
@@ -219,9 +225,6 @@ class FloatingWindow : Service() {
             val fx = preferences.getInt("float_widget_x", 0)
             val fy = preferences.getInt("float_widget_y", 0)
 
-            println(fx)
-            println(fy)
-
             parameters.x = fx
             parameters.y = fy
             parameters.gravity = Gravity.CENTER
@@ -257,12 +260,13 @@ class FloatingWindow : Service() {
                             if (event.rawY.toInt() >= height - 100) {
                                 hideFloatWidget()
                             } else {
-                                with(preferences.edit()) {
-                                    putInt("float_widget_x", updatedParameters.x)
-                                    putInt("float_widget_y", updatedParameters.y)
+                                if (widgetIsVisible)
+                                    with(preferences.edit()) {
+                                        putInt("float_widget_x", updatedParameters.x)
+                                        putInt("float_widget_y", updatedParameters.y)
 
-                                    apply()
-                                }
+                                        apply()
+                                    }
                             }
 
                             closeWM.removeView(closeView)
