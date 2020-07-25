@@ -2,9 +2,7 @@ package com.cubanopensource.todo
 
 import android.app.Activity
 import android.app.Service
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.graphics.Color
 import android.graphics.PixelFormat
 import android.net.TrafficStats
@@ -30,6 +28,10 @@ class FloatingWindow : Service() {
 
     lateinit var preferences: SharedPreferences
 
+    lateinit var wm: WindowManager
+
+    lateinit var widgetView: RelativeLayout
+
     private val mHandlerRunnable = object : Runnable {
         override fun run() {
             val currentRxBytes = TrafficStats.getTotalRxBytes()
@@ -46,6 +48,12 @@ class FloatingWindow : Service() {
             tv.text = calcSpeed(usedTime, usedRxBytes, usedTxBytes)
 
             mHandler.postDelayed(this, 1000)
+        }
+    }
+
+    private val networkChanged = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            println("NETWORK CHANGED")
         }
     }
 
@@ -91,11 +99,17 @@ class FloatingWindow : Service() {
         mLastTime = System.currentTimeMillis()
 
         preferences = applicationContext.getSharedPreferences("${packageName}_preferences", Activity.MODE_PRIVATE)
-        showFloatWidget()
+
+        val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
+        registerReceiver(networkChanged, intentFilter)
     }
 
     private fun getShowWidgetPreference(): Boolean {
         return preferences.getBoolean("showWidget", true)
+    }
+
+    private fun hideFloatWidget() {
+        wm.removeView(widgetView)
     }
 
     private fun showFloatWidget() {
@@ -132,7 +146,7 @@ class FloatingWindow : Service() {
             parameters_close.gravity = Gravity.BOTTOM
 
             // Traffic Stats widget
-            val widgetView = LayoutInflater.from(this).inflate(R.layout.float_window, null) as RelativeLayout
+            widgetView = LayoutInflater.from(this).inflate(R.layout.float_window, null) as RelativeLayout
 
             /*
             <TextView
@@ -153,7 +167,7 @@ class FloatingWindow : Service() {
 
             widgetView.addView(tv)
 
-            val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
             val parameters: WindowManager.LayoutParams
 
@@ -215,7 +229,7 @@ class FloatingWindow : Service() {
 
                         MotionEvent.ACTION_UP -> {
                             if (event.rawY.toInt() >= height - 100) {
-                                wm.removeView(widgetView)
+                                hideFloatWidget()
                             } else {
                                 with(preferences.edit()) {
                                     putInt("float_widget_x", updatedParameters.x)
