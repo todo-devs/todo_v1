@@ -4,6 +4,7 @@ import 'package:getflutter/getflutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/components/disclaim.dart';
+import 'package:todo/pages/check_update_page.dart';
 import 'package:todo/pages/download_ussd_page.dart';
 import 'package:todo/services/AppStateNotifier.dart';
 import 'package:todo/services/PlatformService.dart';
@@ -172,6 +173,42 @@ class _SettingsState extends State<SettingsWidget> {
                   height: 30,
                 ),
                 GestureDetector(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          'Actualizar aplicación',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 15),
+                        child: Icon(Icons.file_download,
+                            color: Theme.of(context).scaffoldBackgroundColor ==
+                                    Theme.of(context).focusColor
+                                ? Colors.white
+                                : Theme.of(context).focusColor,
+                            semanticLabel: 'Actualizar aplicación'),
+                      ),
+                    ],
+                  ),
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      TodoPageRoute(
+                        builder: (context) => CheckUpdatePage(),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
                       TodoPageRoute(
@@ -199,7 +236,7 @@ class _SettingsState extends State<SettingsWidget> {
                                   Theme.of(context).focusColor
                               ? Colors.white
                               : Theme.of(context).focusColor,
-                          semanticLabel: "Leer Términos de uso",
+                          semanticLabel: 'Leer Términos de uso',
                         ),
                       ),
                     ],
@@ -217,7 +254,7 @@ class _SettingsState extends State<SettingsWidget> {
                               Theme.of(context).focusColor
                           ? Colors.white
                           : Theme.of(context).focusColor,
-                      semanticLabel: "Habla con nosotros en Telegram",
+                      semanticLabel: 'Habla con nosotros en Telegram',
                     ),
                     text: 'Habla con nosotros en Telegram',
                     textColor: Colors.white,
@@ -245,7 +282,7 @@ class _SettingsState extends State<SettingsWidget> {
                               Theme.of(context).focusColor
                           ? Colors.white
                           : Theme.of(context).focusColor,
-                      semanticLabel: "Información",
+                      semanticLabel: 'Información',
                     ),
                     text: 'Acerca',
                     textColor: Colors.white,

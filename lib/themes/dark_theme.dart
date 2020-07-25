@@ -10,5 +10,6 @@ final themeDark = ThemeData(
   ),
   scaffoldBackgroundColor: Color(0xff24272c),
   dialogBackgroundColor: Color(0xff121212),
-  focusColor: Color(0xff10DC60)
+  focusColor: Color(0xff10DC60),
+  accentColor: Color(0xff10DC60),
 );

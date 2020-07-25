@@ -25,5 +25,12 @@ class PermissionsService {
   Future<bool> hasPhonePermission() async {
     return hasPermission(PermissionGroup.phone);
   }
-}
 
+  Future<bool> requestStoragePermission() async {
+    return requestPermission(PermissionGroup.storage);
+  }
+
+  Future<bool> hasStoragePermission() async {
+    return hasPermission(PermissionGroup.storage);
+  }
+}

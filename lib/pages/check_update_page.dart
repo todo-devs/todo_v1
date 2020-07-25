@@ -1,67 +1,84 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:apklis_api/apklis_api.dart';
+import 'package:apklis_api/models/apklis_item_model.dart';
+import 'package:device_proxy/device_proxy.dart';
+import 'package:dio/adapter.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo/models/ussd_codes.dart';
-import 'package:todo/pages/home_page.dart';
-import 'package:todo/services/download_ussd.dart';
-import 'package:todo/themes/colors.dart';
-import 'package:todo/utils/transitions.dart';
+import 'package:getflutter/getflutter.dart';
+import 'package:package_info/package_info.dart';
+import 'package:todo/pages/update_page.dart';
 
-class DownloadUssdPage extends StatefulWidget {
+class CheckUpdatePage extends StatefulWidget {
   @override
-  _DownloadUssdPageState createState() => _DownloadUssdPageState();
+  CheckUpdatePageState createState() => CheckUpdatePageState();
 }
 
-class _DownloadUssdPageState extends State<DownloadUssdPage> {
+class CheckUpdatePageState extends State<CheckUpdatePage> {
   var loading = true;
   var message = '';
-  var buttonText = 'CANCELAR DESCARGA';
-  var ussdService = DownloadUssdService();
+  var buttonText = 'CANCELAR COMPROBACIÓN';
 
   @override
   void initState() {
     super.initState();
-
     _loadData();
   }
 
   Future<void> _loadData() async {
     await Future.delayed(Duration(milliseconds: 1500));
+    ProxyConfig proxyConfig = await DeviceProxy.proxyConfig;
+    var dio = Dio();
+    if (proxyConfig.isEnable) {
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.findProxy = (uri) {
+          return "PROXY ${proxyConfig.proxyUrl};";
+        };
+        client.connectionTimeout = Duration(seconds: 10);
+      };
+    }
+    ApklisItemModel apklisItemModel;
     try {
-      var prefs = await SharedPreferences.getInstance();
-      var lastHash = prefs.getString('hash');
-      var actualDay = DateTime.now().day;
-      var actualHash = await ussdService.fetchHash();
-      if (actualHash != lastHash) {
-        var body = await ussdService.fetchUssdConfig();
-        var parsedJson = jsonDecode(body);
-        UssdRoot.fromJson(parsedJson);
-        prefs.setString('hash', actualHash);
-        prefs.setString('config', body);
-        setState(() {
-          loading = false;
-          message = 'Comprobación exitosa.\n\n'
-              'Se han actualizado los códigos USSD.\n\n';
-          buttonText = 'CERRAR';
-        });
+      if (Platform.isAndroid) {
+        final packageInfo = await PackageInfo.fromPlatform();
+        final packageName = packageInfo.packageName;
+        var apklisApi = ApklisApi(packageName, dioClient: dio);
+        var model = await apklisApi.get();
+        if (model.isOk && (model.result?.results?.length ?? 0) > 0) {
+          apklisItemModel = model.result.results.first;
+        }
+      }
+    } catch (e) {
+      log(e);
+    }
+    if (apklisItemModel != null) {
+      final packageInfo = await PackageInfo.fromPlatform();
+      var actual = int.tryParse(packageInfo.buildNumber);
+      var last = apklisItemModel.lastRelease.versionCode;
+      if ((actual != null && last != null && actual < last)) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UpdatePage(model: apklisItemModel),
+          ),
+        );
       } else {
         setState(() {
           loading = false;
           message = 'Comprobación exitosa.\n\n'
-              'No hay cambios en los códigos USSD.\n\n';
+              'Tiene la última versión de la aplicación.\n\n';
           buttonText = 'CERRAR';
         });
       }
-      prefs.setInt('day', actualDay);
-    } catch (e) {
-      log(e.toString());
+    } else {
       setState(() {
         loading = false;
-        message = 'Ha ocurrido un error en la descarga de los códigos USSD.\n\n'
+        message =
+            'Ha ocurrido un error en la comprobación de la actualización de la aplicación.\n\n'
             'Revise su conexión e inténtelo nuevamente.\n\n'
             'Si el error continúa póngase en contacto con el equipo de desarrollo.';
         buttonText = 'CERRAR';
@@ -74,7 +91,7 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Descarga',
+          'Actualización',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -109,12 +126,7 @@ class _DownloadUssdPageState extends State<DownloadUssdPage> {
               margin: EdgeInsets.all(30),
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    TodoPageRoute(
-                      builder: (context) => HomePage(title: 'TODO'),
-                    ),
-                  );
+                  Navigator.pop(context);
                 },
                 color: GFColors.SUCCESS,
                 minWidth: MediaQuery.of(context).size.width,
