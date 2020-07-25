@@ -9,6 +9,25 @@
                         <ImageView android:layout_width="48.0dip" android:layout_height="48.0dip" android:src="@mipmap/launcher_icon" />
                     </LinearLayout>
                 </LinearLayout>
+                <RelativeLayout android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip">
+                    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:weightSum="3.0" android:layout_alignParentLeft="true">
+                        <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <LinearLayout android:gravity="center" android:id="@+id/widget_button_net_datos" android:background="@drawable/back_imagen_widget_button" android:layout_width="32.0dip" android:layout_height="32.0dip">
+                                <ImageView android:layout_width="22.0dip" android:layout_height="22.0dip" android:src="@mipmap/ic_widget_button_datos" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <LinearLayout android:gravity="center" android:id="@+id/widget_button_net_apn" android:background="@drawable/back_imagen_widget_button" android:layout_width="32.0dip" android:layout_height="32.0dip">
+                                <ImageView android:layout_width="22.0dip" android:layout_height="22.0dip" android:src="@mipmap/ic_widget_button_apn" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
+                            <LinearLayout android:gravity="center" android:id="@+id/widget_button_net_wifi" android:background="@drawable/back_imagen_widget_button" android:layout_width="32.0dip" android:layout_height="32.0dip">
+                                <ImageView android:layout_width="22.0dip" android:layout_height="22.0dip" android:src="@mipmap/ic_widget_button_wifi" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
             <LinearLayout android:orientation="horizontal" android:id="@+id/linearLayout_button1" android:padding="15.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="5.0" android:layout_below="@id/widget_layout_top" android:layout_alignParentLeft="true">
                 <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
