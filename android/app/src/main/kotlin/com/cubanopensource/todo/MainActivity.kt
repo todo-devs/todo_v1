@@ -23,10 +23,10 @@ class MainActivity : FlutterActivity() {
 
             when {
                 call.method == "getDrawPermissionState" -> result.success(getDrawPermissionState())
-                call.method == "reqDrawPermission" -> result.success(reqDrawPermission())
+                call.method == "reqDrawPermission" -> reqDrawPermission()
                 call.method == "getShowWidgetPreference" -> result.success(getShowWidgetPreference())
-                call.method == "setFalseShowWidget" -> result.success(setFalseShowWidget())
-                call.method == "setTrueShowWidget" -> result.success(setTrueShowWidget())
+                call.method == "setFalseShowWidget" -> setFalseShowWidget()
+                call.method == "setTrueShowWidget" -> setTrueShowWidget()
                 else -> result.notImplemented()
             }
         }

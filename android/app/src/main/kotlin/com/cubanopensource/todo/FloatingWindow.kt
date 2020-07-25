@@ -5,6 +5,7 @@ import android.app.Service
 import android.content.*
 import android.graphics.Color
 import android.graphics.PixelFormat
+import android.net.ConnectivityManager
 import android.net.TrafficStats
 import android.os.Build
 import android.os.Handler
@@ -28,7 +29,11 @@ class FloatingWindow : Service() {
 
     lateinit var preferences: SharedPreferences
 
-    lateinit var wm: WindowManager
+    var wm: WindowManager? = null
+
+    var widgetIsVisible = false
+
+    lateinit var parameters: WindowManager.LayoutParams
 
     lateinit var widgetView: RelativeLayout
 
@@ -53,8 +58,22 @@ class FloatingWindow : Service() {
 
     private val networkChanged = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            println("NETWORK CHANGED")
+            if (activeNetwork()) {
+                if (wm == null)
+                    initFloatWidget()
+                showFloatWidget()
+            } else {
+                hideFloatWidget()
+            }
         }
+    }
+
+    private fun activeNetwork(): Boolean {
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val activeNetwork = cm.activeNetworkInfo
+
+        return (activeNetwork != null)
     }
 
     fun calcSpeed(timeTaken: Long, downBytes: Long, upBytes: Long): String {
@@ -99,7 +118,7 @@ class FloatingWindow : Service() {
         mLastTime = System.currentTimeMillis()
 
         preferences = applicationContext.getSharedPreferences("${packageName}_preferences", Activity.MODE_PRIVATE)
-
+        
         val intentFilter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
         registerReceiver(networkChanged, intentFilter)
     }
@@ -109,11 +128,21 @@ class FloatingWindow : Service() {
     }
 
     private fun hideFloatWidget() {
-        wm.removeView(widgetView)
+        if (widgetIsVisible) {
+            wm?.removeView(widgetView)
+            widgetIsVisible = false
+        }
     }
 
     private fun showFloatWidget() {
-        if (getDrawPermissionState() && getShowWidgetPreference()) {
+        if (!widgetIsVisible && getDrawPermissionState() && getShowWidgetPreference() && wm != null) {
+            wm?.addView(widgetView, parameters)
+            widgetIsVisible = true
+        }
+    }
+
+    private fun initFloatWidget() {
+        if (getDrawPermissionState()) {
             val displayMetrics = DisplayMetrics()
             (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getMetrics(displayMetrics)
             val height = displayMetrics.heightPixels
@@ -169,8 +198,6 @@ class FloatingWindow : Service() {
 
             wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-            val parameters: WindowManager.LayoutParams
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 parameters = WindowManager.LayoutParams(
                         WindowManager.LayoutParams.WRAP_CONTENT,
@@ -198,7 +225,6 @@ class FloatingWindow : Service() {
             parameters.x = fx
             parameters.y = fy
             parameters.gravity = Gravity.CENTER
-            wm.addView(widgetView, parameters)
 
             // Traffic stats on touch handler
             widgetView.setOnTouchListener(object : View.OnTouchListener {
@@ -224,7 +250,7 @@ class FloatingWindow : Service() {
                             updatedParameters.x = (x + (event.rawX - touchedX)).toInt()
                             updatedParameters.y = (y + (event.rawY - touchedY)).toInt()
 
-                            wm.updateViewLayout(widgetView, updatedParameters)
+                            wm?.updateViewLayout(widgetView, updatedParameters)
                         }
 
                         MotionEvent.ACTION_UP -> {
