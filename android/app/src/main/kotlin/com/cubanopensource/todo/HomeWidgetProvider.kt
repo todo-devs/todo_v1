@@ -27,6 +27,9 @@ class HomeWidgetProvider : AppWidgetProvider() {
             val pendingIntentSms = PendingIntent.getActivity(context, 0,
                     Intent(Intent.ACTION_CALL, Uri.parse("tel:*222*767${Uri.encode("#")}")), 0)
 
+            val pendingIntentTODO = PendingIntent.getActivity(context, 0,
+                    Intent(context, MainActivity::class.java), 0)
+
 
             val views = RemoteViews(context?.packageName, R.layout.home_widget)
 
@@ -35,6 +38,7 @@ class HomeWidgetProvider : AppWidgetProvider() {
             views.setOnClickPendingIntent(R.id.widget_button_saldo_datos, pendingIntentDatos)
             views.setOnClickPendingIntent(R.id.widget_button_saldo_voz, pendingIntentVoz)
             views.setOnClickPendingIntent(R.id.widget_button_saldo_sms, pendingIntentSms)
+            views.setOnClickPendingIntent(R.id.todo_logo, pendingIntentTODO)
 
             appWidgetManager?.updateAppWidget(it, views)
         }
