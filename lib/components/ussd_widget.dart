@@ -415,7 +415,7 @@ class CodeFormPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height / 3,
+            expandedHeight: MediaQuery.of(context).size.height / 4,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0,
             pinned: true,
