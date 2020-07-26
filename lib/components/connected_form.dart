@@ -7,6 +7,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/components/portal_nauta.dart';
 import 'package:todo/pages/login_page.dart';
+import 'package:todo/services/PlatformService.dart';
 import 'package:todo/utils/transitions.dart';
 
 class ConnectedForm extends StatefulWidget {
@@ -187,6 +188,9 @@ class _ConnectedFormState extends State<ConnectedForm> {
 
             _timer.cancel();
             await pr.hide();
+
+            // Apagar el wifi
+            turnOffWifi();
 
             Navigator.pushReplacement(
               context,

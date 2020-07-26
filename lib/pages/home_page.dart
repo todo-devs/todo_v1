@@ -232,7 +232,7 @@ class _HomePageState extends State<HomePage> {
     Widget continueButton = FlatButton(
       child: Text("Continuar"),
       onPressed: () async {
-        await reqDrawPermission();
+        reqDrawPermission();
         Navigator.pop(context);
       },
     );

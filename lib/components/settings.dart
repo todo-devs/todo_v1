@@ -18,6 +18,7 @@ class SettingsWidget extends StatefulWidget {
 class _SettingsState extends State<SettingsWidget> {
   var darkMode = false;
   var showWidget = true;
+  var turnOffWifi = true;
 
   @override
   void initState() {
@@ -41,9 +42,15 @@ class _SettingsState extends State<SettingsWidget> {
         showWidget = value;
       });
     });
+
+    getTurnOffWifiPreference().then((value) {
+      setState(() {
+        turnOffWifi = value;
+      });
+    });
   }
 
-  static const String versionInfo = 'Versión 1.2.4 | 15-07-2020';
+  static const String versionInfo = 'Versión 1.2.5 | 27-07-2020';
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +135,36 @@ class _SettingsState extends State<SettingsWidget> {
                           setTrueShowWidget();
                         } else {
                           setFalseShowWidget();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Apagar wifi al desconectar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Switch(
+                      activeColor: Theme.of(context).focusColor,
+                      activeTrackColor: this.darkMode ? null : Colors.white,
+                      value: turnOffWifi,
+                      onChanged: (value) {
+                        setState(() {
+                          turnOffWifi = value;
+                        });
+
+                        if (value) {
+                          setTrueTurnOffWifi();
+                        } else {
+                          setFalseTurnOffWifi();
                         }
                       },
                     ),
