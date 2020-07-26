@@ -1,12 +1,20 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:apklis_api/apklis_api.dart';
+import 'package:apklis_api/models/apklis_item_model.dart';
+import 'package:device_proxy/device_proxy.dart';
+import 'package:dio/adapter.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:getflutter/getflutter.dart';
 import 'package:http/http.dart';
+import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/models/ussd_codes.dart';
+import 'package:todo/pages/update_page.dart';
 import 'package:todo/services/contacts.dart';
 import 'package:todo/services/phone.dart';
 import 'package:todo/utils/transitions.dart';
@@ -28,6 +36,8 @@ class _UssdRootState extends State<UssdRootWidget> {
   Future<void> _loadData() async {
     String data;
     Map<String, dynamic> parsedJson;
+    ApklisItemModel apklisItemModel;
+    final packageInfo = await PackageInfo.fromPlatform();
     try {
       var prefs = await SharedPreferences.getInstance();
       var lastHash = prefs.getString('hash');
@@ -69,6 +79,27 @@ class _UssdRootState extends State<UssdRootWidget> {
             }
             prefs.setInt('day', actualDay);
           }
+          if (lastDay != null) {
+            ProxyConfig proxyConfig = await DeviceProxy.proxyConfig;
+            var dio = Dio();
+            if (proxyConfig.isEnable) {
+              (dio.httpClientAdapter as DefaultHttpClientAdapter)
+                  .onHttpClientCreate = (client) {
+                client.findProxy = (uri) {
+                  return "PROXY ${proxyConfig.proxyUrl};";
+                };
+                client.connectionTimeout = Duration(seconds: 10);
+              };
+            }
+            if (Platform.isAndroid) {
+              final packageName = packageInfo.packageName;
+              var apklisApi = ApklisApi(packageName, dioClient: dio);
+              var model = await apklisApi.get();
+              if (model.isOk && (model.result?.results?.length ?? 0) > 0) {
+                apklisItemModel = model.result.results.first;
+              }
+            }
+          }
         } catch (e) {
           log(e.toString());
         }
@@ -84,6 +115,18 @@ class _UssdRootState extends State<UssdRootWidget> {
     setState(() {
       items = UssdRoot.fromJson(parsedJson).items;
     });
+    if (apklisItemModel != null) {
+      var actual = int.tryParse(packageInfo.buildNumber);
+      var last = apklisItemModel.lastRelease.versionCode;
+      if (actual != null && last != null && actual < last) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UpdatePage(model: apklisItemModel),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -415,7 +458,7 @@ class CodeFormPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height / 3,
+            expandedHeight: MediaQuery.of(context).size.height / 4,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0,
             pinned: true,

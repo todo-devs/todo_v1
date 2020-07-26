@@ -10,4 +10,5 @@ final themeLight = ThemeData(
   scaffoldBackgroundColor: GFColors.PRIMARY,
   dialogBackgroundColor: GFColors.WHITE,
   focusColor: GFColors.PRIMARY,
+  accentColor: GFColors.PRIMARY,
 );
