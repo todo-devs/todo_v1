@@ -7,6 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.Settings
 import android.widget.RemoteViews
 
@@ -42,7 +43,12 @@ class HomeWidgetProvider : AppWidgetProvider() {
             ))
             dataUseIntent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-            val pendingIntentData = PendingIntent.getActivity(context, 0, dataUseIntent, 0)
+            val pendingIntentData: PendingIntent
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+                pendingIntentData = PendingIntent.getActivity(context, 0, Intent(Settings.ACTION_DATA_USAGE_SETTINGS), 0)
+            else
+                pendingIntentData = PendingIntent.getActivity(context, 0, dataUseIntent, 0)
 
             val views = RemoteViews(context?.packageName, R.layout.home_widget)
 
