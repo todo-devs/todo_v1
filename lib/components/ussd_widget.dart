@@ -603,6 +603,7 @@ class _CodeFormState extends State<CodeForm> {
                   suffixIcon: FlatButton(
                     onPressed: () async {
                       String number = await getContactPhoneNumber();
+                      number = number.replaceAll('-', '');
 
                       phoneNumberController.text = number;
                       phoneNumberController.addListener(() {
