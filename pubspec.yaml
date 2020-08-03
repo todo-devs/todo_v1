@@ -37,6 +37,7 @@ dependencies:
   path_provider: ^1.6.11
   install_plugin: ^2.0.1
   # Internal dependencies
+  # contact_picker: ^0.0.2
   contact_picker:
     path: ./contact_picker
   nauta_api:

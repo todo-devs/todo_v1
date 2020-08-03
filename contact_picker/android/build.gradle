@@ -3,10 +3,11 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     repositories {
+        google()
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
+        // maven {
+        //     url "https://maven.google.com"
+        // }
     }
 
     dependencies {
@@ -16,10 +17,11 @@ buildscript {
 
 rootProject.allprojects {
     repositories {
+        google()
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
+        // maven {
+        //     url "https://maven.google.com"
+        // }
     }
 }
 
