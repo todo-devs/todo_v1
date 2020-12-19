@@ -102,6 +102,10 @@ class _AccountPageState extends State<AccountPage> {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       TextFormField(
+                        // El parametro autovalidate queda obsoleto y no debe ser usado
+                        // Se debe sustituir por la sgte linea, pero es necesario actualizar
+                        // primero el sdk de Flutter
+                        // autovalidateMode: AutovalidateMode.always,
                         autovalidate: true,
                         decoration: InputDecoration(
                           labelText: 'Usuario',
@@ -135,6 +139,10 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       TextFormField(
                         enableInteractiveSelection: false,
+                        // El parametro autovalidate queda obsoleto y no debe ser usado
+                        // Se debe sustituir por la sgte linea, pero es necesario actualizar
+                        // primero el sdk de Flutter
+                        // autovalidateMode: AutovalidateMode.always,
                         autovalidate: true,
                         decoration: InputDecoration(
                           labelText: 'Contraseña',

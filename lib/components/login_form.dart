@@ -62,6 +62,10 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: EdgeInsets.all(5.0),
             child: TextFormField(
+              // El parametro autovalidate queda obsoleto y no debe ser usado
+              // Se debe sustituir por la sgte linea, pero es necesario actualizar
+              // primero el sdk de Flutter
+              // autovalidateMode: AutovalidateMode.always,
               autovalidate: true,
               decoration: InputDecoration(
                 labelText: 'Usuario',
@@ -97,6 +101,10 @@ class _LoginFormState extends State<LoginForm> {
             child: TextFormField(
               enableInteractiveSelection: false,
               obscureText: hidePass,
+              // El parametro autovalidate queda obsoleto y no debe ser usado
+              // Se debe sustituir por la sgte linea, pero es necesario actualizar
+              // primero el sdk de Flutter
+              // autovalidateMode: AutovalidateMode.always,
               autovalidate: true,
               decoration: InputDecoration(
                 labelText: 'Contraseña',
