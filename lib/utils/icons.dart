@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const strIcons = <String, IconData> {
+const strIcons = <String, IconData>{
   'attach_money': Icons.attach_money,
   'code': Icons.code,
   'monetization_on': Icons.monetization_on,
@@ -22,5 +22,6 @@ const strIcons = <String, IconData> {
   'lock_open': Icons.lock_open,
   'screen_lock_landscape': Icons.screen_lock_landscape,
   'mail': Icons.mail,
-  'phone_android': Icons.phone_android
+  'phone_android': Icons.phone_android,
+  'vpn_key': Icons.vpn_key
 };
