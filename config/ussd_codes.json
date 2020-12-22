@@ -208,6 +208,23 @@
           "code": "*234*1*{telefono}*{clave}*{cantidad}#"
         },
         {
+          "name": "Cambiar clave",
+          "description": "Cambiar clave para transferir saldo",
+          "icon": "vpn_key",
+          "type": "code",
+          "fields": [
+            {
+              "name": "clave_actual",
+              "type": "key_number"
+            },
+            {
+              "name": "clave_nueva",
+              "type": "key_number"
+            }
+          ],
+          "code": "*234*2*{clave_actual}*{clave_nueva}#"
+        },
+        {
           "name": "Bono",
           "description": "Consulta el estado de tu bono",
           "icon": "star_border",
