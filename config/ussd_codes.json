@@ -210,7 +210,7 @@
         {
           "name": "Cambiar clave",
           "description": "Cambiar clave para transferir saldo",
-          "icon": "vpn_key",
+          "icon": "lock_open",
           "type": "code",
           "fields": [
             {
