@@ -169,7 +169,7 @@
           "type": "category",
           "items": [
             {
-              "name": "1 CUC",
+              "name": "25 CUP",
               "description": "Adelanta con $1.00 CUC de saldo",
               "icon": "monetization_on",
               "type": "code",
@@ -177,7 +177,7 @@
               "code": "*234*3*1*1#"
             },
             {
-              "name": "2 CUC",
+              "name": "50 CUP",
               "description": "Adelanta con $2.00 CUC de saldo",
               "icon": "monetization_on",
               "type": "code",
@@ -279,7 +279,7 @@
               ]
             },
             {
-              "name": "Bolsa Correo - $1.00 CUC",
+              "name": "Bolsa Correo - $25 CUP",
               "description": "Paquete de 50 MB sólo para correo nauta",
               "icon": "mail",
               "type": "code",
@@ -293,7 +293,7 @@
               "type": "category",
               "items": [
                 {
-                  "name": "Bolsa Diaria - $1 CUC",
+                  "name": "Bolsa Diaria - $25 CUP",
                   "description": "200 MB (vence en 24h)",
                   "icon": "data_usage",
                   "type": "code",
@@ -301,7 +301,7 @@
                   "code": "*133*1*3#"
                 },
                 {
-                  "name": "400 MB - $5 CUC",
+                  "name": "400 MB - $125 CUP",
                   "description": "+500 MB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -309,7 +309,7 @@
                   "code": "*133*1*4*1#"
                 },
                 {
-                  "name": "600 MB - $7 CUC",
+                  "name": "600 MB - $175 CUP",
                   "description": "+800 MB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -317,7 +317,7 @@
                   "code": "*133*1*4*2#"
                 },
                 {
-                  "name": "1 GB - $10 CUC",
+                  "name": "1 GB - $250 CUP",
                   "description": "+1.5 GB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -325,7 +325,7 @@
                   "code": "*133*1*4*3#"
                 },
                 {
-                  "name": "2.5 GB - $20 CUC",
+                  "name": "2.5 GB - $500 CUP",
                   "description": "+3 GB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -333,7 +333,7 @@
                   "code": "*133*1*4*4#"
                 },
                 {
-                  "name": "4 GB - $30 CUC",
+                  "name": "4 GB - $750 CUP",
                   "description": "+5 GB bono 4G +300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -341,7 +341,7 @@
                   "code": "*133*1*4*5#"
                 },
                 {
-                  "name": "1 GB - $4 CUC",
+                  "name": "1 GB - $100 CUP",
                   "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -349,7 +349,7 @@
                   "code": "*133*1*5*1#"
                 },
                 {
-                  "name": "2.5 GB - $8 CUC",
+                  "name": "2.5 GB - $200 CUP",
                   "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -357,7 +357,7 @@
                   "code": "*133*1*5*2#"
                 },
                 {
-                  "name": "14 GB - $45 CUC",
+                  "name": "14 GB - $1125 CUP",
                   "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -373,7 +373,7 @@
               "type": "category",
               "items": [
                 {
-                  "name": "400 MB - $5 CUC",
+                  "name": "400 MB - $125 CUP",
                   "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -381,7 +381,7 @@
                   "code": "*133*1*3*1#"
                 },
                 {
-                  "name": "600 MB - $7 CUC",
+                  "name": "600 MB - $175 CUP",
                   "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -389,7 +389,7 @@
                   "code": "*133*1*3*2#"
                 },
                 {
-                  "name": "1 GB - $10 CUC",
+                  "name": "1 GB - $250 CUP",
                   "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -397,7 +397,7 @@
                   "code": "*133*1*3*3#"
                 },
                 {
-                  "name": "2.5 GB - $20 CUC",
+                  "name": "2.5 GB - $500 CUP",
                   "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -405,7 +405,7 @@
                   "code": "*133*1*3*4#"
                 },
                 {
-                  "name": "4 GB - $30 CUC",
+                  "name": "4 GB - $750 CUP",
                   "description": "+300 MB bono .cu",
                   "icon": "data_usage",
                   "type": "code",
@@ -432,7 +432,7 @@
             },
             {
               "name": "5 min",
-              "description": "Plan de 5 min por $1.50 CUC ($0.30 por min)",
+              "description": "Plan de 5 min por $37.5 CUP ($7.5 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -440,7 +440,7 @@
             },
             {
               "name": "10 min",
-              "description": "Plan de 10 min por $2.90 CUC ($0.29 por min)",
+              "description": "Plan de 10 min por $72.5 CUP ($7.25 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -448,7 +448,7 @@
             },
             {
               "name": "15 min",
-              "description": "Plan de 15 min por $4.20 CUC ($0.28 por min)",
+              "description": "Plan de 15 min por $105 CUP ($7 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -456,7 +456,7 @@
             },
             {
               "name": "25 min",
-              "description": "Plan de 25 min por $6.50 CUC ($0.26 por min)",
+              "description": "Plan de 25 min por $162.5 CUP ($6.5 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -464,7 +464,7 @@
             },
             {
               "name": "40 min",
-              "description": "Plan de 40 min por $10 CUC ($0.25 por min)",
+              "description": "Plan de 40 min por $250 CUP ($6.25 por min)",
               "icon": "phone_in_talk",
               "type": "code",
               "fields": [],
@@ -488,7 +488,7 @@
             },
             {
               "name": "10 sms",
-              "description": "10 SMS nacionales por $0.70 CUC",
+              "description": "10 SMS nacionales por $17.5 CUP",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -496,7 +496,7 @@
             },
             {
               "name": "20 sms",
-              "description": "20 SMS nacionales por $1.30 CUC",
+              "description": "20 SMS nacionales por $32.5 CUP",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -504,7 +504,7 @@
             },
             {
               "name": "35 sms",
-              "description": "35 SMS nacionales por $2.10 CUC",
+              "description": "35 SMS nacionales por $52.5 CUP",
               "icon": "sms",
               "type": "code",
               "fields": [],
@@ -512,7 +512,7 @@
             },
             {
               "name": "45 sms",
-              "description": "45 SMS nacionales por $2.50 CUC",
+              "description": "45 SMS nacionales por $62.5 CUP",
               "icon": "sms",
               "type": "code",
               "fields": [],
